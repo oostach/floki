@@ -1,0 +1,20 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'Gemfile'
+    - 'config/boot.rb'
+    - 'config/puma.rb'
+    - 'bin/**/*'
+
+Layout/LineLength:
+  Max: 140
+
+Style/Documentation:
+  Enabled: false
+
+Style/RedundantConstantBase:
+  Enabled: false
