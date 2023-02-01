@@ -1,0 +1,14 @@
+.header-wrapper.flex.h-full.px-10
+  .logo.w-11.self-center
+    = image_tag 'logo-viking.png', alt: 'Logo'
+  %nav.ml-auto.my-auto
+    %ul.grid.grid-cols-4.gap-4.font-mono
+      %li.menu-item
+        = link_to 'About', '#'
+      %li.menu-item
+        = link_to 'Projects', '#'
+      %li.menu-item
+        = link_to 'Books & Article', '#'
+      %li.menu-item
+        = link_to 'Diary', '#'
+

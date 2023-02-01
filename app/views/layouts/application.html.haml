@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }/
+    %title Floki
+    %meta{ content: 'width=device-width,initial-scale=1', name: 'viewport' }/
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
+    = javascript_importmap_tags
+
+  %body{ class: 'bg-gray-100 p-2.5' }
+    %div.w-full
+      %header.rounded-lg.bg-sky-300.h-20.shadow-lg= render 'layouts/header'
+      %main= yield
+      %footer
+
+
