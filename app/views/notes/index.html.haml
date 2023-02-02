@@ -1,0 +1,7 @@
+= link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }
+
+= turbo_frame_tag 'new-note'
+
+= turbo_frame_tag :notes do
+  - @notes.each do |note|
+    = render note
