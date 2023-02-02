@@ -37,6 +37,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'letter_opener'
+  gem 'haml_lint', require: false
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
