@@ -33,7 +33,7 @@ end
 
 group :development do
   gem "web-console"
-  gem "rack-mini-profiler"
+  gem "rack-mini-profiler", require: false
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'letter_opener'
