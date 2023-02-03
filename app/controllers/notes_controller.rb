@@ -10,6 +10,7 @@ class NotesController < ApplicationController
   end
 
   def create
+    @note = Note.create!(note_params)
   end
 
   private

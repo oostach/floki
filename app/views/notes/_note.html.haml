@@ -1,4 +1,6 @@
-.note.w-full
+.note.w-full.mb-5
   - if note.title
-    .note-title= note.title
-    .note-body= note.body
+    .note-title.flex.items-end.mb-1
+      .text-2xl.mr-2= note.title
+      .note-date.text-sm.text-gray-500= l(note.created_at, format: :long)
+  .note-body.text-gray-700= note.body

@@ -36,5 +36,6 @@ module Floki
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.factory_bot.definition_file_paths = ['spec/factories']
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
   end
 end
