@@ -1,7 +1,9 @@
 = turbo_frame_tag 'new-note' do
   = form_with model: @note do |f|
-    .w-full
+    .form-group.mb-3
       = f.label :title
-      = f.text_field :title
-      = f.text_area :body
-      = f.submit
+      = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full'
+    .form-group
+      = f.text_area :body, class: 'form-input px-2 py-1 rounded w-full'
+    .form-group
+      = f.submit class: 'rounded px-2 py-1 bg-sky-500 text-neutral-50'

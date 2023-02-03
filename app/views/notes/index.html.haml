@@ -1,4 +1,5 @@
-= link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }
+.actions.text-right
+  = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }, class: 'rounded px-2 py-1 bg-sky-500 text-neutral-50'
 
 = turbo_frame_tag 'new-note'
 
