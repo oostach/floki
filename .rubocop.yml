@@ -9,6 +9,7 @@ AllCops:
     - 'config/boot.rb'
     - 'config/puma.rb'
     - 'bin/**/*'
+    - 'db/schema.rb'
 
 Layout/LineLength:
   Max: 140
