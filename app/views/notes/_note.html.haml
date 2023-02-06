@@ -3,4 +3,8 @@
     .note-title.flex.items-end.mb-1
       .text-2xl.mr-2= note.title
       .note-date.text-sm.text-gray-500= l(note.created_at, format: :long)
+      .note-actions.ml-auto
+        .action-edit
+          = link_to edit_note_path(note), class: 'rounded-full bg-gray-100 w-[24px] h-[24px] block' do
+            = svg_icon :edit, options: { width: '16px' }
   .note-body.text-gray-700= note.body
