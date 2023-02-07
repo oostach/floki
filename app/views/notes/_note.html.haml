@@ -1,11 +1,11 @@
 = turbo_frame_tag dom_id(note) do
-  .note.w-full.mb-5
+  .note.w-full.mb-8
     - if note.title
-      .note-title.flex.items-end.mb-1
-        .text-2xl.mr-2= note.title
-        .note-date.text-sm.text-gray-500= l(note.created_at, format: :long)
+      .note-title.flex.items-end.mb-2
+        .text-2xl.mr-2.text-sky-900= note.title
+        .note-date.text-sm.text-sky-600= l(note.created_at, format: :long)
         .note-actions.ml-auto
           .action-edit
-            = link_to edit_note_path(note), class: 'rounded-full bg-gray-100 w-[24px] h-[24px] block' do
-              = svg_icon :edit, options: { width: '16px' }
+            = link_to edit_note_path(note), class: 'border border-sky-700 rounded-full bg-sky-100 w-[28px] h-[28px] flex justify-center' do
+              = svg_icon :edit, classes: 'text-sky-700', options: { width: '20px' }
     .note-body.text-gray-700= note.body
