@@ -5,16 +5,30 @@ class NotesController < ApplicationController
     @notes = Note.last(10)
   end
 
+  def show
+    @note = Note.find(params[:id])
+    render @note
+  end
+
   def new
     @note = Note.new
+  end
+
+  def edit
+    @note = Note.find(params[:id])
   end
 
   def create
     @note = Note.create!(note_params)
   end
 
-  def edit
+  def update
     @note = Note.find(params[:id])
+    if @note.update(note_params)
+      render @note
+    else
+      render action: :edit
+    end
   end
 
   private
