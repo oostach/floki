@@ -1,0 +1,7 @@
+- case blob.content_type
+- when 'image/jpeg'
+  = render 'active_storage/blobs/image', blob:
+- when 'application/pdf'
+  = render 'active_storage/blobs/pdf', blob:
+- else
+  = render 'active_storage/blobs/default', blob:
