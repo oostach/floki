@@ -7,10 +7,10 @@
       = f.label :body, 'Content'
       = f.rich_text_area :body, class: 'form-input px-2 py-1 rounded w-full'
     .form-group
-      = f.submit class: 'rounded px-2 py-1 bg-sky-500 text-neutral-50'
+      = f.submit class: 'rounded px-3 py-1.5 bg-sky-500 text-neutral-50 leading-loose'
       - if note.persisted?
-        = link_to 'Cancel', note_path(note), class: 'rounded px-3 py-2 bg-gray-400 text-neutral-50'
+        = link_to 'Cancel', note_path(note), class: 'rounded px-3 py-1.5 bg-gray-400 text-neutral-50'
       - else
-        = link_to 'Cancel', '#', class: 'rounded px-3 py-2 bg-gray-400 text-neutral-50', data: { action: 'click->notes--form#cancel' }
+        = link_to 'Cancel', '#', class: 'rounded px-3 py-1.5 bg-gray-400 text-neutral-50', data: { action: 'click->notes--form#cancel' }
 
   %hr.my-3.-mx-4.border-gray-300
