@@ -2,4 +2,14 @@
   .badge-button {
     @apply border rounded-full w-[28px] h-[28px] flex justify-center;
   }
+
+  .badge-button-primary {
+    @apply badge-button;
+    @apply border-sky-700 bg-sky-100
+  }
+
+  .badge-button-danger {
+    @apply badge-button;
+    @apply border-red-700 bg-red-100
+  }
 }
