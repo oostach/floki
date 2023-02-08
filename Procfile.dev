@@ -1,2 +1,2 @@
 web: bin/rails server -p 3005
-css: bin/rails tailwindcss:watch
+css: postcss app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css -w --verbose

@@ -1,26 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
 
-@layer components {
-  .main-nav {
-    @apply grid grid-cols-4 gap-4 font-mono;
-  }
+@import "tailwindcss/components";
+@import './components/menus';
+@import './components/buttons';
 
-  .main-nav .main-nav-item {
-    @apply bg-green-300 py-2 px-4 text-center;
-  }
-
-  .main-nav .main-nav-item:hover {
-    @apply bg-green-400;
-  }
-
-  .main-nav-item.active a,
-  .main-nav .main-nav-item:hover a {
-    @apply underline decoration-2 underline-offset-4;
-  }
-
-  .badge-button {
-    @apply border rounded-full w-[28px] h-[28px] flex justify-center
-  }
-}
+@import "tailwindcss/utilities";
