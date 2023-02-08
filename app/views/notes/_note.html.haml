@@ -5,8 +5,8 @@
         .text-2xl.mr-2.text-sky-900= note.title
         .note-date.text-sm.text-sky-600= l(note.created_at, format: :long)
         .note-actions.flex.ml-auto
-          = link_to edit_note_path(note), class: 'border border-sky-700 rounded-full bg-sky-100 w-[28px] h-[28px] flex justify-center mr-2' do
+          = link_to edit_note_path(note), class: 'badge-button border-sky-700 bg-sky-100 mr-2' do
             = svg_icon :edit, classes: 'text-sky-700 stroke-1', options: { width: '20px' }
-          = link_to note_path(note), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'border border-red-700 rounded-full bg-red-100 w-[28px] h-[28px] flex justify-center' do
+          = link_to note_path(note), data: delete_data_attr, class: 'badge-button border-red-700 bg-red-100' do
             = svg_icon :trash, classes: 'text-red-700 stroke-1', options: { width: '20px' }
     .note-body.text-gray-700= note.body

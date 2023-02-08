@@ -19,4 +19,8 @@
   .main-nav .main-nav-item:hover a {
     @apply underline decoration-2 underline-offset-4;
   }
+
+  .badge-button {
+    @apply border rounded-full w-[28px] h-[28px] flex justify-center
+  }
 }

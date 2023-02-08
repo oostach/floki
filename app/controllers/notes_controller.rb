@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Add rendering of the flash messages
 class NotesController < ApplicationController
   before_action :load_note, only: %i[show edit destroy update]
   def index
