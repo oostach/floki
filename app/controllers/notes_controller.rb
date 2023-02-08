@@ -4,7 +4,7 @@
 class NotesController < ApplicationController
   before_action :load_note, only: %i[show edit destroy update]
   def index
-    @notes = Note.order(created_at: :desc).last(10)
+    @notes = Note.last(10)
   end
 
   def show
