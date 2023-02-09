@@ -14,5 +14,6 @@
   %body{ class: 'font-inter bg-gray-200 p-2.5' }
     .w-full
       %header.rounded-lg.bg-sky-300.h-20.shadow-lg= render 'layouts/header'
+      = render 'layouts/flash'
       %main.container.bg-slate-100.rounded-md.mt-4.p-4.mx-auto= yield
       %footer

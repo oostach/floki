@@ -3,5 +3,6 @@
 @import "tailwindcss/components";
 @import './components/menus';
 @import './components/buttons';
+@import './components/flashes';
 
 @import "tailwindcss/utilities";
