@@ -18,7 +18,13 @@ class NotesController < ApplicationController
   def edit; end
 
   def create
-    @note = Note.create!(note_params)
+    @note = Note.new(note_params)
+    if @note.save
+      flash.notice = 'Your note has been successfully saved.'
+      render action: :create
+    else
+      render action: :edit
+    end
   end
 
   def update
@@ -31,6 +37,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
+    flash.notice = 'Your note has been successfully removed.'
   end
 
   private
