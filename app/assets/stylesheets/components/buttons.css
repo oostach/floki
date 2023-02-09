@@ -8,7 +8,7 @@
     @apply border-sky-700 bg-sky-100 hover:bg-sky-200
   }
 
-  .badge-button-danger {
+  .badge-button-alert {
     @apply badge-button;
     @apply border-red-700 bg-red-100 hover:bg-red-200
   }
