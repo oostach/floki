@@ -5,11 +5,19 @@
 
   .badge-button-primary {
     @apply badge-button;
-    @apply border-sky-700 bg-sky-100
+    @apply border-sky-700 bg-sky-100 hover:bg-sky-200
   }
 
   .badge-button-danger {
     @apply badge-button;
-    @apply border-red-700 bg-red-100
+    @apply border-red-700 bg-red-100 hover:bg-red-200
+  }
+
+  .button-primary {
+    @apply rounded px-3 py-1.5 bg-sky-500 hover:bg-sky-600 text-neutral-50 leading-loose;
+  }
+
+  .button-secondary {
+    @apply rounded px-3 py-1.5 bg-gray-400 hover:bg-gray-500 text-neutral-50 leading-loose;
   }
 }

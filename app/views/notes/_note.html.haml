@@ -1,9 +1,10 @@
 = turbo_frame_tag dom_id(note) do
   .note.w-full.mb-8
     - if note.title
-      .note-title.flex.items-end.mb-2
-        .text-2xl.mr-2.text-sky-900= note.title
-        .note-date.text-sm.text-sky-600= l(note.created_at, format: :long)
+      .note-title.flex.items-center.mb-2
+        .text-2xl.font-semibold.mr-2.text-sky-900
+          = note.title
+          .note-date.text-xs.font-normal.italic.text-sky-600= l(note.created_at, format: :long)
         .note-actions.flex.ml-auto
           = link_to edit_note_path(note), class: 'badge-button-primary mr-2' do
             = svg_icon :edit, classes: 'text-sky-700 stroke-1', options: { width: '20px' }
