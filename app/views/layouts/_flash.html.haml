@@ -1,4 +1,8 @@
 = turbo_frame_tag 'flash-messages' do
   - unless flash.empty?
+    - autohide = flash.key?(:autohide) ? flash.delete(:autohide) && true : nil
     - flash.each do |type, message|
-      %div{ class: "container flash-message-#{type}" }= message
+      %div{ class: "container flash-message-#{type} flex", data: { controller: 'flash-messages', autohide: autohide } }
+        = message
+        %button.ml-auto{ data: { action: 'click->flash-messages#close' } }
+          = svg_icon :close, options: { width: '20px' }

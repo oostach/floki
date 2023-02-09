@@ -20,7 +20,8 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     if @note.save
-      flash.notice = 'Your note has been successfully saved.'
+      flash[:autohide] = true
+      flash.now.notice = 'Your note has been successfully saved.'
       render action: :create
     else
       render action: :edit
@@ -37,7 +38,8 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    flash.notice = 'Your note has been successfully removed.'
+    flash[:autohide] = true
+    flash.now.notice = 'Your note has been successfully removed.'
   end
 
   private

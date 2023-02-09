@@ -1,20 +1,38 @@
 @layer components {
   .flash-message {
-    @apply rounded-md mt-4 mx-auto border py-2 px-4;
+    @apply rounded-md mt-4 mx-auto border py-2 px-4 transition ease-linear duration-200;
   }
 
   .flash-message-info {
     @apply flash-message;
     @apply  border-sky-500 bg-sky-100 text-sky-700;
+
+    button {
+      svg {
+        @apply text-sky-700 stroke-1;
+      }
+    }
   }
 
   .flash-message-notice {
     @apply flash-message;
     @apply  border-green-500 bg-green-100 text-green-700;
+
+    button {
+      svg {
+        @apply text-green-700 stroke-1;
+      }
+    }
   }
 
   .flash-message-alert {
     @apply flash-message;
     @apply  border-red-500 bg-red-100 text-red-700;
+
+    button {
+      svg {
+        @apply text-red-700 stroke-1;
+      }
+    }
   }
 }

@@ -7,6 +7,10 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}'
   ],
+  safelist: [
+    { pattern: /flash-message-(notice|alert|info)/ },
+    { pattern: /invisible|hidden/ },
+  ],
   theme: {
     extend: {
       fontFamily: {
