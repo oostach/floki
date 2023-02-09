@@ -5,12 +5,20 @@
 
   .badge-button-primary {
     @apply badge-button;
-    @apply border-sky-700 bg-sky-100 hover:bg-sky-200
+    @apply border-sky-700 bg-sky-100 hover:bg-sky-200;
+
+    svg {
+      @apply text-sky-700 stroke-1;
+    }
   }
 
   .badge-button-alert {
     @apply badge-button;
-    @apply border-red-700 bg-red-100 hover:bg-red-200
+    @apply border-red-700 bg-red-100 hover:bg-red-200;
+
+    svg {
+      @apply text-red-700 stroke-1;
+    }
   }
 
   .button-primary {
