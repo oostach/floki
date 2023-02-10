@@ -2,15 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
-  connect() {
-    const autohide = this.element.dataset.hasOwnProperty('autohide');
+  static autohideTimeout = 3000;
 
-    if (autohide) {
-      const self = this;
-      setTimeout(function(){
-        self.close();
-      }, 3000)
+  connect() {
+    if (this.element.dataset.hasOwnProperty('autohide')) {
+      this.autohide();
     }
+  }
+
+  autohide() {
+    const self = this;
+    setTimeout(function () {
+      self.close();
+    }, this.constructor.autohideTimeout);
   }
 
   close(e) {
