@@ -2,7 +2,8 @@
   - unless flash.empty?
     - autohide = flash.key?(:autohide) ? flash.delete(:autohide) && true : nil
     - flash.each do |type, message|
-      %div{ class: "container flash-message-#{type} flex", data: { controller: 'flash-messages', autohide: autohide } }
+      - flesh_data = { controller: 'flash-messages', 'flash-messages-autohide-value': autohide }
+      %div{ class: "container flash-message-#{type} flex", data: flesh_data }
         = message
         %button.ml-auto{ data: { action: 'click->flash-messages#close' } }
           = svg_icon :close, options: { width: '20px' }
