@@ -2,23 +2,23 @@
 
 class NotificationMailer < ApplicationMailer
   def note_create
-    @note          = params[:note]
-    @reciver_email = params[:reciver_email]
+    @note         = params[:note]
+    @subscription = params[:subscription]
 
-    mail(to: @reciver_email, subject: 'New note added')
+    mail(to: @subscription.email, subject: 'New note added')
   end
 
   def note_destroy
-    @note          = params[:note]
-    @reciver_email = params[:reciver_email]
+    @note         = params[:note]
+    @subscription = params[:subscription]
 
-    mail(to: @reciver_email, subject: 'Note was removed')
+    mail(to: @subscription.email, subject: 'Note was removed')
   end
 
   def note_update
-    @note          = params[:note]
-    @reciver_email = params[:reciver_email]
+    @note         = params[:note]
+    @subscription = params[:subscription]
 
-    mail(to: @reciver_email, subject: 'Note was updated')
+    mail(to: @subscription.email, subject: 'Note was updated')
   end
 end

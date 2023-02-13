@@ -15,6 +15,11 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def unsubscribe
+    @subscription = Subscription.find_by(unsubscribe_token: params[:token])
+    @subscription.destroy
+  end
+
   private
 
   def subscription_params

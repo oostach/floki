@@ -1,3 +1,5 @@
 .note
   %h2= @note.title
   .trix-content= @note.body
+
+= link_to 'Unsubscribe', unsubscribe_subscription_url(@subscription, token: @subscription.unsubscribe_token)

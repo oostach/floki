@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
-  resources :subscriptions
+  resources :subscriptions do
+    get :unsubscribe, on: :member
+  end
 end
