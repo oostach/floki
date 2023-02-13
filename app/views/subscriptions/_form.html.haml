@@ -1,0 +1,8 @@
+.subscription-form
+  = form_with model: subscription do |f|
+    = f.hidden_field :notifiable_model
+    .form-group.mb-2
+      = f.label :email
+      .flex
+        = f.text_field :email, class: 'form-input px-2 py-1 rounded w-full'
+        = f.button svg_icon(:send, classes: 'text-white stroke-1 w-[28px] h-[28px]'), class: 'ml-2 button-primary'

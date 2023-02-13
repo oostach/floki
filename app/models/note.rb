@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
+  include Notifiable
+
   has_rich_text :body
   has_one_attached :image
 

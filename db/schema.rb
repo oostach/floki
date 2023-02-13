@@ -59,13 +59,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_152543) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string "subscribable_type"
-    t.bigint "subscribable_id"
     t.string "email", null: false
+    t.string "notifiable_model", null: false
+    t.string "actions", null: false, array: true
     t.string "unsubscribe_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

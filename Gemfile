@@ -28,6 +28,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem 'letter_opener'
 end
 
 group :development do
@@ -35,7 +36,6 @@ group :development do
   gem "rack-mini-profiler", require: false
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
-  gem 'letter_opener'
   gem 'haml_lint', require: false
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
