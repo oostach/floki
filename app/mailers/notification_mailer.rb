@@ -12,6 +12,13 @@ class NotificationMailer < ApplicationMailer
     @note          = params[:note]
     @reciver_email = params[:reciver_email]
 
-    mail(to: @reciver_email, subject: 'New was removed')
+    mail(to: @reciver_email, subject: 'Note was removed')
+  end
+
+  def note_update
+    @note          = params[:note]
+    @reciver_email = params[:reciver_email]
+
+    mail(to: @reciver_email, subject: 'Note was updated')
   end
 end
