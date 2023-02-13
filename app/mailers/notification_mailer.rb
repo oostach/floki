@@ -5,7 +5,7 @@ class NotificationMailer < ApplicationMailer
     @note         = params[:note]
     @subscription = params[:subscription]
 
-    mail(to: @subscription.email, subject: 'New note added')
+    mail(to: @subscription.email, subject: t('.create_subject'))
   end
 
   def note_destroy

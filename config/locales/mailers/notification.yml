@@ -1,0 +1,14 @@
+en:
+  notification_mailer:
+    note_create:
+      create_subject: A new note was added.
+
+  mailers:
+    notification_mailer:
+      note_create:
+        message: A new note was added %{time}. Please review it.
+        footer_notes_html: |
+          <a href="https://floki.dev">Floki.net.ua</a> sent this email to you as a reminder about the notes updates.
+          <br/>
+          You can %{link} from this list.
+

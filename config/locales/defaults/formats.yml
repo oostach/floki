@@ -1,0 +1,4 @@
+en:
+  time:
+    formats:
+      aton: at %H:%M on %d %b %Y
