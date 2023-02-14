@@ -44,4 +44,7 @@
       }
 
   %body
-    .container= yield
+    .container
+      = yield
+      .unsubscribe
+        = t('.footer_message_html', link: unsubscribe_link(@subscription))

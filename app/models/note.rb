@@ -7,4 +7,6 @@ class Note < ApplicationRecord
   has_one_attached :image
 
   default_scope { with_rich_text_body_and_embeds.order(created_at: :desc) }
+
+  validates :title, presence: true, length: { minimum: 5 }
 end

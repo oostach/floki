@@ -24,7 +24,7 @@ class NotesController < ApplicationController
       flash.now.notice = 'Your note has been successfully saved.'
       render action: :create
     else
-      render action: :edit
+      render action: :new
     end
   end
 

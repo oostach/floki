@@ -1,14 +1,25 @@
 en:
+  layouts:
+    mailer:
+      footer_message_html: |
+        <a href="https://floki.dev">Floki.net.ua</a> sent this email to you as a reminder about the notes updates.
+        <br/>
+        You can %{link} from this list.
+
   notification_mailer:
     note_create:
-      create_subject: A new note was added.
+      create_subject: A new note "%{title}" was added.
+    note_destroy:
+      destroy_subject: The note "%{title}" was deleted.
+    note_update:
+      update_subject: The note "%{title}" was updated.
 
   mailers:
+    unsubscribe: unsubscribe
     notification_mailer:
       note_create:
         message: A new note was added %{time}. Please review it.
-        footer_notes_html: |
-          <a href="https://floki.dev">Floki.net.ua</a> sent this email to you as a reminder about the notes updates.
-          <br/>
-          You can %{link} from this list.
-
+      note_destroy:
+        message: The note %{title} was delete %{time}.
+      note_update:
+        message: The note was updated %{time}. Please review it.

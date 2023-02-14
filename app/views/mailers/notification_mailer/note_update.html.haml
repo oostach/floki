@@ -1,0 +1,6 @@
+.message
+  = t('.message', time: l(@note.created_at, format: :aton))
+
+.note
+  %h2= @note.title
+  .trix-content= @note.body

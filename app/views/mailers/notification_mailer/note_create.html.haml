@@ -4,7 +4,3 @@
 .note
   %h2= @note.title
   .trix-content= @note.body
-
-.unsubscribe
-  = t('.footer_notes_html', link: link_to('unsubscribe', unsubscribe_subscription_url(@subscription, token: @subscription.unsubscribe_token)))
-
