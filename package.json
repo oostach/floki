@@ -6,7 +6,7 @@
   },
   "scripts": {
     "buildcss": "postcss app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css",
-    "watchcss": "postcss app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css -w"
+    "watchcss": "postcss app/assets/stylesheets/application.tailwind.css -o app/assets/builds/tailwind.css -w --verbose"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

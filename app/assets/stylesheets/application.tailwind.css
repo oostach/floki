@@ -12,13 +12,17 @@
     @apply absolute py-2 px-4 bg-gray-100 border border-gray-300 rounded drop-shadow-md -mt-2 right-[112px];
   }
 
-  .field_with_errors {
+  .field-with-errors {
     label {
       @apply text-red-500;
     }
 
     input {
       @apply border-red-500;
+    }
+
+    .field-errors {
+      @apply text-red-500 text-sm italic;
     }
   }
 }
