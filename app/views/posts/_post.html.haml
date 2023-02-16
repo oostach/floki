@@ -1,0 +1,5 @@
+= turbo_frame_tag dom_id(post) do
+  .news-post.mb-5.leading-5
+    .news-author.font-serif.text-sm= post.author
+    .news-title.font-serif= link_to post.title, post.source_url, class: 'text-blue-700 underline', target: :_blank, rel: :noopener
+    .news-time.text-xs.text-gray-500.italic= time_ago_in_words post.created_at

@@ -1,9 +1,9 @@
+= turbo_stream_from 'dashboard_posts'
+
 .flex
   .mr-2.px-1{ class: 'w-3/4' }
     %h2.h2 Main Content
   .ml-2.px-1{ class: 'w-1/4' }
     %h2.mb-4 News Feed
-    = render 'news_post'
-    = render 'news_post'
-    = render 'news_post'
-    = render 'news_post'
+    #news-feed
+      = render partial: 'posts/post', collection: @posts
