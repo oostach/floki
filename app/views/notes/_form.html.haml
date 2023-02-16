@@ -1,16 +1,12 @@
 .notes-form{ data: { controller: 'notes--form' } }
-  = form_with model: note do |f|
-    .form-group.mb-2
-      = f.label :title
-      = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full'
-    .form-group.mb-2
-      = f.label :body, 'Content'
-      = f.rich_text_area :body, class: 'form-input px-2 py-1 rounded w-full'
+  = floki_form_with model: note do |f|
+    = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
+    = f.rich_text_area :body, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
     .form-group
       = f.submit class: 'button-primary'
       - if note.persisted?
-        = link_to 'Cancel', note_path(note), class: 'button-secondary'
+        = link_to t('cancel'), note_path(note), class: 'button-secondary'
       - else
-        = link_to 'Cancel', '#', class: 'button-secondary', data: { action: 'click->notes--form#cancel' }
+        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->notes--form#cancel' }
 
   %hr.my-3.-mx-4.border-gray-300
