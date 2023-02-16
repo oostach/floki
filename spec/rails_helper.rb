@@ -42,7 +42,7 @@ end
 
 Capybara.register_driver :chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: )
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
 RSpec.configure do |config|

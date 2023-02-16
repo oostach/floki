@@ -26,7 +26,8 @@ module Notifiable
   def send_notification(action)
     notifiable = model_name.name
     Subscription.where(notifiable_model: notifiable).where('actions @> ARRAY[?]::varchar[]', [action]).find_each do |subscription|
-      NotificationMailer.with(notifiable.downcase.to_sym => self, subscription: subscription).send("#{notifiable.downcase}_#{action}").deliver_now
+      NotificationMailer.with(notifiable.downcase.to_sym => self, subscription: subscription)
+                        .send("#{notifiable.downcase}_#{action}").deliver_now
     end
   end
 end
