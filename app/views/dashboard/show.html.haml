@@ -1,2 +1,9 @@
-%h1 Dashboard#show
-%p Find me in app/views/dashboard/show.html.erb
+.flex
+  .mr-2.px-1{ class: 'w-3/4' }
+    %h2.h2 Main Content
+  .ml-2.px-1{ class: 'w-1/4' }
+    %h2.mb-4 News Feed
+    = render 'news_post'
+    = render 'news_post'
+    = render 'news_post'
+    = render 'news_post'

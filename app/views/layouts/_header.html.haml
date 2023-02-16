@@ -1,7 +1,8 @@
 .header-wrapper.flex.h-full.px-10
   .logo.self-center
-    = image_tag 'logo-viking.png', alt: 'Logo', class: 'inline w-11'
-    %span.font-mono.font-semibold.text-xl.pl-1 Floki
+    = link_to root_path do
+      = image_tag 'logo-viking.png', alt: 'Logo', class: 'inline w-11'
+      %span.font-mono.font-semibold.text-xl.pl-1 Floki
   %nav.ml-auto.my-auto
     %ul.main-nav
       %li.main-nav-item
