@@ -13,9 +13,7 @@
   }
 
   .field-with-errors {
-    label {
-      @apply text-red-500;
-    }
+    @apply w-full;
 
     input {
       @apply border-red-500;

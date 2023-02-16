@@ -1,7 +1,12 @@
 en:
-  errors:
-    models:
-      subscription:
-        attributes:
-          email:
-            format: Email format is invalid
+  activerecord:
+    errors:
+      messages:
+        format: 'format is incorrect'
+
+      models:
+        subscription:
+          attributes:
+            email:
+              too_long: is too long (max is %{count} chars)
+              too_short: is too short (min is %{count} chars)
