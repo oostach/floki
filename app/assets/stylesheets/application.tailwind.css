@@ -22,7 +22,7 @@
     }
 
     .field-errors {
-      @apply text-red-500 text-sm italic;
+      @apply block text-red-500 text-sm italic;
     }
   }
 }

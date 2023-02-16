@@ -1,8 +1,7 @@
 en:
-  activerecord:
-    errors:
-      models:
-        subscription:
-          attributes:
-            email:
-              format: Email format is invalid
+  errors:
+    models:
+      subscription:
+        attributes:
+          email:
+            format: Email format is invalid
