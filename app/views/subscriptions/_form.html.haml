@@ -1,4 +1,4 @@
-.subscription-form{ class: 'w-1/3', data: { controller: 'subscriptions--form', action: 'click@window->subscriptions--form#hide' } }
+.subscription-form{ data: { controller: 'subscriptions--form', action: 'click@window->subscriptions--form#hide' } }
   = form_with model: subscription do |f|
     = f.hidden_field :notifiable_model
     .form-group.mb-2
