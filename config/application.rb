@@ -37,5 +37,6 @@ module Floki
     config.generators.system_tests = nil
     config.factory_bot.definition_file_paths = ['spec/factories']
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
+    config.telegram_updates_controller.session_store = :redis_cache_store, { expires_in: 1.month }
   end
 end
