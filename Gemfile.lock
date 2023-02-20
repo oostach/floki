@@ -208,8 +208,6 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.8.0)
-    redis-store (1.9.1)
-      redis (>= 4, < 5)
     regexp_parser (2.6.2)
     reverse_markdown (2.1.1)
       nokogiri
@@ -347,7 +345,6 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.2)
   redis (~> 4.0)
-  redis-store
   rspec-rails
   rubocop-rails
   rubocop-rspec
