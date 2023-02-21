@@ -26,8 +26,6 @@ gem 'telegram-bot'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug"
-  # gem 'irb'
-  # gem 'reline'
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
