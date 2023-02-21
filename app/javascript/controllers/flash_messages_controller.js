@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
@@ -6,14 +6,14 @@ export default class extends Controller {
 
   connect() {
     if (this.autohideValue) {
-      this.autohide();
+      this.autohide()
     }
   }
 
   autohide() {
-    const self = this;
+    const self = this
     setTimeout(function () {
-      self.close();
+      self.close()
     }, this.autohideTimeoutValue)
   }
 

@@ -17,7 +17,7 @@ module Telegram
       respond_with :message, text: session[:text]
     end
 
-    def start!(word = nil, *other_words)
+    def start!(_word = nil, *_other_words)
       # do_smth_with(word)
 
       # full message object is also available via `payload` instance method:

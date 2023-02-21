@@ -22,12 +22,12 @@ module.exports = {
     'accessor-pairs': 'off',
     'no-prototype-builtins': 'off',
     'no-return-assign': 'off',
-    "no-multi-spaces": [
-      "error",
+    'no-multi-spaces': [
+      'error',
       {
-        "exceptions": {
-          "ImportDeclaration": false,
-          "VariableDeclarator": true
+        exceptions: {
+          ImportDeclaration: true,
+          VariableDeclarator: true
         }
       }
     ]
