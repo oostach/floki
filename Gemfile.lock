@@ -89,6 +89,8 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.1)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     diff-lcs (1.5.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
@@ -168,6 +170,8 @@ GEM
       net-protocol
     nio4r (2.5.8)
     nokogiri (1.14.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     parallel (1.22.1)
     parser (3.2.1.0)
@@ -344,7 +348,6 @@ DEPENDENCIES
   haml_lint
   image_processing (~> 1.2)
   importmap-rails
-  irb
   jbuilder
   letter_opener
   pg (~> 1.1)
@@ -352,7 +355,6 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.2)
   redis (~> 4.0)
-  reline
   rspec-rails
   rubocop-rails
   rubocop-rspec
