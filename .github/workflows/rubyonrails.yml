@@ -48,7 +48,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@4d060a10e6d98429c69057f0aafbc65fb982bae8 # v1.127.0
         with:
-          bundler-cache: false
+          bundler-cache: true
       # Add or replace any other lints here
       # - name: Security audit dependencies
       #   run: bin/bundler-audit --update
