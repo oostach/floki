@@ -1,15 +1,10 @@
-# This workflow uses actions that are not certified by GitHub.  They are
-# provided by a third-party and are governed by separate terms of service,
-# privacy policy, and support documentation.
-#
-# This workflow will install a prebuilt Ruby version, install dependencies, and
-# run tests and linters.
-name: "Ruby on Rails CI"
+name: Rubocop styles check
+
 on:
   push:
-    branches: [ "master" ]
+    branches: [ 'master' ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ 'master' ]
 jobs:
   lint:
     name: Run Rubocop scanning
@@ -18,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@4d060a10e6d98429c69057f0aafbc65fb982bae8 # v1.127.0
+        uses: ruby/setup-ruby@4d060a10e6d98429c69057f0aafbc65fb982bae8
         with:
           bundler-cache: true
       # Add or replace any other lints here
