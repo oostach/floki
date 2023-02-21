@@ -10,6 +10,7 @@ AllCops:
     - 'config/puma.rb'
     - 'bin/**/*'
     - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
 
 Layout/LineLength:
   Max: 160
