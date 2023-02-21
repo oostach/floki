@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 // Connects to data-controller="notes--form"
 export default class extends Controller {
@@ -6,8 +6,8 @@ export default class extends Controller {
   }
 
   cancel(e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    this.element.remove();
+    this.element.remove()
   }
 }

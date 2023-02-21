@@ -21,6 +21,15 @@ module.exports = {
     'n/no-callback-literal': 'off',
     'accessor-pairs': 'off',
     'no-prototype-builtins': 'off',
-    'no-return-assign': 'off'
+    'no-return-assign': 'off',
+    "no-multi-spaces": [
+      "error",
+      {
+        "exceptions": {
+          "ImportDeclaration": false,
+          "VariableDeclarator": true
+        }
+      }
+    ]
   }
 }

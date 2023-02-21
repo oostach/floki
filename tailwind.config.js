@@ -10,14 +10,14 @@ module.exports = {
   ],
   safelist: [
     { pattern: /flash-message-(notice|alert|info)/ },
-    { pattern: /invisible|hidden|field-with-errors/ },
+    { pattern: /invisible|hidden|field-with-errors/ }
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
-    },
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
   plugins: [
     require('@tailwindcss/forms'),

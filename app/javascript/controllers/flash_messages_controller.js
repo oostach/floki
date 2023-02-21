@@ -14,15 +14,15 @@ export default class extends Controller {
     const self = this;
     setTimeout(function () {
       self.close();
-    }, this.autohideTimeoutValue);
+    }, this.autohideTimeoutValue)
   }
 
   close(e) {
     if (typeof e === 'object') {
-      e.preventDefault();
+      e.preventDefault()
     }
 
-    this.element.classList.add('opacity-0');
-    this.element.addEventListener('transitionend', (event) => { event.target.remove() });
+    this.element.classList.add('opacity-0')
+    this.element.addEventListener('transitionend', (event) => { event.target.remove() })
   }
 }
