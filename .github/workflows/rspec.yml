@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Precompile tailwindcss
-        run: yarn build-tailwind-css
+        run: yarn build-tailwindcss
       - name: Add tailwindcss to assets
         run: bin/rails tailwindcss:export
       # Add or replace database setup steps here
