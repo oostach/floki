@@ -31,6 +31,8 @@ jobs:
           bundler-cache: true
       - name: Precompile assets
         run: bin/rails assets:precompile
+      - name: Install dependencies
+        run: yarn install
       - name: Precompile tailwindcss
         run: yarn build-tailwind-css
       - name: Add tailwindcss to assets
