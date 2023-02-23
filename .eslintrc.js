@@ -30,6 +30,11 @@ module.exports = {
           VariableDeclarator: true
         }
       }
+    ],
+    quotes: [
+      'error',
+      'single',
+      { allowTemplateLiterals: true }
     ]
   }
 }

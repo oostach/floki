@@ -30,13 +30,13 @@ jobs:
         with:
           bundler-cache: true
       - name: Precompile assets
-        run: bin/rails assets:precompile
+        run: RAILS_ENV=development bin/rails assets:precompile
       - name: Install dependencies
         run: yarn install
-      - name: Precompile tailwindcss
-        run: yarn build-tailwindcss
-      - name: Add tailwindcss to assets
-        run: bin/rails tailwindcss:export
+      # - name: Precompile tailwindcss
+      #   run: yarn build-tailwindcss
+      # - name: Add tailwindcss to assets
+      #   run: bin/rails tailwindcss:export
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
