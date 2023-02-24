@@ -15,6 +15,9 @@ module.exports = {
   globals: {
     ZoomMtg: 'readable'
   },
+  ignorePatterns: [
+    '**/vendor/bundle/**/*.js'
+  ],
   rules: {
     'space-before-function-paren': 'off',
     'multiline-ternary': 'off',
