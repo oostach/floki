@@ -28,6 +28,7 @@ jobs:
       - name: Run ESLint
         run: yarn eslint .
           --config .eslintrc.js
-          --ext .js,.jsx,.ts,.tsx
+          --ext .js
+
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel

@@ -1,4 +1,6 @@
 ![example workflow](https://github.com/oostach/floki/actions/workflows/rspec.yml/badge.svg?event=push)
+![example workflow](https://github.com/oostach/floki/actions/workflows/jest.yml/badge.svg?event=push)
+![example workflow](https://github.com/oostach/floki/actions/workflows/linters.yml/badge.svg?event=push)
 
 # Floki project
 

@@ -1,4 +1,4 @@
-name: Rspec tests run
+name: Ruby build
 
 on:
   push:
