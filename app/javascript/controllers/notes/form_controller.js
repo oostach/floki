@@ -1,3 +1,5 @@
+'use strict'
+
 import { Controller } from '@hotwired/stimulus'
 
 // Connects to data-controller="notes--form"
