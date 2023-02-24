@@ -1,0 +1,22 @@
+on:
+  push:
+    branches: [ 'master' ]
+  pull_request:
+    branches: [ 'master' ]
+jobs:
+  jsunit-tests:
+    name: Run javascript tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    env:
+      RAILS_ENV: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install JS dependencies
+        run: yarn install
+      - name: Run JavaScript tests
+        run: yarn testjs
