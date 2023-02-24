@@ -36,7 +36,7 @@ describe('FormController', () => {
   test('it should remove form on click cancel', () => {
     const form = document.querySelector('.notes-form')
     const cancelButton = form.querySelector('.button-cancel')
-    // cancelButton.click()
+    cancelButton.click()
 
     expect(document.body.innerHTML.trim()).toEqual('')
   })
