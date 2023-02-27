@@ -1,0 +1,8 @@
+.actions.text-right.mb-4.relative
+  = link_to 'Add Book or Article', new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
+
+= turbo_frame_tag 'new-publication'
+
+= turbo_frame_tag :publications do
+  - @publications.each do |publication|
+    = render publication

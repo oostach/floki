@@ -1,0 +1,8 @@
+= turbo_frame_tag dom_id(publication) do
+  .publication.w-full.mb-8
+    .publication-title= publication.title
+    .publication-description= publication.description
+    .publication-link= publication.url
+    - if publication.files.any?
+      - publication.files.each do |file|
+        .publication-file= file.url

@@ -3,4 +3,6 @@
 class Publication < ApplicationRecord
   has_rich_text :description
   has_many_attached :files
+
+  validates :title, presence: true
 end
