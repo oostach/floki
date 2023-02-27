@@ -2,7 +2,7 @@
 
 import { Controller } from '@hotwired/stimulus'
 
-// Connects to data-controller="notes--form"
+// Connects to data-controller="publications--form"
 export default class extends Controller {
   connect() {
   }

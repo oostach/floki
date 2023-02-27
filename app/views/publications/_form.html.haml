@@ -1,4 +1,4 @@
-.publication-form{ data: { controller: 'publication--form' } }
+.publication-form{ data: { controller: 'publications--form' } }
   = floki_form_with model: publication do |f|
     = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
     = f.rich_text_area :description, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
@@ -8,4 +8,4 @@
       - if publication.persisted?
         = link_to t('cancel'), publication_path(publication), class: 'button-secondary'
       - else
-        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->publication--form#cancel' }
+        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->publications--form#cancel:prevent' }

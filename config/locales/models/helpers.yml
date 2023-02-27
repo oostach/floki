@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      publication:
+        create: "Add Book or Article"
+        update: "Save Changes"
