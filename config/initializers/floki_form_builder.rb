@@ -26,13 +26,17 @@ class FlokiFormBuilder < ActionView::Helpers::FormBuilder
     wrapper_class = combine_wrapper_classes(wrapper_options.delete(:class))
 
     @template.content_tag(:div, class: wrapper_class) do
-      @template.label(@object_name, method) +
+      @template.label(@object_name, method, { class: ('required' if required?(method)) }) +
         @template.send(field_type, @object_name, method, options)
     end
   end
 
   def field_without_wrapper(method, options, field_type)
-    @template.label(@object_name, method) + @template.send(field_type, @object_name, method, options)
+    @template.label(@object_name, method, { class: ('required' if required?(method)) }) + @template.send(field_type, @object_name, method, options)
+  end
+
+  def required?(method)
+    object.class.validators_on(method).any? { |validation| validation.is_a?(ActiveModel::Validations::PresenceValidator) }
   end
 
   def combine_wrapper_classes(classes)

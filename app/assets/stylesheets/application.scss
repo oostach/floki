@@ -18,3 +18,14 @@
 input[type='submit'] {
   line-height: initial !important;
 }
+
+label {
+  &.required {
+    &::after {
+      content: '*';
+      vertical-align: super;
+      color: red;
+      font-size: 0.8rem;
+    }
+  }
+}
