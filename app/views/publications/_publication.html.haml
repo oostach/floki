@@ -1,6 +1,12 @@
 = turbo_frame_tag dom_id(publication) do
   .publication.w-full.mb-8
-    .publication-title= publication.title
+    .publication-title.flex.items-center.mb-2
+      .text-2xl.font-semibold.mr-2.text-sky-900= publication.title
+      .flex.ml-auto
+        = link_to edit_publication_path(publication), class: 'badge-button-primary mr-2' do
+          = svg_icon :edit, options: { width: '20px' }
+        = link_to publication_path(publication), data: delete_data_attr, class: 'badge-button-alert' do
+          = svg_icon :trash, options: { width: '20px' }
     .publication-description= publication.description
     .publication-link= publication.url
 
