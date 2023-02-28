@@ -7,8 +7,19 @@
       = f.text_field :url, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2 flex-1' }
     .form-group.mb-2
       = f.label :file, 'Attachments'
-      .files
-        = f.file_field :files, multiple: true, direct_upload: publication.persisted?
+      .resources
+        - if publication.persisted? && publication.files.present?
+          - images, files = publication.partition_files
+          .images.flex
+            - images.each do |file|
+              = turbo_frame_tag dom_id(file) do
+                .image.p-2
+                  = image_tag file, width: 150
+                  = link_to 'x', destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr
+          .files
+            - files.each do |file|
+              = link_to file.filename, file
+        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-4'
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?

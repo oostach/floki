@@ -3,10 +3,10 @@
 class PublicationsController < ApplicationController
   PREPAGE = 5
 
-  before_action :load_publication, only: %i[show edit destroy update]
+  before_action :load_publication, only: %i[show edit destroy update destroy_attachment]
 
   def index
-    @publications = Publication.all
+    @publications = Publication.with_attached_files.page(params[:page] || 1).per(PREPAGE)
   end
 
   def show
@@ -43,6 +43,11 @@ class PublicationsController < ApplicationController
     flash.now.notice = 'Your note has been successfully removed.'
   end
 
+  def destroy_attachment
+    @file = @publication.files.find_by(blob: ActiveStorage::Blob.find_signed(params[:signed_id]))
+    @file.purge
+  end
+
   private
 
   def publication_params
@@ -50,6 +55,6 @@ class PublicationsController < ApplicationController
   end
 
   def load_publication
-    @publication = Publication.find(params[:id])
+    @publication = Publication.with_attached_files.find(params[:id])
   end
 end

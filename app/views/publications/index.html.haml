@@ -6,3 +6,5 @@
 = turbo_frame_tag :publications do
   - @publications.each do |publication|
     = render publication
+
+= paginate @publications

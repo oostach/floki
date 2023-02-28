@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
-  resources :publications
+  resources :publications do
+    delete :destroy_attachment, on: :member, path: 'files/:signed_id'
+  end
 
   resources :subscriptions do
     get :unsubscribe, on: :member
