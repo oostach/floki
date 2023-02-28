@@ -37,10 +37,14 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+  config.active_storage.urls_expire_in = 30.minutes
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'floki.dev' }
+  config.action_mailer.default_url_options = {
+    host: 'floki.dev',
+    protocol: 'https'
+  }
   # Preview emails using lettter opener.
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true

@@ -5,4 +5,5 @@
     .publication-link= publication.url
     - if publication.files.any?
       - publication.files.each do |file|
-        .publication-file= file.url
+        .publication-file
+          = link_to file.filename, file

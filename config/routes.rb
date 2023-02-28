@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  default_url_options host: 'floki.net.ua', protocol: 'https'
-
   root 'dashboard#show'
 
   resources :notes
