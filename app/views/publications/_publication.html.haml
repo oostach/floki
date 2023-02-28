@@ -3,7 +3,14 @@
     .publication-title= publication.title
     .publication-description= publication.description
     .publication-link= publication.url
+
     - if publication.files.any?
-      - publication.files.each do |file|
-        .publication-file
-          = link_to file.filename, file
+      .publication-resources
+        .publication-resources-title.bold Resources
+        - images, files = publication.partition_files
+        .publication-images.flex
+          - images.each do |file|
+            = image_tag file, width: 150, class: 'p-2'
+        .publication-files
+          - files.each do |file|
+            = link_to file.filename, file
