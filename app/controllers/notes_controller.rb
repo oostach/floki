@@ -2,9 +2,12 @@
 
 # TODO: Add rendering of the flash messages
 class NotesController < ApplicationController
+  PREPAGE = 5
+
   before_action :load_note, only: %i[show edit destroy update]
+
   def index
-    @notes = Note.last(10)
+    @notes = Note.all.page(params[:page] || 1).per(PREPAGE)
   end
 
   def show
