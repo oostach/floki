@@ -3,6 +3,7 @@
 // import 'flowbite';
 // import 'flowbite-datepicker';
 import '@hotwired/turbo-rails'
-import 'trix'
+import '@rails/activestorage'
 import '@rails/actiontext'
+import 'trix'
 import 'controllers'

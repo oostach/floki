@@ -5,4 +5,6 @@ class Publication < ApplicationRecord
   has_many_attached :files
 
   validates :title, :description, presence: true
+
+  default_scope { with_rich_text_description_and_embeds.order(created_at: :desc) }
 end

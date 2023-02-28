@@ -1,0 +1,6 @@
+= update_flash_messages
+
+= turbo_stream.prepend 'publications', @publication
+
+= turbo_stream.replace 'new-publication' do
+  = turbo_frame_tag 'new-publication'

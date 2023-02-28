@@ -8,7 +8,7 @@
     .form-group.mb-2
       = f.label :file, 'Attachments'
       .files
-        = f.file_field :files, multiple: true
+        = f.file_field :files, multiple: true, direct_upload: publication.persisted?
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?

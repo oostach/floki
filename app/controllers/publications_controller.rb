@@ -2,7 +2,7 @@
 
 class PublicationsController < ApplicationController
   def index
-    @publications = Publication.all.with_rich_text_description_and_embeds
+    @publications = Publication.all
   end
 
   def new
