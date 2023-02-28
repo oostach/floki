@@ -2,7 +2,7 @@
   = floki_form_with model: note do |f|
     = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
     = f.rich_text_area :body, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
-    .form-group
+    .form-submit
       = f.submit class: 'button-primary'
       - if note.persisted?
         = link_to t('cancel'), note_path(note), class: 'button-secondary'

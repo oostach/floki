@@ -8,10 +8,12 @@
     .form-group.mb-2
       = f.label :file, 'Attachments'
       .files
-        = f.file_field :file
-    .form-group
+        = f.file_field :files, multiple: true
+    .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
         = link_to t('cancel'), publication_path(publication), class: 'button-secondary'
       - else
         = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->publications--form#cancel:prevent' }
+
+  %hr.my-3.-mx-4.border-gray-300
