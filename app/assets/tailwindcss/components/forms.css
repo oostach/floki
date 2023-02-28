@@ -1,0 +1,32 @@
+@layer components {
+  .subscription-form {
+    @apply relative py-2 px-4 bg-gray-100 border border-gray-300 rounded drop-shadow-md text-left;
+  }
+
+  label {
+    &.required::after {
+      content: '*';
+      @apply text-red-500 text-sm align-super;
+    }
+  }
+
+  input[type='submit'] {
+    line-height: initial !important;
+  }
+
+  .form-submit {
+    @apply text-right;
+  }
+
+  .field-with-errors {
+    @apply w-full;
+
+    input {
+      @apply border-red-500;
+    }
+
+    .field-errors {
+      @apply block text-red-500 text-sm italic;
+    }
+  }
+}

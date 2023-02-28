@@ -4,23 +4,6 @@
 @import './components/menus';
 @import './components/buttons';
 @import './components/flashes';
+@import './components/forms';
 
 @import "tailwindcss/utilities";
-
-@layer components {
-  .subscription-form {
-    @apply relative py-2 px-4 bg-gray-100 border border-gray-300 rounded drop-shadow-md text-left;
-  }
-
-  .field-with-errors {
-    @apply w-full;
-
-    input {
-      @apply border-red-500;
-    }
-
-    .field-errors {
-      @apply block text-red-500 text-sm italic;
-    }
-  }
-}

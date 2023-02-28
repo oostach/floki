@@ -10,7 +10,7 @@ module.exports = {
   ],
   safelist: [
     { pattern: /flash-message-(notice|alert|info)/ },
-    { pattern: /invisible|hidden|field-with-errors/ }
+    { pattern: /invisible|hidden|field-with-errors|required/ }
   ],
   theme: {
     extend: {
