@@ -10,16 +10,17 @@
       .resources
         - if publication.persisted? && publication.files.present?
           - images, files = publication.partition_files
-          .images.flex
+          .images.flex.flex-wrap
             - images.each do |file|
-              = turbo_frame_tag dom_id(file) do
-                .image.p-2
+              = turbo_frame_tag dom_id(file), class: 'flex' do
+                .image.px-2.pt-2.pb-6.mr-2.bg-white.relative.rounded.min-w-fit.mb-2.min-h-max
                   = image_tag file, width: 150
-                  = link_to 'x', destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr
+                  = link_to destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr, class: 'badge-button-alert badge-small absolute bottom-1 right-1' do
+                    = svg_icon :xmark, options: { width: '12px' }
           .files
             - files.each do |file|
               = link_to file.filename, file
-        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-4'
+        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
