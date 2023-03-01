@@ -31,7 +31,8 @@ class PublicationsController < ApplicationController
   end
 
   def update
-    if @publication.update(publication_params)
+    if @publication.update(publication_params.except(:files))
+      @publication.files.attach(publication_params.delete(:files))
       render @publication
     else
       render action: :edit

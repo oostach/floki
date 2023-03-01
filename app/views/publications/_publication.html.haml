@@ -14,9 +14,9 @@
       .publication-resources
         .publication-resources-title.bold Resources
         - images, files = publication.partition_files
-        .publication-images.flex
+        .publication-images.flex.flex-wrap
           - images.each do |file|
-            = image_tag file, width: 150, class: 'p-2'
+            = image_tag file, width: 160, class: 'p-2 mr-2 mb-2 bg-white border rounded'
         .publication-files
           - files.each do |file|
             = link_to file.filename, file
