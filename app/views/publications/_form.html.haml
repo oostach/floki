@@ -17,9 +17,14 @@
                   = image_tag file, width: 150
                   = link_to destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr, class: 'badge-button-alert badge-small absolute bottom-1 right-1' do
                     = svg_icon :xmark, options: { width: '12px' }
-          .files
+          .files.grid.grid-cols-2.gap-2
             - files.each do |file|
-              = link_to file.filename, file
+              = turbo_frame_tag dom_id(file) do
+                .file.flex.items-center.bg-white.border.rounded.p-2
+                  .file-icon.inline= file_type_icon(file)
+                  = link_to file.filename.base, file, class: 'text-sm'
+                  = link_to destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
+                    = svg_icon :xmark, options: { width: '12px' }
         = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'
     .form-submit
       = f.submit class: 'button-primary'

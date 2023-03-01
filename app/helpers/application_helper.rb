@@ -36,4 +36,7 @@ module ApplicationHelper
       render 'layouts/flash'
     end
   end
+
+  def file_type_icon(file)
+  end
 end
