@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  class SvgNotFound < StandardError; end
+
   def svg_icon(name, path: nil, classes: '', options: {})
     svg_file = find_svg_file(name, path)
 
@@ -22,7 +24,7 @@ module ApplicationHelper
     svg_file_path = File.join(svg_path, "#{name}.svg")
     svg_file      = AssetsDetector.find_assets_source(svg_file_path)
 
-    raise "Can't find #{svg_file_path}" unless svg_file
+    raise SvgNotFound, "Can't find #{svg_file_path}" unless svg_file
 
     svg_file
   end
@@ -37,6 +39,11 @@ module ApplicationHelper
     end
   end
 
-  def file_type_icon(file)
+  def file_type_icon(file, width: 18)
+    ext = file.filename.extension_without_delimiter
+    svg_icon ext, path: 'icons/svg/file-types', options: { width: "#{width}px" }
+  rescue SvgNotFound => e
+    Rails.logger.error e.message
+    svg_icon :default, path: 'icons/svg/file-types', options: { width: "#{width}px" }
   end
 end

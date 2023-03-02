@@ -21,7 +21,7 @@
             - files.each do |file|
               = turbo_frame_tag dom_id(file) do
                 .file.flex.items-center.bg-white.border.rounded.p-2
-                  .file-icon.inline= file_type_icon(file)
+                  .file-icon.inline.m-1= file_type_icon(file)
                   = link_to file.filename.base, file, class: 'text-sm'
                   = link_to destroy_attachment_publication_path(publication, file.signed_id), data: delete_data_attr, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
                     = svg_icon :xmark, options: { width: '12px' }
