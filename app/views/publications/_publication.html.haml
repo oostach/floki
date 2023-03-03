@@ -16,7 +16,7 @@
         - images, files = publication.partition_files
         .publication-images.flex.flex-wrap
           - images.each do |file|
-            = image_tag file, width: 160, class: 'p-2 mr-2 mb-2 bg-white border rounded'
-        .publication-files
+            = render 'image', image: file
+        .publication-files.grid.grid-cols-2.gap-2
           - files.each do |file|
-            = link_to file.filename, file
+            = render 'file', file: file

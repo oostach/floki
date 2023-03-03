@@ -1,0 +1,7 @@
+- delete_url = local_assigns.fetch(:delete_url, nil)
+
+.image.px-2.pt-2.pb-6.mr-2.bg-white.relative.rounded.min-w-fit.mb-2.min-h-max
+  = image_tag image.variant(:thumb), width: 150
+  - if delete_url
+    = link_to delete_url, data: delete_data_attr, class: 'badge-button-alert badge-small absolute bottom-1 right-1' do
+      = svg_icon :xmark, options: { width: '12px' }

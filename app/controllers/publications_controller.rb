@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PublicationsController < ApplicationController
+  include ActiveStorage::SetCurrent
+
   PREPAGE = 5
 
   before_action :load_publication, only: %i[show edit destroy update destroy_attachment]
