@@ -14,9 +14,9 @@
       .publication-resources
         .publication-resources-title.bold Resources
         - images, files = publication.partition_files
-        .publication-images.flex.flex-wrap
+        .images.flex.flex-wrap
           - images.each do |file|
             = render 'image', image: file
-        .publication-files.grid.grid-cols-2.gap-2
+        .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2
           - files.each do |file|
             = render 'file', file: file
