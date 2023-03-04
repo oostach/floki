@@ -11,9 +11,9 @@
         - if publication.persisted? && publication.files.present?
           - images, files = publication.partition_files
           .images.flex.flex-wrap
-            - images.each do |file|
-              = turbo_frame_tag dom_id(file), class: 'flex' do
-                = render 'image', image: file, delete_url: destroy_attachment_publication_path(publication, file.signed_id)
+            - images.each do |image|
+              = turbo_frame_tag dom_id(image) do
+                = render 'image', image: image, delete_url: destroy_attachment_publication_path(publication, image.signed_id)
           .files.grid.grid-cols-2.gap-2
             - files.each do |file|
               = turbo_frame_tag dom_id(file) do
