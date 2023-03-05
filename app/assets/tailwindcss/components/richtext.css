@@ -1,0 +1,17 @@
+@layer components {
+  .form-richtext {
+    @apply mt-1 block w-full rounded-md border border-gray-300 shadow-sm;
+  }
+
+  .form-richtext .trix-button-row {
+    @apply p-2.5 bg-white rounded-t-md border-b border-gray-300;
+  }
+
+  .form-richtext .trix-button-row .trix-button-group {
+    @apply mb-0;
+  }
+
+  .form-richtext trix-editor.trix-content {
+    @apply border-0 bg-white rounded-b-md focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50;;
+  }
+}

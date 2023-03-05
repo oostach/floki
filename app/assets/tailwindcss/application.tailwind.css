@@ -6,5 +6,6 @@
 @import './components/flashes';
 @import './components/forms';
 @import './components/pagination';
+@import './components/richtext';
 
 @import "tailwindcss/utilities";
