@@ -1,0 +1,29 @@
+@layer components {
+  .pagination {
+    @apply flex;
+  }
+
+  .pagination .page {
+    @apply pagination-button;
+  }
+
+  .pagination .page.current {
+    @apply pagination-button-current;
+  }
+
+  .pagination .next {
+    @apply pagination-button;
+  }
+
+  .pagination .last {
+    @apply pagination-button;
+  }
+
+  .pagination .first {
+    @apply pagination-button;
+  }
+
+  .pagination .prev {
+    @apply pagination-button;
+  }
+}

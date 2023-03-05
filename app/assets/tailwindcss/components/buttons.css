@@ -5,34 +5,44 @@
   }
 
   .badge-normal {
-    @apply w-[28px] h-[28px]
+    @apply w-[28px] h-[28px];
   }
 
   .badge-small {
-    @apply w-[16px] h-[16px] ;
+    @apply w-[16px] h-[16px];
   }
 
   .badge-button-primary {
     @apply badge-button;
     @apply border-sky-700 bg-sky-100 hover:bg-sky-200;
+  }
 
-    svg {
-      @apply text-sky-700 stroke-1;
-    }
+  .badge-button-primary  svg {
+    @apply text-sky-700 stroke-1;
   }
 
   .badge-button-alert {
     @apply badge-button;
     @apply border-red-700 bg-red-100 hover:bg-red-200;
+  }
 
-    svg {
-      @apply text-red-700 stroke-1;
-    }
+  .badge-button-alert  svg {
+    @apply text-red-700 stroke-1;
+  }
+
+  /* Pagination */
+
+  .pagination-button {
+    @apply button-light mr-1;
+  }
+
+  .pagination-button-current {
+    @apply pagination-button button-primary;
   }
 
   /* Buttons */
   .button {
-    @apply rounded px-3 py-1.5 leading-loose;
+    @apply rounded px-3 py-2 leading-none inline-block;
   }
 
   .button-primary {
