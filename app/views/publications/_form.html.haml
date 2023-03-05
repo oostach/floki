@@ -1,10 +1,10 @@
 .publication-form{ data: { controller: 'publications--form' } }
   = floki_form_with model: publication do |f|
-    = f.text_field :title, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
-    = f.rich_text_area :description, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2' }
+    = f.text_field :title
+    = f.rich_text_area :description
     .flex.w-full
-      = f.text_field :author, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2 flex-1 mr-4' }
-      = f.text_field :url, class: 'form-input px-2 py-1 rounded w-full', wrapper: { class: 'mb-2 flex-1' }
+      = f.text_field :author, wrapper: { class: 'flex-1 mr-4' }
+      = f.text_field :url, wrapper: { class: 'flex-1' }
     .form-group.mb-2
       = f.label :file, 'Attachments'
       .publication-resources
