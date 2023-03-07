@@ -29,10 +29,6 @@ module ApplicationHelper
     svg_file
   end
 
-  def delete_data_attr
-    { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
-  end
-
   def update_flash_messages
     turbo_stream.replace 'flash-messages' do
       render 'layouts/flash'

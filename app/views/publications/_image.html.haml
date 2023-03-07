@@ -5,6 +5,6 @@
     .text-xs{ class: 'w-[125px] truncate ...' }= image.filename.base
     - if delete_url
       .ml-auto.pl-2
-        = link_to delete_url, data: delete_data_attr, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
+        = link_to delete_url, data: delete_data_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
           = svg_icon :xmark, options: { width: '12px' }
   = image_tag image.variant(:thumb), width: 150

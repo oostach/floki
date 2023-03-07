@@ -8,6 +8,6 @@
         .note-actions.flex.ml-auto
           = link_to edit_note_path(note), class: 'badge-button-primary badge-normal mr-2' do
             = svg_icon :edit, options: { width: '20px' }
-          = link_to note_path(note), data: delete_data_attr, class: 'badge-button-alert badge-normal' do
+          = link_to note_path(note), data: delete_data_attrs, class: 'badge-button-alert badge-normal' do
             = svg_icon :trash, options: { width: '20px' }
     .note-body.text-gray-700= note.body

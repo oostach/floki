@@ -18,8 +18,8 @@
             - files.each do |file|
               = turbo_frame_tag dom_id(file) do
                 = render 'file', file: file, delete_url: destroy_attachment_publication_path(publication, file.signed_id)
-      .resources-upload
-        .droppable-area
+      .resources-upload{ data: { controller: 'droppable' } }
+        .droppable-area{ data: droppable_data_attrs }
           %span Drug and drop your resources here!
         = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2 hidden'
     .form-submit
