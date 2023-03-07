@@ -9,3 +9,13 @@
 @import './components/richtext';
 
 @import "tailwindcss/utilities";
+
+@layer components {
+  .droppable-area {
+    @apply flex p-6 mt-2 rounded-lg border-2 border-dashed border-blue-900 justify-center bg-gradient-to-b  from-cyan-500/20 to-blue-500/20;
+  }
+
+  .droppable-area span {
+    @apply font-opensans font-medium text-lg text-blue-900;
+  }
+}

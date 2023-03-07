@@ -18,7 +18,10 @@
             - files.each do |file|
               = turbo_frame_tag dom_id(file) do
                 = render 'file', file: file, delete_url: destroy_attachment_publication_path(publication, file.signed_id)
-        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'
+      .resources-upload
+        .droppable-area
+          %span Drug and drop your resources here!
+        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2 hidden'
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
