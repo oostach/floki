@@ -10,6 +10,17 @@ export default class extends Controller {
 
   loadFiles(e) {
     e.preventDefault()
+
+    const form =  document.querySelector('.publication-form form')
+    const formData = new FormData(form)
+    const filesData = new FormData()
+    const files = e.dataTransfer.files
+
+    // debugger
+
+    for (const pair of filesData.entries()) {
+      console.log(pair)
+    }
   }
 
   highlightDroppableArea(e) {

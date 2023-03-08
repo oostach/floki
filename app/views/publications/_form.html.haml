@@ -21,7 +21,7 @@
       .resources-upload{ data: { controller: 'droppable' } }
         .droppable-area{ data: droppable_data_attrs }
           %span Drug and drop your resources here!
-        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2 hidden'
+        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
