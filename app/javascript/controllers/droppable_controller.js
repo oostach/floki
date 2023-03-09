@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import { Turbo } from '@hotwired/turbo-rails'
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
@@ -28,9 +29,8 @@ export default class extends Controller {
         Accept: 'text/vnd.turbo-stream.html'
       },
       body: filesData
-    }).then((success) => {
-      console.log(success)
-    })
+    }).then(res => res.text())
+      .then(html => Turbo.renderStreamMessage(html))
   }
 
   highlightDroppableArea(e) {

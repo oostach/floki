@@ -1,0 +1,5 @@
+= turbo_stream.prepend dom_id(@publication, 'images') do
+  = render partial: 'image', collection: @images, locals: { publication: @publication }
+
+= turbo_stream.prepend dom_id(@publication, 'files') do
+  = render partial: 'file', collection: @files, locals: { publication: @publication }

@@ -1,4 +1,6 @@
-- delete_url = local_assigns.fetch(:delete_url, nil)
+:ruby
+  publication = local_assigns.fetch(:publication, nil)
+  delete_url = destroy_attachment_publication_path(publication, file.signed_id) if publication
 
 .file.flex.items-center.bg-white.border.rounded.p-2
   .file-icon.inline.m-1= file_type_icon(file)

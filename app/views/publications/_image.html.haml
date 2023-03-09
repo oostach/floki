@@ -1,4 +1,6 @@
-- delete_url = local_assigns.fetch(:delete_url, nil)
+:ruby
+  publication = local_assigns.fetch(:publication, nil)
+  delete_url = destroy_attachment_publication_path(publication, image.signed_id) if publication
 
 .image.p-2.mr-2.bg-white.rounded.min-w-fit.mb-2.min-h-max
   .flex.pb-2

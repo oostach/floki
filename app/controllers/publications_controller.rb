@@ -48,10 +48,7 @@ class PublicationsController < ApplicationController
 
   def add_attachment
     @publication.files.attach(publication_params.delete(:files))
-    respond_to do |format|
-      format.turbo_stream { turbo_stream.replace helpers.dom_id(@publication, 'resources'), partial: 'resources', locals: { publication: @publication } }
-      # format.turbo_stream { turbo_stream.replace helpers.dom_id(@publication, 'resources'), partial: 'resources', locals: { publication: @publication } }
-    end
+    @images, @files = @publication.files.last(publication_params[:files].size).partition { |file| file.content_type.match?('image') }
   end
 
   def destroy_attachment
