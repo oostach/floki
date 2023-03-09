@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :publications do
     delete :destroy_attachment, on: :member, path: 'files/:signed_id'
+    post :add_attachment, on: :member
   end
 
   resources :subscriptions do

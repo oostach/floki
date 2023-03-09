@@ -7,18 +7,8 @@
       = f.text_field :url, wrapper: { class: 'flex-1' }
     .form-group.mb-2
       = f.label :file, 'Attachments'
-      .publication-resources
-        - if publication.persisted? && publication.files.present?
-          - images, files = publication.partition_files
-          .images.flex.flex-wrap
-            - images.each do |image|
-              = turbo_frame_tag dom_id(image) do
-                = render 'image', image: image, delete_url: destroy_attachment_publication_path(publication, image.signed_id)
-          .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2
-            - files.each do |file|
-              = turbo_frame_tag dom_id(file) do
-                = render 'file', file: file, delete_url: destroy_attachment_publication_path(publication, file.signed_id)
-      .resources-upload{ data: { controller: 'droppable' } }
+      = render 'publications/resources', publication: publication
+      .resources-upload{ data: { controller: 'droppable', add_url: add_attachment_publication_path(publication) } }
         .droppable-area{ data: droppable_data_attrs }
           %span Drug and drop your resources here!
         = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'

@@ -4,23 +4,33 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['droppableArea']
 
-  track(e) {
-    e.preventDefault()
-  }
-
   loadFiles(e) {
     e.preventDefault()
 
-    const form =  document.querySelector('.publication-form form')
-    const formData = new FormData(form)
     const filesData = new FormData()
     const files = e.dataTransfer.files
+    const csrfToken = document.getElementsByName('csrf-token')[0].content
 
-    // debugger
+    for (const file of files) {
+      filesData.append('publication[files][]', file)
+    }
 
     for (const pair of filesData.entries()) {
       console.log(pair)
     }
+
+    fetch(this.data.element.dataset.addUrl, {
+      method: 'POST',
+      mode: 'same-origin',
+      credentials: 'same-origin',
+      headers: {
+        'X-CSRF-Token': csrfToken,
+        Accept: 'text/vnd.turbo-stream.html'
+      },
+      body: filesData
+    }).then((success) => {
+      console.log(success)
+    })
   }
 
   highlightDroppableArea(e) {
