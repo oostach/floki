@@ -6,12 +6,11 @@
       = f.text_field :author, wrapper: { class: 'flex-1 mr-4' }
       = f.text_field :url, wrapper: { class: 'flex-1' }
     .form-group.mb-2
-      = f.label :file, 'Attachments'
-      = render 'publications/resources', publication: publication
-      .resources-upload{ data: { controller: 'droppable', add_url: add_attachment_publication_path(publication) } }
+      = f.label t('.resources')
+      = render 'resources', publication: publication
+      .resources-uploader{ data: { controller: 'droppable', add_url: add_attachment_publication_path(publication) } }
         .droppable-area{ data: droppable_data_attrs }
-          %span Drug and drop your resources here!
-        = f.file_field :files, multiple: true, direct_upload: publication.persisted?, class: 'mt-2'
+          %span= t('.drag_and_drop_message')
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?

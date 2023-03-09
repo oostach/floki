@@ -7,3 +7,6 @@
     .files
       = turbo_frame_tag dom_id(publication, 'files'), class: 'grid md:grid-cols-2 sm:grid-cols-1 gap-2' do
         = render partial: 'file', collection: files, locals: { publication: publication }
+  - else
+    .images= turbo_frame_tag dom_id(publication, 'images'), class: 'flex flex-wrap'
+    .files= turbo_frame_tag dom_id(publication, 'files'), class: 'grid md:grid-cols-2 sm:grid-cols-1 gap-2'

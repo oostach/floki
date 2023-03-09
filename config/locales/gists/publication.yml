@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    attributes:
+      publication:
+        url: Link to source
+
+  publications:
+    form:
+      drag_and_drop_message: Drug and drop your resources here!
+      resources: Resources
