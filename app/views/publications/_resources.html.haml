@@ -3,11 +3,7 @@
     - images, files = publication.partition_files
     .images
       = turbo_frame_tag dom_id(publication, 'images'), class: 'flex flex-wrap' do
-        - images.each do |image|
-          = turbo_frame_tag dom_id(image) do
-            = render 'image', image: image, publication: publication
+        = render partial: 'image', collection: images, locals: { publication: publication }
     .files
       = turbo_frame_tag dom_id(publication, 'files'), class: 'grid md:grid-cols-2 sm:grid-cols-1 gap-2' do
-        - files.each do |file|
-          = turbo_frame_tag dom_id(file) do
-            = render 'file', file: file, publication: publication
+        = render partial: 'file', collection: files, locals: { publication: publication }
