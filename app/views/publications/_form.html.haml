@@ -10,7 +10,8 @@
       = render 'resources', publication: publication
       .resources-uploader{ data: { controller: 'droppable', add_url: add_attachment_publication_path(publication) } }
         .droppable-area{ data: droppable_data_attrs }
-          %span= t('.drag_and_drop_message')
+          = svg_icon :upload, options: { width: '48px' }
+          .announcement= t('.drag_and_drop_message')
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
