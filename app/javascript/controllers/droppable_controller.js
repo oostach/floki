@@ -15,7 +15,7 @@ export default class extends Controller {
       filesData.append('publication[files][]', file)
     }
 
-    fetch(this.#addUrl, {
+    fetch(this.#addResourcesUrl, {
       method: 'POST',
       mode: 'same-origin',
       credentials: 'same-origin',
@@ -25,7 +25,10 @@ export default class extends Controller {
       },
       body: filesData
     }).then(res => res.text())
-      .then(html => Turbo.renderStreamMessage(html))
+      .then(html => {
+        Turbo.renderStreamMessage(html)
+        this.#buildFormFields(files)
+      })
   }
 
   highlightDroppableArea(e) {
@@ -42,7 +45,14 @@ export default class extends Controller {
     return document.getElementsByName('csrf-token')[0].content
   }
 
-  get #addUrl() {
-    return this.data.element.dataset.addUrl
+  get #addResourcesUrl() {
+    return this.data.element.dataset.addResourcesUrl
+  }
+
+  #buildFormFields(files) {
+    const filesField = document.createElement('input', { multiple: true, name: 'publication[files][]' })
+    filesField.classList.add('hidden')
+    filesField.files = files
+    this.droppableAreaTarget.append(filesField)
   }
 }

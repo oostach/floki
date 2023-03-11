@@ -1,6 +1,6 @@
 :ruby
   publication = local_assigns.fetch(:publication, nil)
-  delete_url = destroy_attachment_publication_path(publication, file.signed_id) if publication
+  delete_url = destroy_attachment_publication_path(publication, file.signed_id) if publication&.persisted?
 
 = turbo_frame_tag dom_id(file) do
   .file.flex.items-center.bg-white.border.rounded.p-2

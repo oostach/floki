@@ -1,6 +1,6 @@
 :ruby
   publication = local_assigns.fetch(:publication, nil)
-  delete_url = destroy_attachment_publication_path(publication, image.signed_id) if publication
+  delete_url = destroy_attachment_publication_path(publication, image.signed_id) if publication&.persisted?
 
 = turbo_frame_tag dom_id(image) do
   .image.p-2.mr-2.bg-white.rounded.min-w-fit.mb-2.min-h-max

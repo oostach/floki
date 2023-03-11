@@ -8,7 +8,9 @@
     .form-group.mb-2
       = f.label t('.resources')
       = render 'resources', publication: publication
-      .resources-uploader{ data: { controller: 'droppable', add_url: add_attachment_publication_path(publication) } }
+      - add_resources_url = publication.persisted? ? add_attachments_publication_path(publication) : add_attachments_publications_path
+      .resources-uploader{ data: { controller: 'droppable', add_resources_url: add_resources_url } }
+        -# = f.file_field :files, multipart: true
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }
           .announcement= t('.drag_and_drop_message')
