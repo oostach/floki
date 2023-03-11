@@ -7,7 +7,7 @@ module DataAttributesHelper
 
   def droppable_data_attrs
     { action: 'dragover->droppable#highlightDroppableArea dragenter->droppable#highlightDroppableArea
-               dragleave->droppable#clearDroppableArea drop->droppable#loadFiles',
+               dragleave->droppable#clearDroppableArea drop->droppable#uploadOrPreviewFiles',
       droppable: { target: 'droppableArea' } }
   end
 end

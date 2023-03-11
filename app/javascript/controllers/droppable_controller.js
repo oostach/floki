@@ -5,27 +5,22 @@ import { Turbo } from '@hotwired/turbo-rails'
 export default class extends Controller {
   static targets = ['droppableArea']
 
-  loadFiles(e) {
+  uploadOrPreviewFiles(e) {
     e.preventDefault()
 
     const filesData = new FormData()
     const files = e.dataTransfer.files
-    const csrfToken = document.getElementsByName('csrf-token')[0].content
 
     for (const file of files) {
       filesData.append('publication[files][]', file)
     }
 
-    for (const pair of filesData.entries()) {
-      console.log(pair)
-    }
-
-    fetch(this.data.element.dataset.addUrl, {
+    fetch(this.#addUrl, {
       method: 'POST',
       mode: 'same-origin',
       credentials: 'same-origin',
       headers: {
-        'X-CSRF-Token': csrfToken,
+        'X-CSRF-Token': this.#csrfToken,
         Accept: 'text/vnd.turbo-stream.html'
       },
       body: filesData
@@ -41,5 +36,13 @@ export default class extends Controller {
 
   clearDroppableArea() {
     this.droppableAreaTarget.classList.remove('highlight')
+  }
+
+  get #csrfToken() {
+    return document.getElementsByName('csrf-token')[0].content
+  }
+
+  get #addUrl() {
+    return this.data.element.dataset.addUrl
   }
 }
