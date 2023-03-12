@@ -1,5 +1,5 @@
 .publication-form{ data: { controller: 'publications--form' } }
-  = floki_form_with model: publication do |f|
+  = floki_form_with model: publication, multipart: true do |f|
     = f.text_field :title
     = f.rich_text_area :description
     .flex.w-full
@@ -7,10 +7,9 @@
       = f.text_field :url, wrapper: { class: 'flex-1' }
     .form-group.mb-2
       = f.label t('.resources')
-      = render 'resources', publication: publication
-      - add_resources_url = publication.persisted? ? add_attachments_publication_path(publication) : add_attachments_publications_path
-      .resources-uploader{ data: { controller: 'droppable', add_resources_url: add_resources_url } }
-        = f.file_field :files, multiple: true, class: 'hidden', data: { droppable_target: 'filesField' } if publication.new_record?
+      - add_resources_url = publication.persisted? ? add_attachments_publication_path(publication) : nil
+      .resources{ data: { controller: 'droppable', droppable_uploadable_value: publication.persisted?, droppable_resources_url_value: add_resources_url, droppable_image_template_value: render('publications/image_template') } }
+        .preview-area= render 'resources', publication: publication
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }
           .announcement= t('.drag_and_drop_message')

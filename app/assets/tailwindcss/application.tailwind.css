@@ -7,6 +7,7 @@
 @import './components/forms';
 @import './components/pagination';
 @import './components/richtext';
+@import './components/resources';
 
 @import "tailwindcss/utilities";
 

@@ -1,0 +1,7 @@
+.image
+  .image-info
+    .image-name
+    .image-actions
+      = link_to '#', data: { actions: 'click->droppable#deletePreview' }, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
+        = svg_icon :xmark, options: { width: '12px' }
+  %img.image-preview{ src: '#', width: 150 }

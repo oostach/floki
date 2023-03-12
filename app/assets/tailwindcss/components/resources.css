@@ -1,0 +1,17 @@
+@layer components {
+  .image {
+    @apply  p-2 mr-2 bg-white rounded min-w-fit mb-2 min-h-max;
+  }
+
+  .image .image-info {
+    @apply flex pb-2;
+  }
+
+  .image .image-info .image-name {
+    @apply text-xs w-[125px] truncate;
+  }
+
+  .image .image-info .image-actions {
+    @apply ml-auto pl-2;
+  }
+}
