@@ -5,7 +5,7 @@ class PublicationsController < ApplicationController
 
   PREPAGE = 5
 
-  before_action :load_publication, only: %i[show edit destroy update destroy_attachment add_attachment]
+  before_action :load_publication, only: %i[show edit destroy update destroy_attachment add_attachments]
 
   def index
     @publications = Publication.with_attached_files.page(params[:page] || 1).per(PREPAGE)
@@ -33,8 +33,7 @@ class PublicationsController < ApplicationController
   end
 
   def update
-    if @publication.update(publication_params.except(:files))
-      @publication.files.attach(publication_params.delete(:files))
+    if @publication.update(publication_params)
       render @publication
     else
       render action: :edit
@@ -72,6 +71,6 @@ class PublicationsController < ApplicationController
   end
 
   def load_publication
-    @publication = Publication.with_attached_files.find(params_publication_id)
+    @publication = Publication.with_attached_files.find(params_publication_id) if params_publication_id
   end
 end

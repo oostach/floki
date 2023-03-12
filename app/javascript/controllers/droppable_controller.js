@@ -3,7 +3,7 @@ import { Turbo } from '@hotwired/turbo-rails'
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
-  static targets = ['droppableArea']
+  static targets = ['droppableArea', 'filesField']
 
   uploadOrPreviewFiles(e) {
     e.preventDefault()
@@ -50,9 +50,6 @@ export default class extends Controller {
   }
 
   #buildFormFields(files) {
-    const filesField = document.createElement('input', { multiple: true, name: 'publication[files][]' })
-    filesField.classList.add('hidden')
-    filesField.files = files
-    this.droppableAreaTarget.append(filesField)
+    this.filesFieldTarget.files = files
   }
 }

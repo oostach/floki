@@ -10,7 +10,7 @@
       = render 'resources', publication: publication
       - add_resources_url = publication.persisted? ? add_attachments_publication_path(publication) : add_attachments_publications_path
       .resources-uploader{ data: { controller: 'droppable', add_resources_url: add_resources_url } }
-        -# = f.file_field :files, multipart: true
+        = f.file_field :files, multiple: true, class: 'hidden', data: { droppable_target: 'filesField' } if publication.new_record?
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }
           .announcement= t('.drag_and_drop_message')
