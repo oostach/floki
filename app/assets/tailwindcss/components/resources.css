@@ -20,7 +20,11 @@
   }
 
   .file .file-icon {
-    @apply inline mr-2;
+    @apply flex mr-2;
+  }
+
+  .file .file-icon i.icon-image {
+    @apply bg-cover inline-block w-[16px] h-[20px];
   }
 
   .file .file-link {
