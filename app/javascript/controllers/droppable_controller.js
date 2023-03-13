@@ -11,6 +11,12 @@ export default class extends Controller {
     uploadable: Boolean
   }
 
+  deletePreview(e) {
+    e.preventDefault()
+
+    e.currentTarget.closest('.image').remove()
+  }
+
   uploadOrPreviewFiles(e) {
     e.preventDefault()
 
@@ -33,13 +39,16 @@ export default class extends Controller {
     return document.getElementsByName('csrf-token')[0].content
   }
 
-  #buildFormFields(files) {
+  #buildFormFields(file) {
     const fileField = document.createElement('input')
+    const list = new DataTransfer()
+    list.items.add(file)
+
     fileField.setAttribute('type', 'file')
     fileField.setAttribute('name', 'publication[files][]')
     fileField.setAttribute('class', 'hidden')
-    fileField.files = files
-    this.element.appendChild(fileField)
+    fileField.files = list.files
+    return fileField
   }
 
   #previewFiles(files) {
@@ -48,15 +57,16 @@ export default class extends Controller {
         ? this.#previewImage(file)
         : this.#previewFile(file)
     }
-    this.#buildFormFields(files)
   }
 
   #previewImage(file) {
     const parser = new DOMParser()
     const htmlDoc = parser.parseFromString(this.imageTemplateValue, 'text/html')
-    htmlDoc.querySelector('.image-name').innerText = file.name
-    htmlDoc.querySelector('.image-preview').src = URL.createObjectURL(file)
-    this.imagesPreviewAreaTarget.append(htmlDoc.querySelector('.image'))
+    const previewContainer = htmlDoc.querySelector('.image')
+    previewContainer.querySelector('.image-name').innerText = file.name
+    previewContainer.querySelector('.image-preview').src = URL.createObjectURL(file)
+    previewContainer.appendChild(this.#buildFormFields(file))
+    this.imagesPreviewAreaTarget.append(previewContainer)
   }
 
   #previewFile() {
