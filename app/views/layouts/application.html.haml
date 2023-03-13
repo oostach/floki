@@ -11,7 +11,7 @@
     = stylesheet_link_tag 'tailwind', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
 
-  %body{ class: 'font-inter bg-gray-200 p-2.5', data: { icon_path: { jpg: "#{asset_path('icons/png/file-types/jpg.png')}", png: "#{asset_path('icons/png/file-types/png.png')}", avi: "#{asset_path('icons/png/file-types/avi.png')}", html: "#{asset_path('icons/png/file-types/html.png')}", pdf: "#{asset_path('icons/png/file-types/pdf.png')}" }.to_json } }
+  %body{ class: 'font-inter bg-gray-200 p-2.5' }
     .w-full
       %header.rounded-lg.bg-sky-300.h-20.shadow-lg= render 'layouts/header'
       = render 'layouts/flash'

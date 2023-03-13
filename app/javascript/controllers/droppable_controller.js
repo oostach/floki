@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { Turbo } from '@hotwired/turbo-rails'
-import pngIcon from '../file-types'
+import { pngCssIcon } from '../file-types'
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
@@ -76,7 +76,7 @@ export default class extends Controller {
     const parser = new DOMParser()
     const htmlDoc = parser.parseFromString(this.fileTemplateValue, 'text/html')
     const previewContainer = htmlDoc.querySelector('.file')
-    const icon = pngIcon(file)
+    const icon = pngCssIcon(file)
 
     previewContainer.querySelector('.file-icon').append(icon)
     previewContainer.querySelector('.file-link').prepend(file.name)
