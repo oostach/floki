@@ -8,7 +8,8 @@
     .form-group.mb-2
       = f.label t('.resources')
       - add_resources_url = publication.persisted? ? add_attachments_publication_path(publication) : nil
-      .resources{ data: { controller: 'droppable', droppable_uploadable_value: publication.persisted?, droppable_resources_url_value: add_resources_url, droppable_image_template_value: render('publications/image_template') } }
+      .resources{ data: { controller: 'droppable', droppable_uploadable_value: publication.persisted?, droppable_resources_url_value: add_resources_url,
+                  droppable_image_template_value: render('publications/image_template'), droppable_file_template_value: render('publications/file_template') } }
         .preview-area= render 'resources', publication: publication
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }

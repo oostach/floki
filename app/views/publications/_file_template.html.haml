@@ -1,0 +1,8 @@
+.file
+  .file-icon
+  = link_to 'javascript:void(0);', class: 'file-link', target: :_blank, rel: 'noopener' do
+    %span.file-size
+  .file-actions
+    = link_to '#', data: { action: 'click->droppable#deletePreview' }, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
+      = svg_icon :xmark, options: { width: '12px' }
+

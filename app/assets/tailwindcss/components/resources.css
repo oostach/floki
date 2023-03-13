@@ -14,4 +14,20 @@
   .image .image-info .image-actions {
     @apply ml-auto pl-2;
   }
+
+  .file {
+    @apply flex items-center bg-white border rounded p-2;
+  }
+
+  .file .file-icon {
+    @apply inline mr-2;
+  }
+
+  .file .file-link {
+    @apply text-sm truncate;
+  }
+
+  .file .file-link span.file-size {
+    @apply text-sky-600 text-xs italic pl-1;
+  }
 }

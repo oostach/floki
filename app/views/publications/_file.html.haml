@@ -3,11 +3,11 @@
   delete_url = destroy_attachment_publication_path(publication, file.signed_id) if publication&.persisted?
 
 = turbo_frame_tag dom_id(file) do
-  .file.flex.items-center.bg-white.border.rounded.p-2
-    .file-icon.inline.m-1= file_type_icon(file)
-    = link_to file.blob.url, class: 'text-sm truncate ...', target: :_blank, rel: 'noopener' do
+  .file
+    .file-icon= png_file_type_icon(file)
+    = link_to file.blob.url, class: 'file-link', target: :_blank, rel: 'noopener' do
       = file.filename.base
-      %span.text-sky-600.text-xs.italic== (#{number_to_human_size(file.blob.byte_size)})
+      %span.file-size== (#{number_to_human_size(file.blob.byte_size)})
     - if delete_url
       = link_to delete_url, data: delete_data_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
         = svg_icon :xmark, options: { width: '12px' }

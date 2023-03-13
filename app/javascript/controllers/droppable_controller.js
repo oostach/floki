@@ -1,20 +1,22 @@
 import { Controller } from '@hotwired/stimulus'
 import { Turbo } from '@hotwired/turbo-rails'
+import pngIcon from '../file-types'
 
 // Connects to data-controller="flash-messages"
 export default class extends Controller {
-  static targets = ['droppableArea', 'filesField', 'imagesPreviewArea']
+  static targets = ['droppableArea', 'filesField', 'imagesPreviewArea', 'filesPreviewArea']
 
   static values = {
     resourcesUrl: String,
     imageTemplate: String,
+    fileTemplate: String,
     uploadable: Boolean
   }
 
   deletePreview(e) {
     e.preventDefault()
 
-    e.currentTarget.closest('.image').remove()
+    e.currentTarget.closest('.image, .file').remove()
   }
 
   uploadOrPreviewFiles(e) {
@@ -63,14 +65,24 @@ export default class extends Controller {
     const parser = new DOMParser()
     const htmlDoc = parser.parseFromString(this.imageTemplateValue, 'text/html')
     const previewContainer = htmlDoc.querySelector('.image')
+
     previewContainer.querySelector('.image-name').innerText = file.name
     previewContainer.querySelector('.image-preview').src = URL.createObjectURL(file)
     previewContainer.appendChild(this.#buildFormFields(file))
     this.imagesPreviewAreaTarget.append(previewContainer)
   }
 
-  #previewFile() {
+  #previewFile(file) {
+    const parser = new DOMParser()
+    const htmlDoc = parser.parseFromString(this.fileTemplateValue, 'text/html')
+    const previewContainer = htmlDoc.querySelector('.file')
+    const icon = pngIcon(file)
 
+    previewContainer.querySelector('.file-icon').append(icon)
+    previewContainer.querySelector('.file-link').prepend(file.name)
+    previewContainer.querySelector('.file-size').innerText = `(${(file.size / 1024).toFixed(3)} Kb)`
+    previewContainer.appendChild(this.#buildFormFields(file))
+    this.filesPreviewAreaTarget.append(previewContainer)
   }
 
   #uploadFiles(files) {

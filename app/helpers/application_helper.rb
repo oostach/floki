@@ -42,4 +42,9 @@ module ApplicationHelper
     Rails.logger.error e.message
     svg_icon :default, path: 'icons/svg/file-types', options: { width: "#{width}px" }
   end
+
+  def png_file_type_icon(file, width: '16px')
+    ext = file.filename.extension_without_delimiter
+    image_tag "icons/png/file-types/#{ext}.png", class: 'file-icon-png', width: width
+  end
 end
