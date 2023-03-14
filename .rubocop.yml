@@ -23,3 +23,6 @@ Style/RedundantConstantBase:
 
 Style/HashSyntax:
   EnforcedShorthandSyntax: either
+
+RSpec/MultipleExpectations:
+  Max: 3

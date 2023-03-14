@@ -8,7 +8,18 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
 
     trait :with_attachment do
-      files { [fixture_file_upload('spec/factories/attachments/simple.pdf', 'application/pdf')] }
+      files { [Rack::Test::UploadedFile.new('spec/factories/attachments/simple.pdf')] }
+    end
+
+    trait :with_many_attachments do
+      files do
+        [
+          Rack::Test::UploadedFile.new('spec/factories/attachments/simple.pdf'),
+          Rack::Test::UploadedFile.new('spec/factories/attachments/simple.html'),
+          Rack::Test::UploadedFile.new('spec/factories/attachments/simple.jpg'),
+          Rack::Test::UploadedFile.new('spec/factories/attachments/simple.png')
+        ]
+      end
     end
   end
 end
