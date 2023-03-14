@@ -26,3 +26,8 @@ Style/HashSyntax:
 
 RSpec/MultipleExpectations:
   Max: 3
+
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - spec/**/*
