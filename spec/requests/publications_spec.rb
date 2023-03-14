@@ -14,8 +14,10 @@ RSpec.describe 'Publications' do
 
     it 'add a attachment to' do
       expect {
-        post upload_attachments_publication_url(publication), params: attachment_params
+        post upload_attachments_publication_url(publication), params: attachment_params, xhr: true
       }.to change(publication.files, :count).by(1)
+      expect(response).to be_successful
+      expect(response).to render_template(:upload_attachments)
     end
   end
 end
