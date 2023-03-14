@@ -23,7 +23,7 @@ require 'selenium-webdriver'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f } # rubocop:disable Lint/RedundantDirGlobSort
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -31,18 +31,6 @@ begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
-end
-
-Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless')
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
-end
-
-Capybara.register_driver :chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
 RSpec.configure do |config|

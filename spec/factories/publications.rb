@@ -5,7 +5,7 @@ FactoryBot.define do
     title { Faker::Book.title }
     url { Faker::Internet.url }
     author { Faker::Book.author }
-    description { Faker::Book.description }
+    description { Faker::Lorem.paragraph }
 
     trait :with_attachment do
       files { [fixture_file_upload('spec/factories/attachments/simple.pdf', 'application/pdf')] }
