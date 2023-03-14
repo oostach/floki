@@ -45,14 +45,9 @@ class PublicationsController < ApplicationController
     flash.now.notice = 'Your note has been successfully removed.'
   end
 
-  def add_attachments
-    if params_publication_id
-      @publication.files.attach(publication_params.delete(:files))
-      @images, @files = @publication.files.last(publication_params[:files].size).partition { |file| file.content_type.match?('image') }
-    else
-      @publication = Publication.new(publication_params)
-      @images, @files = @publication.files.partition { |file| file.content_type.match?('image') }
-    end
+  def upload_attachments
+    @publication.files.attach(publication_params.delete(:files))
+    @images, @files = @publication.files.last(publication_params[:files].size).partition { |file| file.content_type.match?('image') }
   end
 
   def destroy_attachment
