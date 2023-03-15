@@ -1,0 +1,5 @@
+@layer components {
+  .album {
+    @apply w-full absolute overflow-hidden inset-0;
+  }
+}
