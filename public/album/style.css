@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+.album{
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+.album .album-image {
+  height: 65vh;
+}
+.album .album-image img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.album .album-previews {
+  display: flex;
+  flex-direction: row;
+  height: 20vh;
+  overflow: hidden;
+}
+.album .album-previews .preview-item {
+  width: 100px;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 10px rgb(255 255 255 / 75%);
+}
+.album .album-previews .preview-item img {
+  max-height: 100%;
+  object-fit: contain;
+}
+.album .album-previews .preview-item:last-child {
+  width: 200px;
+}
