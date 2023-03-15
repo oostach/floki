@@ -1,13 +1,19 @@
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 .album{
   align-items: center;
   display: flex;
   height: 100vh;
+  width: 100vw;
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  background-color: aliceblue;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .album .album-image {
   height: 65vh;
