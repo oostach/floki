@@ -3,7 +3,7 @@
   delete_url = destroy_attachment_publication_path(publication, image.signed_id) if publication&.persisted?
 
 = turbo_frame_tag dom_id(image) do
-  .image
+  .image{ data: { album_target: 'imageContainer', image_url: image.url, image_index: image_counter } }
     .image-info
       .image-name= image.filename.base
       - if action_name.in? %w[edit new add_attachments]
@@ -11,4 +11,4 @@
           - delete_attrs = delete_data_attrs.merge('publications--form-target' => 'deleteButton')
           = link_to delete_url.presence || '#', data: delete_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
             = svg_icon :xmark, options: { width: '12px' }
-    = image_tag image.variant(:thumb), width: 150, class: 'image-previwe'
+    = image_tag image.variant(:thumb), width: 150, class: 'image-previwe', data: { action: 'click->album#openAlbum' }
