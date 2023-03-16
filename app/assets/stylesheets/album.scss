@@ -7,9 +7,12 @@
   justify-content: space-evenly;
   overflow: hidden;
   background-color: aliceblue;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
 
   .album-image {
     height: 65vh;
@@ -32,14 +35,16 @@
       height: 100%;
       box-sizing: border-box;
       box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.75);
+      cursor: pointer;
 
       &:last-child {
         width: 200px;
       }
 
       img {
-        max-height: 100%;
-        object-fit: contain;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
       }
     }
   }

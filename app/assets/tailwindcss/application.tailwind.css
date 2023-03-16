@@ -8,7 +8,6 @@
 @import './components/pagination';
 @import './components/richtext';
 @import './components/resources';
-@import './components/album';
 
 @import "tailwindcss/utilities";
 

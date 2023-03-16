@@ -15,11 +15,7 @@
         .publication-resources-title.bold Resources
         - images, files = publication.partition_files
         .images.flex.flex-wrap{ data: { controller: 'album' } }
-          .album.absolute.inset-0.bg-slate-200
-            .album-content.h-.flex.justify-center.items-center.h-screen.flex-nowrap.overflow-hidden
-              - images.each.with_index do |image, index|
-                .album-item.p-4.flex-none{ class: "#{index == 1 ? 'flex-1 w-9/12' : 'flex-none opacity-20 '}" }= image_tag image
+          .album-holder.hidden{ data: { album_target: 'albumHolder' } }
           = render partial: 'image', collection: images, as: :image
         .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2
-          - files.each do |file|
-            = render 'file', file: file
+          = render partial: 'file', collection: files, as: :file
