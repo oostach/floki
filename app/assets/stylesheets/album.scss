@@ -1,3 +1,7 @@
+*[data-controller='album']:focus-visible {
+  outline: none;
+}
+
 .album{
   align-items: center;
   display: flex;
