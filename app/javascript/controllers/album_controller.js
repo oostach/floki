@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 
-// Connects to data-controller="album-messages"
+// Connects to data-controller="album"
 export default class extends Controller {
   static targets = ['container', 'image', 'previews', 'preview', 'imageItem']
 
@@ -50,7 +50,7 @@ export default class extends Controller {
 
   #htmlTemplate() {
     const parser = new DOMParser()
-    const textTemplate = this.constructor.template.replace(/\s+(?=<)|(?<=>)\s+/gm, '')
+    const textTemplate = this.constructor.template.replace(/\s+(?=<)/gm, '').trim()
     return parser.parseFromString(textTemplate, 'text/html').querySelector('.album')
   }
 

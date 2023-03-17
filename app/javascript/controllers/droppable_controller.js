@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import { Turbo } from '@hotwired/turbo-rails'
 import { pngCssIcon } from '../file-types'
 
-// Connects to data-controller="flash-messages"
+// Connects to data-controller="droppable"
 export default class extends Controller {
   static targets = ['droppableArea', 'filesField', 'imagesPreviewArea', 'filesPreviewArea']
 
