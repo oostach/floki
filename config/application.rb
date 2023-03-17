@@ -32,6 +32,7 @@ module Floki
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.active_storage.urls_expire_in = 30.minutes
 
     # Don't generate system test files.
     config.generators.system_tests = nil

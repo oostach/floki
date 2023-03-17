@@ -3,7 +3,7 @@
   delete_url = destroy_attachment_publication_path(publication, image.signed_id) if publication&.persisted?
 
 = turbo_frame_tag dom_id(image) do
-  .image{ data: { album_target: 'imageItem', url: image.url, index: image_counter } }
+  .image{ data: { album_target: 'imageItem', url: image.url, preview_url: image.variant(:thumb).url, index: image_counter } }
     .image-info
       .image-name= image.filename.base
       - if action_name.in? %w[edit new add_attachments]

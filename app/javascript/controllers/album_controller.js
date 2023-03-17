@@ -7,7 +7,7 @@ export default class extends Controller {
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
       <dvi class='album-close-btn' data-action='click->album#closeAlbum'>X</dvi>
-      <div class='album-image' data-album-target='image'></div>
+      <div class='album-image'><img src='' data-album-target='image' /></div>
       <div class='album-previews' data-album-target='previews'></div>
     </div>
   `
@@ -45,7 +45,7 @@ export default class extends Controller {
   }
 
   #collectImagesParams() {
-    return this.imageItemTargets.map(target => { return { url: target.dataset.url, index: target.dataset.index } })
+    return this.imageItemTargets.map(target => { return { url: target.dataset.url, index: target.dataset.index, previewUrl: target.dataset.previewUrl } })
   }
 
   #htmlTemplate() {
@@ -54,14 +54,15 @@ export default class extends Controller {
     return parser.parseFromString(textTemplate, 'text/html').querySelector('.album')
   }
 
-  #buildPreviewItem({ url, index }) {
+  #buildPreviewItem({ url, index, previewUrl }) {
     const img = new Image()
-    img.src = url
+    img.src = previewUrl || url
 
     const imageWrapper = document.createElement('div')
     imageWrapper.classList.add('preview-item')
     imageWrapper.dataset.action = 'click->album#changeImage'
     imageWrapper.dataset.imageIndex = index
+    imageWrapper.dataset.url = url
     imageWrapper.dataset.albumTarget = 'preview'
     imageWrapper.appendChild(img)
     return imageWrapper
@@ -80,7 +81,9 @@ export default class extends Controller {
       preview.classList.remove('active')
 
       if (preview.dataset.imageIndex === index) {
-        this.imageTarget.replaceChildren(preview.querySelector('img').cloneNode())
+        const img = new Image()
+        img.onload = () => { this.imageTarget.src = img.src }
+        img.src = preview.dataset.url
         preview.classList.add('active')
       }
     })
