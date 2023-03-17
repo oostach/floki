@@ -77,6 +77,8 @@ export default class extends Controller {
 
   #setImage(index) {
     this.previewTargets.forEach(preview => {
+      preview.classList.remove('active')
+
       if (preview.dataset.imageIndex === index) {
         this.imageTarget.replaceChildren(preview.querySelector('img').cloneNode())
         preview.classList.add('active')

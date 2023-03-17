@@ -3,7 +3,7 @@
 class Publication < ApplicationRecord
   has_rich_text :description
   has_many_attached :files do |attachable|
-    attachable.variant(:thumb, resize_to_limit: [150, 150])
+    attachable.variant(:thumb, resize_to_limit: [200, 200])
   end
 
   validates :title, :description, presence: true

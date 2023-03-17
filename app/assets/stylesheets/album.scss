@@ -43,8 +43,9 @@
       box-sizing: border-box;
       box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.75);
       cursor: pointer;
+      transition: width 0.15s;
 
-      &:last-child {
+      &.active {
         width: 200px;
       }
 
