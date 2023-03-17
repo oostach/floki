@@ -2,58 +2,81 @@ import { Controller } from '@hotwired/stimulus'
 
 // Connects to data-controller="album-messages"
 export default class extends Controller {
-  static targets = ['imageContainer', 'mainImage', 'albumHolder', 'albumContainer']
+  static targets = ['container', 'image', 'previews', 'preview', 'imageItem']
 
-  static values = {
-    images: Array
-  }
+  static template = `
+    <div class='album' data-album-target='container' style='display: none;'>
+      <div class='album-image' data-album-target='image'></div>
+      <div class='album-previews' data-album-target='previews'></div>
+    </div>
+  `
+
+  #imagesList = []
 
   connect() {
-    this.imagesValue = this.imageContainerTargets.map(target => { return { imageUrl: target.dataset.imageUrl, imageIndex: target.dataset.imageIndex } })
-    this.albumHolderTarget.prepend(this.#buildAlbum(this.imagesValue))
+    this.#imagesList.push(...this.#collectImagesParams())
+    this.#buildAlbum()
   }
 
   openAlbum(event) {
     event.preventDefault()
 
-    const currentIndex = this.#currentIndex(event.currentTarget)
-    this.mainImageTarget.innerHTML = this.#getMainImage(currentIndex)
-    this.albumHolderTarget.classList.toggle('hidden', false)
-    document.querySelector('body').style.overflow = 'hidden'
+    this.#setImage(this.#initialIndex(event.currentTarget))
+    this.#showAlbum()
   }
 
-  #currentIndex(target) {
-    return target.closest('.image').dataset.imageIndex
+  changeImage(event) {
+    event.preventDefault()
+
+    const index = event.currentTarget.dataset.imageIndex
+    this.#setImage(index)
   }
 
-  #getMainImage(currentIndex) {
-    const previews = this.albumHolderTarget.querySelectorAll('.preview-item')
-    let mainImage  = null
-    for (const preview of previews.values()) {
-      if (preview.dataset.imageIndex === currentIndex) {
-        mainImage = preview.innerHTML
-      }
-    }
-    return mainImage
+  #initialIndex(target) {
+    return target.closest('.image').dataset.index
   }
 
-  #buildImage(imageData) {
-    const preview = document.createElement('div')
-    preview.classList.add('preview-item')
-    preview.dataset.imageIndex = imageData.imageIndex
+  #collectImagesParams() {
+    return this.imageItemTargets.map(target => { return { url: target.dataset.url, index: target.dataset.index } })
+  }
+
+  #htmlTemplate() {
+    const parser = new DOMParser()
+    const textTemplate = this.constructor.template.replace(/\s+(?=<)|(?<=>)\s+/gm, '')
+    return parser.parseFromString(textTemplate, 'text/html').querySelector('.album')
+  }
+
+  #buildPreviewItem({ url, index }) {
     const img = new Image()
-    img.src = imageData.imageUrl
-    preview.appendChild(img)
-    return preview
+    img.src = url
+
+    const imageWrapper = document.createElement('div')
+    imageWrapper.classList.add('preview-item')
+    imageWrapper.dataset.action = 'click->album#changeImage'
+    imageWrapper.dataset.imageIndex = index
+    imageWrapper.dataset.albumTarget = 'preview'
+    imageWrapper.appendChild(img)
+    return imageWrapper
   }
 
-  #buildAlbum(imagesData) {
-    const albumContainer = document.createElement('div')
-    albumContainer.classList.add('album')
-    albumContainer.dataset.albumTarget = 'albumContainer'
-    albumContainer.innerHTML = '<div class="album-image" data-album-target="mainImage"></div><div class="album-previews"></div>'
-    const previewsContainer = albumContainer.querySelector('.album-previews')
-    imagesData.forEach(image => { previewsContainer.appendChild(this.#buildImage(image)) })
-    return albumContainer
+  #buildAlbum() {
+    const album = this.#htmlTemplate()
+    const previews = album.querySelector('.album-previews')
+
+    this.#imagesList.forEach(imageItem => previews.appendChild(this.#buildPreviewItem(imageItem)))
+    this.element.prepend(album)
+  }
+
+  #setImage(index) {
+    this.previewTargets.forEach(preview => {
+      if (preview.dataset.imageIndex === index) {
+        this.imageTarget.replaceChildren(preview.querySelector('img').cloneNode())
+      }
+    })
+  }
+
+  #showAlbum() {
+    this.containerTarget.style.display = 'flex'
+    document.body.style.overflow = 'hidden'
   }
 }

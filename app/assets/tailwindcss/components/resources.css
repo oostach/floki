@@ -15,6 +15,10 @@
     @apply ml-auto pl-2;
   }
 
+  .image img.image-previwe {
+    @apply cursor-pointer;
+  }
+
   .file {
     @apply flex items-center bg-white border rounded p-2;
   }
