@@ -49,10 +49,14 @@
         width: 200px;
       }
 
-      img {
+      img.preview-image {
         min-width: 100%;
         min-height: 100%;
         object-fit: cover;
+      }
+
+      img.original-image {
+        display: none;
       }
     }
   }

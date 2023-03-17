@@ -7,7 +7,7 @@ export default class extends Controller {
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
       <dvi class='album-close-btn' data-action='click->album#closeAlbum'>X</dvi>
-      <div class='album-image'><img src='' data-album-target='image' /></div>
+      <div class='album-image' data-album-target='image'></div>
       <div class='album-previews' data-album-target='previews'></div>
     </div>
   `
@@ -55,16 +55,28 @@ export default class extends Controller {
   }
 
   #buildPreviewItem({ url, index, previewUrl }) {
-    const img = new Image()
-    img.src = previewUrl || url
-
+    const imgPreview = new Image()
     const imageWrapper = document.createElement('div')
+
     imageWrapper.classList.add('preview-item')
     imageWrapper.dataset.action = 'click->album#changeImage'
     imageWrapper.dataset.imageIndex = index
-    imageWrapper.dataset.url = url
     imageWrapper.dataset.albumTarget = 'preview'
-    imageWrapper.appendChild(img)
+
+    if (previewUrl) {
+      const imgOriginal = new Image()
+
+      imgPreview.src = previewUrl
+      imgOriginal.src = url
+      imgOriginal.classList.add('original-image')
+      imgOriginal.dataset.index = index
+      imageWrapper.appendChild(imgOriginal)
+    } else {
+      imgPreview.src = url
+    }
+
+    imgPreview.classList.add('preview-image')
+    imageWrapper.prepend(imgPreview)
     return imageWrapper
   }
 
@@ -72,18 +84,29 @@ export default class extends Controller {
     const album = this.#htmlTemplate()
     const previews = album.querySelector('.album-previews')
 
-    this.#imagesList.forEach(imageItem => previews.appendChild(this.#buildPreviewItem(imageItem)))
+    this.#imagesList.forEach(imageItem => {
+      previews.appendChild(this.#buildPreviewItem(imageItem))
+    })
+
     this.element.prepend(album)
   }
 
   #setImage(index) {
+    const currentImageIndex = this.imageTarget.querySelector('.original-image')?.dataset.index
+
     this.previewTargets.forEach(preview => {
       preview.classList.remove('active')
 
+      if (preview.dataset.imageIndex === currentImageIndex) {
+        preview.appendChild(this.imageTarget.querySelector('.original-image'))
+      }
+
       if (preview.dataset.imageIndex === index) {
-        const img = new Image()
-        img.onload = () => { this.imageTarget.src = img.src }
-        img.src = preview.dataset.url
+        const img = preview.querySelector('.original-image')
+          ? preview.querySelector('.original-image')
+          : preview.querySelector('.preview-image').cloneNode()
+
+        this.imageTarget.appendChild(img)
         preview.classList.add('active')
       }
     })
