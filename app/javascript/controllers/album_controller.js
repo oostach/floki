@@ -6,6 +6,7 @@ export default class extends Controller {
 
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
+      <dvi class='album-close-btn' data-action='click->album#closeAlbum'>X</dvi>
       <div class='album-image' data-album-target='image'></div>
       <div class='album-previews' data-album-target='previews'></div>
     </div>
@@ -23,6 +24,13 @@ export default class extends Controller {
 
     this.#setImage(this.#initialIndex(event.currentTarget))
     this.#showAlbum()
+  }
+
+  closeAlbum(event) {
+    event.preventDefault()
+
+    document.body.style.removeProperty('overflow')
+    this.containerTarget.style.display = 'none'
   }
 
   changeImage(event) {
@@ -71,6 +79,7 @@ export default class extends Controller {
     this.previewTargets.forEach(preview => {
       if (preview.dataset.imageIndex === index) {
         this.imageTarget.replaceChildren(preview.querySelector('img').cloneNode())
+        preview.classList.add('active')
       }
     })
   }
