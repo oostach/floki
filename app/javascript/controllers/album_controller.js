@@ -6,9 +6,13 @@ export default class extends Controller {
 
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
-      <dvi class='album-close-btn' data-action='click->album#closeAlbum'>X</dvi>
-      <div class='album-image' data-album-target='image'></div>
-      <div class='album-previews' data-album-target='previews'></div>
+      <div class='album-header'>
+        <dvi class='album-close-btn' data-action='click->album#closeAlbum'>X</dvi>
+      </div>
+      <div class='album-body'>
+        <div class='album-image' data-album-target='image'></div>
+        <div class='album-previews' data-album-target='previews'></div>
+      </div>
     </div>
   `
 
