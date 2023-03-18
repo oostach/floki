@@ -121,15 +121,14 @@ export default class extends Controller {
       preview.classList.remove('active')
 
       if (preview.dataset.imageIndex === currentOriginalIndex) {
-        preview.appendChild(this.imageTarget.querySelector('.original-image'))
+        const originalImage = this.imageTarget.querySelector('.original-image')
+        preview.appendChild(originalImage)
       }
 
       if (preview.dataset.imageIndex === index) {
-        const img = preview.querySelector('.original-image')
-          ? preview.querySelector('.original-image')
-          : preview.querySelector('.preview-image').cloneNode()
+        const img = preview.querySelector('.original-image') || preview.querySelector('.preview-image').cloneNode()
 
-        if (this.imageTarget.hasChildNodes()) this.imageTarget.innerHTML = ''
+        if (img.classList.contains('preview-image') && this.imageTarget.hasChildNodes()) this.imageTarget.innerHTML = ''
 
         this.imageTarget.appendChild(img)
         this.#currentImageIndex = parseInt(index)
