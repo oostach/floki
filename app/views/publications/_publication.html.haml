@@ -1,3 +1,5 @@
+- album_attr = { controller: 'album', action: 'keydown.esc->album#closeAlbum keydown.right->album#nextImage keydown.left->album#previousImage' }
+
 = turbo_frame_tag dom_id(publication) do
   .publication.w-full.mb-8
     .publication-title.flex.items-center.mb-2
@@ -14,7 +16,7 @@
       .publication-resources
         .publication-resources-title.bold Resources
         - images, files = publication.partition_files
-        .images.flex.flex-wrap{ data: { controller: 'album', action: 'keydown.esc->album#closeAlbum' }, tabindex: '0' }
+        .images.flex.flex-wrap{ data: album_attr, tabindex: '0' }
           = render partial: 'image', collection: images, as: :image
         .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2
           = render partial: 'file', collection: files, as: :file

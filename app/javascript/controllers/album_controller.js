@@ -13,9 +13,12 @@ export default class extends Controller {
   `
 
   #imagesList = []
+  #currentImageIndex = null
+  #albumSize = null
 
   connect() {
     this.#imagesList.push(...this.#collectImagesParams())
+    this.#albumSize = this.#imagesList.length
     this.#buildAlbum()
   }
 
@@ -38,6 +41,22 @@ export default class extends Controller {
 
     const index = event.currentTarget.dataset.imageIndex
     this.#setImage(index)
+  }
+
+  nextImage(event) {
+    event.preventDefault()
+
+    const firstIndex = '0'
+    const nextIndex = this.#currentImageIndex + 1
+    nextIndex >= this.#albumSize ? this.#setImage(firstIndex) : this.#setImage(nextIndex.toString())
+  }
+
+  previousImage(event) {
+    event.preventDefault()
+
+    const nextIndex = this.#currentImageIndex - 1
+    const lastIndex = this.#albumSize - 1
+    nextIndex < 0 ? this.#setImage(lastIndex.toString()) : this.#setImage(nextIndex.toString())
   }
 
   #initialIndex(target) {
@@ -92,12 +111,12 @@ export default class extends Controller {
   }
 
   #setImage(index) {
-    const currentImageIndex = this.imageTarget.querySelector('.original-image')?.dataset.index
+    const currentOriginalIndex = this.imageTarget.querySelector('.original-image')?.dataset.index
 
     this.previewTargets.forEach(preview => {
       preview.classList.remove('active')
 
-      if (preview.dataset.imageIndex === currentImageIndex) {
+      if (preview.dataset.imageIndex === currentOriginalIndex) {
         preview.appendChild(this.imageTarget.querySelector('.original-image'))
       }
 
@@ -107,6 +126,7 @@ export default class extends Controller {
           : preview.querySelector('.preview-image').cloneNode()
 
         this.imageTarget.appendChild(img)
+        this.#currentImageIndex =  parseInt(index)
         preview.classList.add('active')
       }
     })
