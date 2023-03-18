@@ -125,8 +125,10 @@ export default class extends Controller {
           ? preview.querySelector('.original-image')
           : preview.querySelector('.preview-image').cloneNode()
 
+        if (this.imageTarget.hasChildNodes()) this.imageTarget.innerHTML = ''
+
         this.imageTarget.appendChild(img)
-        this.#currentImageIndex =  parseInt(index)
+        this.#currentImageIndex = parseInt(index)
         preview.classList.add('active')
       }
     })
