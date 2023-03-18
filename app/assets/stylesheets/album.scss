@@ -1,11 +1,12 @@
 $album-bg-color: aliceblue;
-$header-height: 50px;
+$header-height: 60px;
+$image-size: 65vh;
 
-  @keyframes change-animation {
-    from {
-      opacity: 0;
-    }
+@keyframes change-image {
+  from {
+    opacity: 0.4;
   }
+}
 
 *[data-controller='album']:focus-visible {
   outline: none;
@@ -36,6 +37,16 @@ $header-height: 50px;
     .album-close-btn {
       cursor: pointer;
       margin-right: $header-height / 2;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.5) rotate(180deg);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      svg {
+        color: #001526;
+      }
     }
   }
 
@@ -46,11 +57,11 @@ $header-height: 50px;
     align-items: center;
 
     .album-image {
-      height: 65vh;
+      height: $image-size;
       display: flex;
 
       img {
-        animation: change-animation 0.4s;
+        animation: change-image 0.4s;
         max-width: 100%;
         max-height: 100%;
         display: block;
