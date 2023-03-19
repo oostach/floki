@@ -13,11 +13,6 @@ $image-size: 65vh;
 }
 
 .album{
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  flex-direction: column;
   overflow: hidden;
   background-color: $album-bg-color;
   position: fixed;
@@ -53,8 +48,9 @@ $image-size: 65vh;
   .album-body {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
+    height: -webkit-fill-available;
 
     .album-image {
       height: $image-size;
@@ -72,8 +68,9 @@ $image-size: 65vh;
     .album-previews {
       display: flex;
       flex-direction: row;
-      height: 20vh;
+      height: $image-size / 3.5;
       overflow: hidden;
+      margin-top: 50px;
 
       .preview-item {
         width: 100px;

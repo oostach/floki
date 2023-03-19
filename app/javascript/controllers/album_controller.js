@@ -142,7 +142,7 @@ export default class extends Controller {
   }
 
   #showAlbum() {
-    this.containerTarget.style.display = 'flex'
+    this.containerTarget.style.display = 'block'
     document.body.style.overflow = 'hidden'
   }
 }
