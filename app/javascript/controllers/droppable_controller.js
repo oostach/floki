@@ -4,7 +4,7 @@ import { pngCssIcon } from '../file-types'
 
 // Connects to data-controller="droppable"
 export default class extends Controller {
-  static targets = ['droppableArea', 'filesField', 'imagesPreviewArea', 'filesPreviewArea']
+  static targets = ['droppableArea', 'imagesPreviewArea', 'filesPreviewArea']
 
   static values = {
     resourcesUrl: String,
@@ -35,6 +35,16 @@ export default class extends Controller {
 
   clearDroppableArea() {
     this.droppableAreaTarget.classList.remove('highlight')
+  }
+
+  openFilesUploader(e) {
+    e.preventDefault()
+    const fileField = document.createElement('input')
+    fileField.setAttribute('type', 'file')
+    fileField.setAttribute('name', 'publication[files][]')
+    fileField.setAttribute('class', 'hidden')
+    this.element.appendChild(fileField)
+    fileField.click()
   }
 
   get #csrfToken() {
