@@ -13,7 +13,7 @@
         .preview-area= render 'resources', publication: publication
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }
-          .announcement= t('.drag_and_drop_message')
+          .announcement.text-center= t('.drag_and_drop_message_html')
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?

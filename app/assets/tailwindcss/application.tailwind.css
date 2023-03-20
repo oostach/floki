@@ -13,7 +13,7 @@
 
 @layer components {
   .droppable-area {
-    @apply flex flex-col items-center p-4 mt-2 rounded-lg font-opensans font-medium text-lg text-blue-900;
+    @apply flex flex-col items-center p-4 mt-2 rounded-lg font-opensans font-medium text-lg text-blue-900 cursor-pointer;
     @apply border-2 border-dashed border-blue-900 bg-gradient-to-b from-cyan-500/20 to-blue-500/20;
   }
 

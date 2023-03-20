@@ -6,5 +6,5 @@ en:
 
   publications:
     form:
-      drag_and_drop_message: Drug and drop your resources here!
+      drag_and_drop_message_html: Drug and drop your resources here <br/> or click to select files!
       resources: Resources
