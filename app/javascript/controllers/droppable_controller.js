@@ -22,7 +22,7 @@ export default class extends Controller {
   uploadOrPreviewFiles(e) {
     e.preventDefault()
 
-    const files = e.dataTransfer.files
+    const files = e.currentTarget.type === 'file' ? e.currentTarget.files : e.dataTransfer.files
 
     this.uploadableValue ? this.#uploadFiles(files) : this.#previewFiles(files)
   }
@@ -41,8 +41,10 @@ export default class extends Controller {
     e.preventDefault()
     const fileField = document.createElement('input')
     fileField.setAttribute('type', 'file')
+    fileField.setAttribute('multiple', 'multiple')
     fileField.setAttribute('name', 'publication[files][]')
     fileField.setAttribute('class', 'hidden')
+    fileField.dataset.action = 'change->droppable#uploadOrPreviewFiles'
     this.element.appendChild(fileField)
     fileField.click()
   }
