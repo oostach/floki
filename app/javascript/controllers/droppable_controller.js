@@ -26,6 +26,7 @@ export default class extends Controller {
 
     if (e.currentTarget.type === 'file') e.currentTarget.remove()
     this.uploadableValue ? this.#uploadFiles(files) : this.#previewFiles(files)
+    this.clearDroppableArea()
   }
 
   highlightDroppableArea(e) {

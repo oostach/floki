@@ -13,11 +13,15 @@
 
 @layer components {
   .droppable-area {
-    @apply flex flex-col items-center p-4 mt-2 rounded-lg font-opensans font-medium text-lg text-blue-900 cursor-pointer;
-    @apply border-2 border-dashed border-blue-900 bg-gradient-to-b from-cyan-500/20 to-blue-500/20;
+    @apply flex flex-col items-center p-4 mt-2 rounded-lg font-opensans text-zinc-700;
+    @apply border border-dashed border-zinc-700 bg-white;
   }
 
   .droppable-area.highlight {
-    @apply from-cyan-500/40 to-blue-500/40;
+    @apply bg-gradient-to-b from-slate-200/40 to-slate-300/40;
+  }
+
+  .link {
+    @apply underline text-blue-500;
   }
 }

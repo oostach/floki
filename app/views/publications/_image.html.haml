@@ -6,9 +6,8 @@
   .image{ data: { album_target: 'imageItem', url: image.url, preview_url: image.variant(:thumb).url, index: image_counter } }
     .image-info
       .image-name= image.filename.base
-      - if action_name.in? %w[edit new add_attachments]
+      - if delete_url
         .image-actions
-          - delete_attrs = delete_data_attrs.merge('publications--form-target' => 'deleteButton')
-          = link_to delete_url.presence || '#', data: delete_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
+          = link_to delete_url, data: delete_data_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
             = svg_icon :xmark, options: { width: '12px' }
     = image_tag image.variant(:thumb), width: 150, class: 'image-previwe', data: { action: 'click->album#openAlbum' }

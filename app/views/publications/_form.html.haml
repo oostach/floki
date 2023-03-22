@@ -13,7 +13,12 @@
         .preview-area= render 'resources', publication: publication
         .droppable-area{ data: droppable_data_attrs }
           = svg_icon :upload, options: { width: '48px' }
-          .announcement.text-center= t('.drag_and_drop_message_html')
+          .announcement.text-center.ml-4
+            .text-3xl.font-semibold.pb-1= t('.drag_and_drop_message')
+            .text-base
+              = t('or')
+              = link_to t('click'), '#', class: 'link', data: { action: 'click->droppable#openFilesUploader' }
+              = t('.to_select_file')
     .form-submit
       = f.submit class: 'button-primary'
       - if publication.persisted?
