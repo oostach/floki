@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     get :unsubscribe, on: :member
   end
 
+  resources :projects
+
   # telegram_webhook Telegram::WebhookController, :default
 end
