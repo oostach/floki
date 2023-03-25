@@ -1,0 +1,6 @@
+.project-form
+  = floki_form_for model: Project do |f|
+    = f.text_field :title
+    = f.rich_text_area :description
+    = t.text_field :repository
+    .form-submit= f.submit class: 'button-primary'
