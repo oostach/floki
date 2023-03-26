@@ -1,4 +1,4 @@
-.notes-form{ data: { controller: 'notes--form' } }
+.notes-form{ data: { controller: 'form' } }
   = floki_form_with model: note do |f|
     = f.text_field :title
     = f.rich_text_area :body
@@ -7,6 +7,6 @@
       - if note.persisted?
         = link_to t('cancel'), note_path(note), class: 'button-secondary'
       - else
-        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->notes--form#cancel:prevent' }
+        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->form#cancel:prevent' }
 
   %hr.my-3.-mx-4.border-gray-300
