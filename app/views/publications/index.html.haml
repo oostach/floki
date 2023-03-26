@@ -4,7 +4,6 @@
 = turbo_frame_tag 'new-publication'
 
 = turbo_frame_tag :publications do
-  - @publications.each do |publication|
-    = render publication
+  = render @publications
 
 = paginate @publications

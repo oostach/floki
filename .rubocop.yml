@@ -31,3 +31,8 @@ Style/BlockDelimiters:
   Enabled: true
   Exclude:
     - spec/**/*
+
+RSpec/ExampleLength:
+  Enabled: true
+  Exclude:
+    - spec/system/**/*

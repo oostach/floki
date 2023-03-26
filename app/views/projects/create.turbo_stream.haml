@@ -1,0 +1,6 @@
+= update_flash_messages
+
+= turbo_stream.prepend 'projects', @project
+
+= turbo_stream.replace 'project-form' do
+  = turbo_frame_tag 'project-form'
