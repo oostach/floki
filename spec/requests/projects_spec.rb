@@ -24,4 +24,21 @@ RSpec.describe 'Projects' do
       expect(response.body).to include(first_project.description.to_trix_html)
     end
   end
+
+  describe 'GET /new' do
+    before do
+      get new_project_url
+    end
+
+    it 'renders a new project page' do
+      expect(response).to be_successful
+      expect(response).to render_template(:new)
+    end
+
+    it 'renders a project form on the page' do
+      expect(assigns(:project)).to be_a_new(Project)
+      expect(response.body).to include('Title')
+      expect(response.body).to include('Description')
+    end
+  end
 end
