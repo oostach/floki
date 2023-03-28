@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_174124) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_152100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174124) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
-    t.string "repository"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174124) do
     t.string "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "repositories", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "url", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_repositories_on_project_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -92,4 +100,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174124) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "repositories", "projects"
 end

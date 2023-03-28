@@ -2,6 +2,6 @@
   = floki_form_with model: project do |f|
     = f.text_field :title
     = f.rich_text_area :description
-    = f.text_field :repository
+    = f.check_box :enable_repo
     .form-submit
       = f.submit class: 'button-primary'

@@ -24,6 +24,7 @@ gem 'sassc-rails'
 gem 'image_processing', '~> 1.2'
 # gem 'telegram-bot'
 gem 'octokit'
+gem 'faraday-retry'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

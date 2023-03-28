@@ -4,6 +4,9 @@ FactoryBot.define do
   factory :project do
     title { Faker::App.name }
     description { Faker::Lorem.paragraph }
-    repository { Faker::Internet.url }
+
+    trait :with_repository do
+      association :repository
+    end
   end
 end
