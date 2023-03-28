@@ -37,6 +37,5 @@ module Floki
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
-    config.telegram_updates_controller.session_store = :redis_cache_store, { expires_in: 1.month }
   end
 end
