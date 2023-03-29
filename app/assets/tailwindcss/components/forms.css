@@ -3,6 +3,14 @@
     @apply px-2 py-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50;
   }
 
+  .form-group.inline-checkbox {
+    @apply mb-2 flex items-center;
+  }
+
+  .form-group.inline-checkbox .form-input[type='checkbox'] {
+    @apply w-fit inline-block mr-1.5;
+  }
+
   label {
     @apply text-zinc-500 text-sm font-medium;
   }

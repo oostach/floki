@@ -1,0 +1,5 @@
+en:
+  activerecord:
+    attributes:
+      project:
+        enable_repo: Add project's repository

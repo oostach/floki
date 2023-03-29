@@ -2,54 +2,34 @@
 
 class FlokiFormBuilder < ActionView::Helpers::FormBuilder
   DEFAULT_WRAPPER_CLASSES  = %w[form-group mb-2].freeze
-  RICHTEXT_WRAPPER_CLASSES = %w[form-richtext].freeze
-  DEFAULT_INPUT_CLASSES    = %w[form-input].freeze
 
   def text_field(method, options = {})
     build_field(method, __method__, options.reverse_merge(wrapper: false))
   end
 
-  def rich_text_area(method, options = {})
-    wrapper_options = options.delete(:wrapper) || {}
-    wrapper_class   = combine_wrapper_classes(wrapper_options[:class])
+  def inline_check_box(method, options = {})
+    wrapper_classes = options.dig(:wrapper, :class).to_s.split | ['inline-checkbox']
+    options[:wrapper] = (options[:wrapper] || {}).merge(class: wrapper_classes.join(' '))
 
-    @template.content_tag(:div, class: wrapper_class) do
-      @template.label(@object_name, method, { class: ('required' if required?(method)) }) +
-        @template.content_tag(:div, class: RICHTEXT_WRAPPER_CLASSES) do
-          @template.send(__method__, @object_name, method, options)
-        end
-    end
+    build_field(method, __method__, options.reverse_merge(wrapper: false))
+  end
+
+  def rich_text_area(method, options = {})
+    build_field(method, __method__, options.reverse_merge(wrapper: false))
   end
 
   private
 
   def build_field(method, field_type, options)
     wrapper_options = options.delete(:wrapper) || {}
-    options[:class] = [options[:class], *DEFAULT_INPUT_CLASSES].join(' ')
+    field_builder   = "FlokiForm::#{field_type.to_s.classify}".constantize.new(@template, object, @object_name, method, options)
 
     if wrapper_options.is_a?(FalseClass)
-      field_without_wrapper(method, options, field_type)
+      field_builder.without_wrapper.render
     else
-      field_with_wrapper(method, options, field_type, wrapper_options)
+      field_builder.wrapper_class = combine_wrapper_classes(wrapper_options[:class])
+      field_builder.render
     end
-  end
-
-  def field_with_wrapper(method, options, field_type, wrapper_options)
-    wrapper_class = combine_wrapper_classes(wrapper_options[:class])
-
-    @template.content_tag(:div, class: wrapper_class) do
-      @template.label(@object_name, method, { class: ('required' if required?(method)) }) +
-        @template.send(field_type, @object_name, method, options)
-    end
-  end
-
-  def field_without_wrapper(method, options, field_type)
-    @template.label(@object_name, method, { class: ('required' if required?(method)) }) +
-      @template.send(field_type, @object_name, method, options)
-  end
-
-  def required?(method)
-    object.class.validators_on(method).any? { |validation| validation.is_a?(ActiveModel::Validations::PresenceValidator) }
   end
 
   def combine_wrapper_classes(classes)
