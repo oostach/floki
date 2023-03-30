@@ -1,7 +1,11 @@
-.project-form{ data: { controller: :form } }
+.project-form{ data: { controller: 'form project--form' } }
   = floki_form_with model: project do |f|
     = f.text_field :title
     = f.rich_text_area :description
-    = f.inline_check_box :enable_repo
+    = f.inline_check_box :enable_repo, data: { action: 'change->project--form#toggleRepository', 'project--form-target' => 'repositoryToggle' }
+    .reposytory-fields{ data: { 'project--form-target' => 'repositoryFields' } }
+      = f.fields_for :repository, project.repository || project.build_repository do |ff|
+        = ff.text_field :url
+        = ff.text_field :name
     .form-submit
       = f.submit class: 'button-primary'
