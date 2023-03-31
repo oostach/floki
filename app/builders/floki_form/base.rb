@@ -30,6 +30,7 @@ module FlokiForm
 
     def render
       add_default_input_class unless skip_default_input_class?
+      objectify_options
       without_wrapper? ? template_with_no_wrapper : template_with_wrapper
     end
 
@@ -47,6 +48,10 @@ module FlokiForm
 
     def template_with_wrapper
       raise NotImplementedError, 'The method should be implemented in the parent class'
+    end
+
+    def objectify_options
+      options[:object] = object
     end
   end
 end

@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.build_repository
   end
 
   def create
@@ -22,6 +23,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description, :enable_repo)
+    params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: [:url, :name] })
   end
 end

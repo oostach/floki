@@ -4,7 +4,7 @@
     = f.rich_text_area :description
     = f.inline_check_box :enable_repo, data: { action: 'change->project--form#toggleRepository', 'project--form-target' => 'repositoryToggle' }
     .reposytory-fields{ data: { 'project--form-target' => 'repositoryFields' } }
-      = f.fields_for :repository, project.repository || project.build_repository do |ff|
+      = f.fields_for :repository do |ff|
         = ff.text_field :url
         = ff.text_field :name
     .form-submit
