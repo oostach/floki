@@ -11,6 +11,14 @@
     @apply w-fit inline-block mr-1.5;
   }
 
+  .form-group.with-spinner label{
+    @apply inline-block w-full relative;
+  }
+
+  .form-group.with-spinner label .loader {
+    @apply absolute right-2 top-8;
+  }
+
   label {
     @apply text-zinc-500 text-sm font-medium;
   }
@@ -27,6 +35,11 @@
   .form-submit {
     @apply text-right;
   }
+
+  .form-submit input[type='submit'][disabled='disabled'], .form-submit input[type='submit'][disabled='disabled']:hover {
+    @apply cursor-not-allowed opacity-50;
+  }
+
 
   .field-with-errors {
     @apply w-full;
