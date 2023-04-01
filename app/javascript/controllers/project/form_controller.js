@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import { Octokit } from 'octokit'
 
 // Connects to data-controller="project--form"
 export default class extends Controller {
@@ -13,8 +14,7 @@ export default class extends Controller {
     const urlField = e.target
     const urlLabel = urlField.previousElementSibling
 
-    urlLabel.appendChild(this.#addLoader())
-    this.#toggleSubmitButton()
+    this.#getRepoData(urlLabel)
   }
 
   toggleRepository(e) {
@@ -45,5 +45,18 @@ export default class extends Controller {
     const loader = document.createElement('span')
     loader.classList.add('loader')
     return loader
+  }
+
+  async #getRepoData(urlLabel) {
+    const octokit = new Octokit({})
+    const loader = this.#addLoader()
+
+    urlLabel.appendChild(loader)
+    this.#toggleSubmitButton()
+
+    const repoData = await octokit.request('GET /repos/oostach/floki')
+
+    urlLabel.removeChild(loader)
+    this.#toggleSubmitButton()
   }
 }
