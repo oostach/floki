@@ -4,6 +4,7 @@ import { Octokit } from 'octokit'
 // Connects to data-controller="project--form"
 export default class extends Controller {
   static targets = ['repositoryFields', 'repositoryToggle', 'submitButton']
+  #repoPattern = /(?<=^https:\/\/github\.com\/)(?<owner>[a-zA-Z-]+)(?:\/)(?<name>[a-zA-Z-]+)$/gm
 
   connect() {
     this.#toggleRepositoryFields()
@@ -13,8 +14,11 @@ export default class extends Controller {
     e.preventDefault()
     const urlField = e.target
     const urlLabel = urlField.previousElementSibling
+    const repoParams = this.#repoPattern.exec(urlField.value)
 
-    this.#getRepoData(urlLabel)
+    if (repoParams?.groups.owner && repoParams.groups.name) {
+      this.#getRepoData(urlLabel, repoParams.groups.owner, repoParams.groups.name)
+    }
   }
 
   toggleRepository(e) {
@@ -41,22 +45,22 @@ export default class extends Controller {
       : this.submitButtonTarget.setAttribute('disabled', 'disabled')
   }
 
-  #addLoader() {
+  #createLoader() {
     const loader = document.createElement('span')
     loader.classList.add('loader')
     return loader
   }
 
-  async #getRepoData(urlLabel) {
+  async #getRepoData(label, owner, repo) {
     const octokit = new Octokit({})
-    const loader = this.#addLoader()
+    const loader = this.#createLoader()
 
-    urlLabel.appendChild(loader)
+    label.appendChild(loader)
     this.#toggleSubmitButton()
 
-    const repoData = await octokit.request('GET /repos/oostach/floki')
+    const repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
 
-    urlLabel.removeChild(loader)
+    label.removeChild(loader)
     this.#toggleSubmitButton()
   }
 }
