@@ -16,8 +16,12 @@ export default class extends Controller {
     const urlLabel = urlField.previousElementSibling
     const repoParams = this.#repoPattern.exec(urlField.value)
 
+    if (urlField.value.trim() === '') return
+
     if (repoParams?.groups.owner && repoParams.groups.name) {
       this.#getRepoData(urlLabel, repoParams.groups.owner, repoParams.groups.name)
+    } else {
+      console.log('invalid url')
     }
   }
 
@@ -54,12 +58,16 @@ export default class extends Controller {
   async #getRepoData(label, owner, repo) {
     const octokit = new Octokit({})
     const loader = this.#createLoader()
+    let repoData = null
 
     label.appendChild(loader)
     this.#toggleSubmitButton()
 
-    const repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
-
+    try {
+      repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
+    } catch (e) {
+      console.log('Repository Not Found')
+    }
     label.removeChild(loader)
     this.#toggleSubmitButton()
   }
