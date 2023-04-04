@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { Octokit } from 'octokit'
+import { wrapWithError } from '../../lib/error-wrapper'
 
 // Connects to data-controller="project--form"
 export default class extends Controller {
@@ -20,9 +21,7 @@ export default class extends Controller {
     if (repoParams?.groups.owner && repoParams.groups.name) {
       this.#getRepoData(urlField, repoParams.groups.owner, repoParams.groups.name)
     } else {
-      const errorBlock = this.#showErrorMessage('Invalid repository url')
-      const wrapper = this.#wrapInput(urlField)
-      wrapper.appendChild(errorBlock)
+      wrapWithError(urlField, 'Invalid repository url')
     }
   }
 
@@ -69,27 +68,9 @@ export default class extends Controller {
       repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
       this.#toggleSubmitButton()
     } catch (e) {
-      const errorBlock = this.#showErrorMessage('Repository Not Found')
-      const wrapper = this.#wrapInput(urlField)
-      wrapper.appendChild(errorBlock)
+      wrapWithError(urlField, 'Repository Not Found')
     } finally {
       label.removeChild(loader)
     }
-  }
-
-  #showErrorMessage(message) {
-    const errorContainer = document.createElement('span')
-    errorContainer.classList.add('field-errors')
-    errorContainer.textContent = message
-    return errorContainer
-  }
-
-  #wrapInput(el) {
-    const wrapper = document.createElement('div')
-
-    wrapper.classList.add('field-with-errors')
-    el.parentNode.insertBefore(wrapper, el)
-    wrapper.appendChild(el)
-    return wrapper
   }
 }
