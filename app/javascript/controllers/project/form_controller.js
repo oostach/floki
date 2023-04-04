@@ -13,15 +13,16 @@ export default class extends Controller {
   validateRepositories(e) {
     e.preventDefault()
     const urlField = e.target
-    const urlLabel = urlField.previousElementSibling
     const repoParams = this.#repoPattern.exec(urlField.value)
 
     if (urlField.value.trim() === '') return
 
     if (repoParams?.groups.owner && repoParams.groups.name) {
-      this.#getRepoData(urlLabel, repoParams.groups.owner, repoParams.groups.name)
+      this.#getRepoData(urlField, repoParams.groups.owner, repoParams.groups.name)
     } else {
-      console.log('invalid url')
+      const errorBlock = this.#showErrorMessage('Invalid repository url')
+      const wrapper = this.#wrapInput(urlField)
+      wrapper.appendChild(errorBlock)
     }
   }
 
@@ -55,8 +56,9 @@ export default class extends Controller {
     return loader
   }
 
-  async #getRepoData(label, owner, repo) {
+  async #getRepoData(urlField, owner, repo) {
     const octokit = new Octokit({})
+    const label = urlField.previousElementSibling
     const loader = this.#createLoader()
     let repoData = null
 
@@ -65,10 +67,29 @@ export default class extends Controller {
 
     try {
       repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
+      this.#toggleSubmitButton()
     } catch (e) {
-      console.log('Repository Not Found')
+      const errorBlock = this.#showErrorMessage('Repository Not Found')
+      const wrapper = this.#wrapInput(urlField)
+      wrapper.appendChild(errorBlock)
+    } finally {
+      label.removeChild(loader)
     }
-    label.removeChild(loader)
-    this.#toggleSubmitButton()
+  }
+
+  #showErrorMessage(message) {
+    const errorContainer = document.createElement('span')
+    errorContainer.classList.add('field-errors')
+    errorContainer.textContent = message
+    return errorContainer
+  }
+
+  #wrapInput(el) {
+    const wrapper = document.createElement('div')
+
+    wrapper.classList.add('field-with-errors')
+    el.parentNode.insertBefore(wrapper, el)
+    wrapper.appendChild(el)
+    return wrapper
   }
 }
