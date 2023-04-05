@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { Octokit } from 'octokit'
-import { wrapWithError } from '../../lib/error-wrapper'
+import { wrapWithError, clearErrors } from '../../lib/error-wrapper'
 
 // Connects to data-controller="project--form"
 export default class extends Controller {
@@ -23,6 +23,12 @@ export default class extends Controller {
     } else {
       wrapWithError(urlField, 'Invalid repository url')
     }
+  }
+
+  clearErrors(e) {
+    e.preventDefault()
+
+    clearErrors(e.target)
   }
 
   toggleRepository(e) {

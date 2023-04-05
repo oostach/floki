@@ -8,7 +8,7 @@ ActionView::Base.field_error_proc = proc do |html_tag, instance|
     method_name = instance.instance_variable_get('@method_name')
     FormErrorsWrapper.new(self, html_tag, instance.object, method_name).render
   else
-    content_tag :div, html_tag, class: 'field_with_errors'
+    content_tag :div, html_tag, class: 'field-with-errors'
   end
 end
 

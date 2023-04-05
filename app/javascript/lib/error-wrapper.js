@@ -7,6 +7,17 @@ export const wrapWithError = (field, message) => {
   inputWrapper.appendChild(errorNode)
 }
 
+export const clearErrors = (field) => {
+  const inputWrapper = field.closest('.field-with-errors')
+
+  if (inputWrapper) {
+    const errorNode = inputWrapper.querySelector('.field-errors')
+
+    inputWrapper.classList.remove('field-with-errors')
+    errorNode.remove()
+  }
+}
+
 const createErrorNode = (message) => {
   const errorContainer = document.createElement('span')
 
@@ -16,10 +27,9 @@ const createErrorNode = (message) => {
 }
 
 const wrapInput = (field) => {
-  const wrapper = document.createElement('div')
+  const wrapper = field.closest('.form-group')
 
   wrapper.classList.add('field-with-errors')
-  field.parentNode.insertBefore(wrapper, field)
   wrapper.appendChild(field)
   return wrapper
 }
