@@ -14,10 +14,11 @@ export default class extends Controller {
   validateRepositories(e) {
     e.preventDefault()
     const urlField = e.target
-    const repoParams = this.#repoPattern.exec(urlField.value)
+    const fieldValue = urlField.value.trim()
 
-    if (urlField.value.trim() === '') return
+    if (fieldValue === '') return
 
+    const repoParams = fieldValue.matchAll(this.#repoPattern).next().value
     if (repoParams?.groups.owner && repoParams.groups.name) {
       this.#getRepoData(urlField, repoParams.groups.owner, repoParams.groups.name)
     } else {
