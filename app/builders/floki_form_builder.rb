@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
 class FlokiFormBuilder < ActionView::Helpers::FormBuilder
-  DEFAULT_WRAPPER_CLASSES  = %w[form-group mb-2].freeze
+  DEFAULT_WRAPPER_CLASSES = %w[form-group mb-2].freeze
 
+  #
+  # Wrapper around the standard FormBuilder text_field method. It creates a text field with label wrapped in a div with class "form-group".
+  #
+  # @param method [<Symbol>] object attribute we generate text field for.
+  # @param options [<Hash>] a set of configuration options for the text_field and wrapper.
+  # @option opts [<Boolean, Hash>] :wrapper accepts configuration hash for the wrapper or false to disable wrapping a field.
+  #
+  # @return [<String>] html template of the text field.
+  #
   def text_field(method, options = {})
     build_field(method, __method__, options.reverse_merge(wrapper: false))
   end
