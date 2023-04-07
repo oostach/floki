@@ -7,6 +7,6 @@
       = f.fields_for :repository do |ff|
         - url_data = { action: 'blur->project--form#validateRepositories focus->project--form#clearErrors' }
         = ff.text_field :url, data: url_data, wrapper: { class: 'with-spinner' }
-        = ff.text_field :name
+        = ff.text_field :name, data: { 'project--form-target' => 'repoName' }
     .form-submit
       = f.submit class: 'button-primary', data: { 'project--form-target' => 'submitButton' }

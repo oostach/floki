@@ -4,8 +4,10 @@ import { wrapWithError, clearErrors } from '../../lib/error-wrapper'
 
 // Connects to data-controller="project--form"
 export default class extends Controller {
-  static targets = ['repositoryFields', 'repositoryToggle', 'submitButton']
+  static targets = ['repositoryFields', 'repositoryToggle', 'submitButton', 'repoName']
+
   #repoPattern = /(?<=^https:\/\/github\.com\/)(?<owner>[a-zA-Z-]+)(?:\/)(?<name>[a-zA-Z-]+)$/gm
+  #previousRepoUrl = null
 
   connect() {
     this.#toggleRepositoryFields()
@@ -16,8 +18,9 @@ export default class extends Controller {
     const urlField = e.target
     const fieldValue = urlField.value.trim()
 
-    if (fieldValue === '') return
+    if (fieldValue === '' || fieldValue === this.#previousRepoUrl) return
 
+    this.#previousRepoUrl = fieldValue
     const repoParams = fieldValue.matchAll(this.#repoPattern).next().value
     if (repoParams?.groups.owner && repoParams.groups.name) {
       this.#getRepoData(urlField, repoParams.groups.owner, repoParams.groups.name)
@@ -50,8 +53,8 @@ export default class extends Controller {
     this.repositoryFieldsTarget.style.display = 'block'
   }
 
-  #toggleSubmitButton() {
-    this.submitButtonTarget.hasAttribute('disabled')
+  #toggleSubmitButton(force = false) {
+    this.submitButtonTarget.hasAttribute('disabled') || force
       ? this.submitButtonTarget.removeAttribute('disabled')
       : this.submitButtonTarget.setAttribute('disabled', 'disabled')
   }
@@ -70,10 +73,12 @@ export default class extends Controller {
 
     label.appendChild(loader)
     this.#toggleSubmitButton()
+    this.repoNameTarget.value = ''
 
     try {
       repoData = await octokit.request(`GET /repos/${owner}/${repo}`)
-      this.#toggleSubmitButton()
+      this.repoNameTarget.value = repoData.data.name
+      this.#toggleSubmitButton(true)
     } catch (e) {
       wrapWithError(urlField, 'Repository Not Found')
     } finally {
