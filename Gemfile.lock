@@ -1,7 +1,8 @@
-PATH
-  remote: ../floki-form
+GIT
+  remote: https://github.com/oostach/floki-form
+  revision: 6a9bb5fd7da4c086744ae2a354e93ef4094dd30d
   specs:
-    floki-form (0.1.0)
+    floki-form (0.2.0)
       actionpack (>= 7.0.4.3)
       activemodel (>= 7.0.4.3)
       railties (>= 7.0.4.3)
@@ -377,7 +378,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   faraday-retry
-  floki-form!
+  floki-form (~> 0.2)!
   haml-rails
   haml_lint
   image_processing (~> 1.2)
