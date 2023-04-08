@@ -1,5 +1,5 @@
-.actions.text-right.mb-4.relative
-  = link_to 'Add Project', new_project_path, data: { turbo_frame: 'project-form' }, class: 'button-primary'
+= page_title do
+  - link_to 'Add Project', new_project_path, data: { turbo_frame: 'project-form' }, class: 'button-primary'
 
 = turbo_frame_tag 'project-form'
 

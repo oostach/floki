@@ -25,3 +25,17 @@
     @apply underline text-blue-500;
   }
 }
+
+@layer components {
+  .page-title {
+    @apply flex -mx-4 -mt-4 px-4 py-4 rounded-t-md bg-sky-100 border-b border-sky-400 mb-4;
+  }
+
+  .page-title .page-title-text {
+    @apply font-semibold text-3xl text-sky-900;
+  }
+
+  .page-title .page-title-actions {
+    @apply text-right ml-auto relative;
+  }
+}

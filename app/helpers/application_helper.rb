@@ -47,4 +47,11 @@ module ApplicationHelper
     ext = file.filename.extension_without_delimiter
     image_tag "icons/png/file-types/#{ext}.png", class: 'file-icon-png', width: width
   end
+
+  def page_title
+    tag.div(class: 'page-title') do
+      concat(tag.h1(t('.page_title', default: controller_name.capitalize), class: 'page-title-text'))
+      concat((tag.div(yield, class: 'page-title-actions') if block_given?))
+    end
+  end
 end

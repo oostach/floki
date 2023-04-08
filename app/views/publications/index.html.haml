@@ -1,5 +1,6 @@
-.actions.text-right.mb-4.relative
-  = link_to 'Add Book or Article', new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
+
+= page_title do
+  - link_to 'Add Book or Article', new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
 
 = turbo_frame_tag 'new-publication'
 
