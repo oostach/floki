@@ -1,8 +1,10 @@
-= page_title do
+- actions_content = capture do
   = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }, class: 'button-primary'
   = link_to 'Subscribe', new_subscription_path(notifiable_model: 'Note'), data: { turbo_frame: 'new-subscription' }, class: 'button-secondary'
   .absolute.right-0.mt-2{ class: 'w-1/3' }
     = turbo_frame_tag 'new-subscription'
+
+= page_title actions_content
 
 = turbo_frame_tag 'new-note'
 
