@@ -8,4 +8,4 @@
       = render partial: 'file', collection: files, locals: { publication: publication }
 - else
   .images.flex.flex-wrap{ data: { droppable_target: 'imagesPreviewArea' } }
-  .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2{ data: { droppable_target: 'filesPreviewArea' } }
+  %div{ class: 'files grid grid-cols-1 gap-2', data: { droppable_target: 'filesPreviewArea' } }

@@ -1,6 +1,7 @@
 @layer components {
   .main-nav {
-    @apply grid grid-cols-4 gap-4 font-mono;
+    @apply grid grid-cols-4 gap-4 bg-transparent w-auto h-auto z-auto font-mono;
+    @apply sm:fixed sm:z-50 sm:w-1/2 sm:h-screen sm:top-0 sm:left-0 sm:hidden sm:bg-green-300 ;
   }
 
   .main-nav .main-nav-item {

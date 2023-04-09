@@ -14,6 +14,13 @@ module.exports = {
     { pattern: /bg-icon-(zip|png|pdf|jpg|doc|html|mov)/ }
   ],
   theme: {
+    screens: {
+      '2xl': { max: '1535px' },
+      xl: { max: '1279px' },
+      lg: { max: '1023px' },
+      md: { max: '767px' },
+      sm: { max: '639px' }
+    },
     extend: {
       backgroundImage: {
         'icon-png': 'url("./icons/png/file-types/png.png")',

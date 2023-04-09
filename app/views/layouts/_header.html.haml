@@ -3,8 +3,9 @@
     = link_to root_path do
       = image_tag 'logo-floki.png', alt: 'Logo', class: 'inline w-16'
       %span.font-mono.font-semibold.text-xl.pl-1 Floki
-  %nav.ml-auto.my-auto
-    %ul.main-nav
+  %nav.ml-auto.my-auto{ data: { controller: 'main-menu' } }
+    %button{ class: 'sm:block hidden button-primary', data: { action: 'click->main-menu#show' } } Menu
+    %ul.main-nav{ data: { main_menu_target: 'menuList', action: 'click@window->main-menu#hide' } }
       %li.main-nav-item
         = link_to 'About', '#'
       %li.main-nav-item

@@ -18,5 +18,5 @@
         - images, files = publication.partition_files
         .images.flex.flex-wrap{ data: album_attr, tabindex: '0' }
           = render partial: 'image', collection: images, as: :image
-        .files.grid.md:grid-cols-2.sm:grid-cols-1.gap-2
+        %div{ class: 'files grid grid-cols-1 gap-2' }
           = render partial: 'file', collection: files, as: :file
