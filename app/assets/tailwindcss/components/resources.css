@@ -16,7 +16,7 @@
   }
 
   .image img.image-previwe {
-    @apply cursor-pointer;
+    @apply cursor-pointer max-w-[180px] sm:max-w-full;
   }
 
   .file {

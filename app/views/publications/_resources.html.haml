@@ -1,11 +1,11 @@
 - if publication.persisted? && publication.files.present?
   - images, files = publication.partition_files
   .images
-    = turbo_frame_tag dom_id(publication, 'images'), class: 'flex flex-wrap' do
+    = turbo_frame_tag dom_id(publication, 'images'), class: 'flex flex-wrap sm:grid sm:grid-cols-2' do
       = render partial: 'image', collection: images, locals: { publication: publication }
   .files
-    = turbo_frame_tag dom_id(publication, 'files'), class: 'grid md:grid-cols-2 sm:grid-cols-1 gap-2' do
+    = turbo_frame_tag dom_id(publication, 'files'), class: 'grid grid-cols-2 sm:grid-cols-1 gap-2' do
       = render partial: 'file', collection: files, locals: { publication: publication }
 - else
-  .images.flex.flex-wrap{ data: { droppable_target: 'imagesPreviewArea' } }
-  %div{ class: 'files grid grid-cols-1 gap-2', data: { droppable_target: 'filesPreviewArea' } }
+  .images.flex.flex-wrap.sm:grid.sm:grid-cols-2{ data: { droppable_target: 'imagesPreviewArea' } }
+  .files.grid.grid-cols-2.gap-2.sm:grid-cols-1{ data: { droppable_target: 'filesPreviewArea' } }

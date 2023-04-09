@@ -1,7 +1,7 @@
 @layer components {
   /* Badge buttons */
   .badge-button {
-    @apply border rounded-full  flex justify-center;
+    @apply border rounded-full flex justify-center;
   }
 
   .badge-normal {
@@ -42,7 +42,7 @@
 
   /* Buttons */
   .button {
-    @apply rounded px-3 py-2 leading-none inline-block;
+    @apply rounded px-3 py-2 leading-none inline-block text-center;
   }
 
   .button-primary {
