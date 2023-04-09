@@ -4,4 +4,9 @@
 = turbo_frame_tag 'project-form'
 
 = turbo_frame_tag :projects do
-  = render @projects
+  - if @projects.present?
+    = render @projects
+  - else
+    = turbo_frame_tag :blankslate do
+      = render 'blankslate'
+

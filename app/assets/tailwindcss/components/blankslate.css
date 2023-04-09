@@ -1,0 +1,17 @@
+@layer components {
+  .blank-slate {
+    @apply w-fit mx-auto my-20 text-center;
+  }
+
+  .blank-slate .blank-slate-image, .blank-slate .blank-slate-actions {
+    @apply mb-3;
+  }
+
+  .blank-slate .blank-slate-title {
+    @apply text-2xl mb-3 text-gray-700;
+  }
+
+  .blank-slate .blank-slate-helptext {
+    @apply text-gray-500;
+  }
+}

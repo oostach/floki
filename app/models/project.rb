@@ -8,11 +8,15 @@ class Project < ApplicationRecord
 
   validates :title, presence: true
 
-  has_one :repository, dependent: :destroy, inverse_of: :project
-  validates_associated :repository
+  has_one :repository, dependent: :destroy, inverse_of: :project, validate: false
+  validates_associated :repository, if: :repo_enabled?
   accepts_nested_attributes_for :repository
 
   def repo
     @repo ||= Octokit::Repository.from_url repository
+  end
+
+  def repo_enabled?
+    enable_repo.present? && enable_repo == '1'
   end
 end

@@ -10,3 +10,9 @@
         = ff.text_field :name, data: { 'project--form-target' => 'repoName' }
     .form-submit
       = f.submit class: 'button-primary', data: { 'project--form-target' => 'submitButton' }
+      - if project.persisted?
+        = link_to t('cancel'), project_path(project), class: 'button-secondary'
+      - else
+        = link_to t('cancel'), '#', class: 'button-secondary', data: { action: 'click->form#cancel:prevent' }
+
+  %hr.my-3.-mx-4.border-gray-300

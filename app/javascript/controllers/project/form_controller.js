@@ -67,7 +67,7 @@ export default class extends Controller {
 
   async #getRepoData(urlField, owner, repo) {
     const octokit = new Octokit({})
-    const label = urlField.previousElementSibling
+    const label = urlField.closest('.form-group').querySelector('label')
     const loader = this.#createLoader()
     let repoData = null
 
