@@ -32,6 +32,11 @@ Style/BlockDelimiters:
   Exclude:
     - spec/**/*
 
+Lint/MissingSuper:
+  Enabled: true
+  Exclude:
+    - app/components/**/*
+
 RSpec/ExampleLength:
   Enabled: true
   Exclude:

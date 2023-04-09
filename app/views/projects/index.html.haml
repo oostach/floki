@@ -7,6 +7,7 @@
   - if @projects.present?
     = render @projects
   - else
-    = turbo_frame_tag :blankslate do
-      = render 'blankslate'
-
+    = turbo_frame_tag(:blankslate) do
+      = render BlankSlateComponent.new(:projects, 'No projects where found', 'You can create new project') do |wrapper|
+        - wrapper.with_actions do
+          = link_to 'Add Project', new_project_path, data: { turbo_frame: 'project-form' }, class: 'button-primary'
