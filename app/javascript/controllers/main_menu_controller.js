@@ -7,17 +7,23 @@ export default class extends Controller {
   connect() {
   }
 
+  resize() {
+    if (window.matchMedia('(min-width: 639px)').matches) {
+      this.menuListTarget.classList.remove('menu-visible')
+    }
+  }
+
   hide(event) {
     if (window.matchMedia('(min-width: 639px)').matches) return
     if (this.#is_clicked_on_element(event) || this.#is_clicked_inside_element(event)) return
 
-    this.menuListTarget.style.display = 'none'
+    this.menuListTarget.classList.remove('menu-visible')
   }
 
   show(event) {
     event.preventDefault()
 
-    this.menuListTarget.style.display = 'block'
+    this.menuListTarget.classList.add('menu-visible')
   }
 
   #is_clicked_inside_element(event) {

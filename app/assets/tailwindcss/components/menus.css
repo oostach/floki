@@ -4,6 +4,10 @@
     @apply sm:fixed sm:z-50 sm:w-1/2 sm:h-screen sm:top-0 sm:left-0 sm:hidden sm:bg-green-300 ;
   }
 
+  .main-nav.menu-visible{
+    @apply block;
+  }
+
   .main-nav .main-nav-item {
     @apply bg-green-300 py-2 px-4 text-center;
   }
