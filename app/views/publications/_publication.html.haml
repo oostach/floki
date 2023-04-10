@@ -3,14 +3,23 @@
 = turbo_frame_tag dom_id(publication) do
   .publication.w-full.mb-8
     .publication-title.flex.items-center.mb-2
-      .text-2xl.font-semibold.mr-2.text-sky-900= publication.title
+      %div
+        .text-2xl.font-semibold.mr-2.text-sky-900= publication.title
+        .publication-info
+          %span.text-sm.text-sky-700.font-normal Added on #{l(publication.created_at.to_date, format: :long)}, writen by #{publication.author}
+        .publication-link.text-xs.italic.text-gray-700
+          %span.font-bold Source URL:
+          = link_to publication.url, publication.url, class: ''
       .flex.ml-auto
         = link_to edit_publication_path(publication), class: 'badge-button-primary mr-2 badge-normal' do
           = svg_icon :edit, options: { width: '20px' }
         = link_to publication_path(publication), data: delete_data_attrs, class: 'badge-button-alert badge-normal' do
           = svg_icon :trash, options: { width: '20px' }
-    .publication-description= publication.description
-    .publication-link= publication.url
+    .publication-description
+      .line-clamp-8= publication.description
+      = link_to publication_path(publication), class: 'font-semibold text-sky-700 text-sm mt-4 inline-block' do
+        Show more
+
 
     - if publication.files.any?
       .publication-resources

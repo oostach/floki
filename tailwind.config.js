@@ -6,7 +6,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/builders/**/*.rb',
     './app/javascript/**/*.js',
-    './app/views/**/*.{erb,haml,html,slim}'
+    './app/views/**/*.{erb,haml,html,slim}',
+    './app/components/**/*.{erb,haml,html,slim}'
   ],
   safelist: [
     { pattern: /flash-message-(notice|alert|info)/ },
@@ -22,6 +23,12 @@ module.exports = {
       sm: { max: '639px' }
     },
     extend: {
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10'
+      },
       backgroundImage: {
         'icon-png': 'url("./icons/png/file-types/png.png")',
         'icon-html': 'url("./icons/png/file-types/html.png")',
@@ -41,6 +48,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
-    require('tailwindcss-font-inter')
+    require('tailwindcss-font-inter'),
+    require('@tailwindcss/line-clamp')
   ]
 }
