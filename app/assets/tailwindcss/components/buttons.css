@@ -1,7 +1,7 @@
 @layer components {
   /* Badge buttons */
   .badge-button {
-    @apply border rounded-full flex justify-center;
+    @apply border rounded-full flex justify-center items-center;
   }
 
   .badge-normal {

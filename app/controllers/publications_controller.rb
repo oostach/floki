@@ -43,6 +43,7 @@ class PublicationsController < ApplicationController
   def destroy
     @publication.destroy
     flash.now.notice = 'Your note has been successfully removed.'
+    redirect_to(action: :index, status: :see_other) unless turbo_frame_request?
   end
 
   def upload_attachments

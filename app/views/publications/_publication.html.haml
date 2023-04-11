@@ -12,7 +12,8 @@
       .publication-actions
         = link_to edit_publication_path(publication), class: 'badge-button-primary mr-2 badge-normal' do
           = svg_icon :edit, options: { width: '20px' }
-        = link_to publication_path(publication), data: delete_data_attrs, class: 'badge-button-alert badge-normal' do
+        - link_attr = action_name == 'show' ? delete_data_attrs.merge(turbo_frame: :_top) : delete_data_attrs
+        = link_to publication_path(publication), data: link_attr, class: 'badge-button-alert badge-normal' do
           = svg_icon :trash, options: { width: '20px' }
 
     .publication-description= publication.description
