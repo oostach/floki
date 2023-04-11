@@ -2,7 +2,7 @@
   .note.w-full.mb-8
     - if note.title
       .note-title.flex.items-center.mb-2
-        .text-2xl.font-semibold.mr-2.text-sky-900
+        .text-xl.font-semibold.mr-2.text-sky-900
           = note.title
           .note-date.text-xs.font-normal.italic.text-sky-600= l(note.created_at, format: :long)
         .note-actions.flex.ml-auto

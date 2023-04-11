@@ -6,7 +6,7 @@
       @apply flex items-center mb-2;
 
       .publication-title-text {
-        @apply hidden text-2xl font-semibold mr-2 text-sky-900;
+        @apply hidden text-xl font-semibold mr-2 text-sky-900;
       }
 
       .publication-title-info {
