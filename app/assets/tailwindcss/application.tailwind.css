@@ -9,6 +9,7 @@
 @import './components/richtext';
 @import './components/resources';
 @import './components/blankslate';
+@import './components/publications';
 
 @import "tailwindcss/utilities";
 
@@ -33,7 +34,7 @@
   }
 
   .page-title .page-title-text {
-    @apply font-semibold text-3xl text-sky-900;
+    @apply font-semibold text-2xl text-sky-900;
   }
 
   .page-title .page-title-actions {

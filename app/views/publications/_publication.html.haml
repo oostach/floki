@@ -1,31 +1,28 @@
 - album_attr = { controller: 'album', action: 'keydown.esc->album#closeAlbum keydown.right->album#nextImage keydown.left->album#previousImage' }
 
 = turbo_frame_tag dom_id(publication) do
-  .publication.w-full.mb-8
-    .publication-title.flex.items-center.mb-2
+  .publication
+    .publication-title
       %div
-        .text-2xl.font-semibold.mr-2.text-sky-900= publication.title
-        .publication-info
-          %span.text-sm.text-sky-700.font-normal Added on #{l(publication.created_at.to_date, format: :long)}, writen by #{publication.author}
-        .publication-link.text-xs.italic.text-gray-700
-          %span.font-bold Source URL:
+        .publication-title-text= publication.title
+        .publication-title-info Added on #{l(publication.created_at.to_date, format: :long)}, writen by #{publication.author}
+        .publication-source-link
+          %span Source URL:
           = link_to publication.url, publication.url, class: ''
-      .flex.ml-auto
+      .publication-actions
         = link_to edit_publication_path(publication), class: 'badge-button-primary mr-2 badge-normal' do
           = svg_icon :edit, options: { width: '20px' }
         = link_to publication_path(publication), data: delete_data_attrs, class: 'badge-button-alert badge-normal' do
           = svg_icon :trash, options: { width: '20px' }
-    .publication-description
-      .line-clamp-8= publication.description
-      = link_to publication_path(publication), class: 'font-semibold text-sky-700 text-sm mt-4 inline-block' do
-        Show more
 
+    .publication-description= publication.description
+    .publication-show-more= link_to 'Show more', publication_path(publication), data: { turbo: false }
 
     - if publication.files.any?
       .publication-resources
-        .publication-resources-title.bold Resources
+        .publication-resources-title Resources
         - images, files = publication.partition_files
-        .images.flex.flex-wrap.sm:grid.sm:grid-cols-2{ data: album_attr, tabindex: '0' }
+        .images{ data: album_attr, tabindex: '0' }
           = render partial: 'image', collection: images, as: :image
-        .files.grid.sm:grid-cols-1.grid-cols-2.gap-2
+        .files
           = render partial: 'file', collection: files, as: :file

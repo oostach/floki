@@ -3,7 +3,7 @@
 
 = turbo_frame_tag 'project-form'
 
-= turbo_frame_tag :projects do
+= turbo_frame_tag :projects, class: 'publications' do
   - if @projects.present?
     = render @projects
   - else

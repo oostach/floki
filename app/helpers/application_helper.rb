@@ -48,9 +48,11 @@ module ApplicationHelper
     image_tag "icons/png/file-types/#{ext}.png", class: 'file-icon-png', width: width
   end
 
-  def page_title(&)
+  def page_title(title: nil, &)
+    title ||= t('.page_title', default: controller_name.capitalize)
+
     tag.div(class: 'page-title') do
-      concat(tag.h1(t('.page_title', default: controller_name.capitalize), class: 'page-title-text'))
+      concat(tag.h1(title, class: 'page-title-text'))
       concat(capture_actions_content(&))
     end
   end

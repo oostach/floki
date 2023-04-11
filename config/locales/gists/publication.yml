@@ -7,6 +7,8 @@ en:
   publications:
     index:
       page_title: Books and Articles
+    show:
+      page_title: Books and Articles > %{text}
     form:
       drag_and_drop_message: Drug and drop your resources here
       to_select_file: to select files

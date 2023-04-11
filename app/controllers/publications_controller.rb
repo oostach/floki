@@ -12,7 +12,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    render @publication
+    turbo_frame_request? ? render(@publication) : render(action: 'show')
   end
 
   def new

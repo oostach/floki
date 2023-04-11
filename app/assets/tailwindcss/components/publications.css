@@ -1,0 +1,73 @@
+@layer components {
+  .publication {
+    @apply w-full mb-8;
+
+    .publication-title {
+      @apply flex items-center mb-2;
+
+      .publication-title-text {
+        @apply hidden text-2xl font-semibold mr-2 text-sky-900;
+      }
+
+      .publication-title-info {
+        @apply text-sm text-sky-700 font-normal;
+      }
+
+      .publication-source-link {
+        @apply text-xs italic text-gray-700;
+
+        span {
+          @apply font-bold;
+        }
+      }
+
+      .publication-actions {
+        @apply flex ml-auto;
+      }
+    }
+
+    .publication-description {
+      @apply line-clamp-none;
+    }
+
+    .publication-show-more {
+      @apply hidden;
+    }
+
+    .publication-resources {
+      .publication-resources-title {
+        @apply font-bold;
+      }
+
+      .images {
+        @apply flex flex-wrap sm:grid sm:grid-cols-2;
+      }
+
+      .files {
+        @apply grid sm:grid-cols-1 grid-cols-2 gap-2;
+      }
+    }
+  }
+
+  .publications {
+    .publication {
+      .publication-title {
+        .publication-title-text {
+          @apply block;
+        }
+      }
+
+      .publication-description {
+        @apply line-clamp-8;
+      }
+
+      .publication-show-more {
+        @apply block mt-4;
+
+        a {
+          @apply font-semibold text-sky-700 text-sm;
+        }
+      }
+    }
+  }
+}

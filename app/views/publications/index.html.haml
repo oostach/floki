@@ -4,7 +4,7 @@
 
 = turbo_frame_tag 'new-publication'
 
-= turbo_frame_tag :publications do
+= turbo_frame_tag :publications, class: 'publications' do
   - if @publications.present?
     = render @publications
   - else
