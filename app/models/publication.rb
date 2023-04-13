@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Publication < ApplicationRecord
+  include Taggable
+
   has_rich_text :description
   has_many_attached :files do |attachable|
     attachable.variant(:thumb, resize_to_fill: [300, 300])
