@@ -4,6 +4,7 @@ class Taggable
   extend ActiveSupport::Concern
 
   included do
-    has_many :tags, as: :taggable, dependent: :destroy
+    has_many :tag_mappings, as: :taggable
+    has_many :tags, , dependent: :destroy
   end
 end

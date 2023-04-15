@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Tag < ApplicationRecord
-  belongs_to :owner, polymorphic: true
+  has_many :tag_mappings, inverse_of: :tag, dependent: :destroy
 end
