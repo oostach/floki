@@ -2,5 +2,5 @@
 
 class TagMapping < ApplicationRecord
   belongs_to :taggable, polymorphic: true
-  belongs_to :tag, inverse_of: :tag_mapping
+  belongs_to :tag, inverse_of: :tag_mappings
 end

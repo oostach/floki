@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_093658) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_15_194239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,26 +101,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_093658) do
   create_table "tag_mappings", force: :cascade do |t|
     t.string "taggable_type", null: false
     t.bigint "taggable_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tags_id", null: false
+    t.index ["tag_id"], name: "index_tag_mappings_on_tag_id"
     t.index ["taggable_type", "taggable_id"], name: "index_tag_mappings_on_taggable"
-    t.index ["tags_id"], name: "index_tag_mappings_on_tags_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.bigint "tag_mappings_id"
     t.string "owner_class", limit: 82
     t.string "name", limit: 128, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_class"], name: "index_tags_on_owner_class"
-    t.index ["tag_mappings_id"], name: "index_tags_on_tag_mappings_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "repositories", "projects"
-  add_foreign_key "tag_mappings", "tags", column: "tags_id"
-  add_foreign_key "tags", "tag_mappings", column: "tag_mappings_id"
+  add_foreign_key "tag_mappings", "tags"
 end
