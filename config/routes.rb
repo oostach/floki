@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
+
+  scope ':owner' do
+    resources :tags, only: %i[create update] do
+      get :edit, on: :collection
+    end
+  end
+
   resources :publications do
     delete :destroy_attachment, on: :member, path: 'files/:signed_id'
     post :upload_attachments, on: :member

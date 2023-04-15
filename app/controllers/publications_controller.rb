@@ -8,7 +8,7 @@ class PublicationsController < ApplicationController
   before_action :load_publication, only: %i[show edit destroy update destroy_attachment upload_attachments]
 
   def index
-    @publications = Publication.with_attached_files.page(params[:page] || 1).per(PREPAGE)
+    @publications = Publication.with_attached_files.includes(:tags).page(params[:page] || 1).per(PREPAGE)
   end
 
   def show
