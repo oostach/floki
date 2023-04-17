@@ -1,0 +1,5 @@
+= turbo_frame_tag :tags do
+  .tags.my-2.flex.items-center
+    %span.font-bold.text-sky-700 Tags:
+    = floki_form_for :tags do |f|
+      = f.text_field :name, label: false, value: @tags, wrapper: { class: 'mb-0 ml-2' }

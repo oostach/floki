@@ -6,8 +6,8 @@ module Taggable
   included do
     has_many :tag_mappings, as: :taggable, dependent: :destroy
     has_many :tags, through: :tag_mappings do
-      def add(list)
-        tags_list = list.split
+      def add(list_of_tags)
+        tags_list = list_of_tags.split
 
         where(owner_class: owner_class, name: tags_list).then do |tags|
           tag_names = tags.map(&:name)
@@ -18,6 +18,12 @@ module Taggable
       def owner_class
         proxy_association.owner.class.name
       end
+
+      def list
+        map(&:name).join(' ')
+      end
     end
+
+    accepts_nested_attributes_for :tags
   end
 end

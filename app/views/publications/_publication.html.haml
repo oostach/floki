@@ -16,10 +16,11 @@
         = link_to publication_path(publication), data: link_attr, class: 'badge-button-alert badge-normal' do
           = svg_icon :trash, options: { width: '20px' }
 
-    .tags.my-2
-      %span.font-bold.text-sky-700 Tags:
-      = publication.tags.map { |tag| "##{tag.name}" }.join(' ')
-      = link_to '+', edit_tags_path(publication.to_global_id)
+    = turbo_frame_tag :tags do
+      .tags.my-2.flex.items-center
+        %span.font-bold.text-sky-700 Tags:
+        = publication.tags.map { |tag| "##{tag.name}" }.join(' ')
+        = link_to '+', edit_tags_path(publication.to_global_id), class: 'inline-block w-6 h-6 leading-none bg-sky-100 text-sky-700 font-bold rounded-full text-center border-2 align-middle border-sky-700 ml-2'
 
     .publication-description= publication.description
     .publication-show-more= link_to 'Show more', publication_path(publication), data: { turbo: false }

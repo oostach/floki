@@ -4,7 +4,7 @@ class TagsController < ApplicationController
   before_action :load_owner
 
   def edit
-    @tags = @owner.tags
+    @tags = @owner.tags.list
   end
 
   private
