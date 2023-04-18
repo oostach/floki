@@ -1,0 +1,5 @@
+= turbo_frame_tag :tags do
+  .tags.my-2.flex.items-center
+    %span.font-bold.text-sky-700.mr-2 Tags:
+    = tags.map { |tag| "##{tag.name}" }.join(' ')
+    = link_to '+', edit_tags_path(owner.to_global_id), class: 'inline-block w-6 h-6 leading-none bg-sky-100 text-sky-700 font-bold rounded-full text-center border-2 align-middle border-sky-700 ml-2'

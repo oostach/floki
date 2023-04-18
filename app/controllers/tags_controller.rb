@@ -8,6 +8,7 @@ class TagsController < ApplicationController
   end
 
   def create
+    @tags = @owner.tags.add(tags_params[:name])
   end
 
   private

@@ -1,6 +1,8 @@
 = turbo_frame_tag :tags do
   .tags.my-2.flex.items-center
-    %span.font-bold.text-sky-700 Tags:
+    %span.font-bold.text-sky-700.mr-2 Tags:
     = floki_form_for :tags, url: tags_path do |f|
       = f.hidden_field :owner, value: @owner.to_global_id
-      = f.text_field :name, label: false, value: @tags, wrapper: { class: 'mb-0 ml-2' }
+      .flex
+        = f.text_field :name, label: false, value: @tags, wrapper: false, class: 'inline-block mr-2'
+        = f.submit class: 'button-secondary inline-block'
