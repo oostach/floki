@@ -1,4 +1,4 @@
-= turbo_frame_tag :tags do
+= turbo_frame_tag dom_id(owner, :tags) do
   .tags.my-2.flex.items-center
     %span.font-bold.text-sky-700.mr-2 Tags:
     = tags.map { |tag| "##{tag.name}" }.join(' ')
