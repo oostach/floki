@@ -6,13 +6,16 @@ module Taggable
   included do
     has_many :tag_mappings, as: :taggable, dependent: :destroy
     has_many :tags, through: :tag_mappings do
-      def add(list_of_tags)
+      def update_list(list_of_tags)
+        replace(find_or_create_tags(list_of_tags))
+      end
+
+      def find_or_create_tags(list_of_tags)
         tags_list = list_of_tags.split
 
-        where(owner_class: owner_class, name: tags_list).then do |tags|
-          tag_names = tags.map(&:name)
-          self << (tags_list - tag_names).map { |name| Tag.new(owner_class: owner_class, name: name) }
-        end
+        existing_tags = Tag.where(owner_class: owner_class, name: tags_list)
+        new_tags      = (tags_list - existing_tags.map(&:name)).map { |name| Tag.create!(owner_class: owner_class, name: name) }
+        existing_tags + new_tags
       end
 
       def owner_class

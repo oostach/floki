@@ -8,5 +8,7 @@ class CreateTags < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :tags, %i[name owner_class], unique: true
   end
 end

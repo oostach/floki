@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_194239) do
     t.string "name", limit: 128, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "owner_class"], name: "index_tags_on_name_and_owner_class", unique: true
     t.index ["owner_class"], name: "index_tags_on_owner_class"
   end
 
