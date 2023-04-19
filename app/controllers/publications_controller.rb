@@ -9,6 +9,7 @@ class PublicationsController < ApplicationController
 
   def index
     @publications = Publication.with_attached_files.includes(:tags).page(params[:page] || 1).per(PREPAGE)
+    @tags = @publications.flat_map { |publication| publication.tags.map { |tag| [tag.id, tag.name] } }.uniq
   end
 
   def show
