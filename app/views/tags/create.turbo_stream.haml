@@ -1,2 +1,5 @@
 = turbo_stream.replace dom_id(@owner, :tags) do
   = render 'tags/tags', tags: @tags, owner: @owner
+
+= turbo_stream.replace 'tags-filter' do
+  = render 'tags/filter', tags: @filter_tags

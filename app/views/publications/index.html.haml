@@ -4,9 +4,7 @@
 
 = turbo_frame_tag 'new-publication'
 
-= floki_form_for :filter, data: { controller: 'tag-filter' } do |f|
-  = f.collection_check_boxes :tags, @tags, :first, :last do |b|
-    = b.label(class: 'tag') { '#'.html_safe + b.text + b.check_box(class: 'hidden') }
+= render 'tags/filter', tags: @tags
 
 = turbo_frame_tag :publications, class: 'publications' do
   - if @publications.present?
