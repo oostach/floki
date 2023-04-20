@@ -2,4 +2,4 @@
   = render 'tags/tags', tags: @tags, owner: @owner
 
 = turbo_stream.replace 'tags-filter' do
-  = render 'tags/filter', tags: @filter_tags
+  = render 'tags/filter', tags: @filter_tags, owner_class: @owner.class

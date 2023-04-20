@@ -4,15 +4,8 @@
 
 = turbo_frame_tag 'new-publication'
 
-= render 'tags/filter', tags: @tags
+- if @tags.present?
+  = render 'tags/filter', tags: @tags, owner_class: @publications.first.class
 
 = turbo_frame_tag :publications, class: 'publications' do
-  - if @publications.present?
-    = render @publications
-  - else
-    = turbo_frame_tag(:blankslate) do
-      = render BlankSlateComponent.new(:publications, 'Neither books no articles where found', 'You can add one by clicking add button') do |wrapper|
-        - wrapper.with_actions do
-          = link_to 'Add Book or Article', new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
-
-= paginate @publications
+  = render 'publications', publications: @publications

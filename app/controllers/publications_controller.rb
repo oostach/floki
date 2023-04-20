@@ -8,7 +8,9 @@ class PublicationsController < ApplicationController
   before_action :load_publication, only: %i[show edit destroy update destroy_attachment upload_attachments]
 
   def index
-    @publications = Publication.with_attached_files.includes(:tags).page(params[:page] || 1).per(PREPAGE)
+    @publications = Publication.with_attached_files
+                               .filter_by_tags(tags_filter_params[:tags])
+                               .page(params[:page] || 1).per(PREPAGE)
     @tags = @publications.flat_map { |publication| publication.tags.map { |tag| [tag.id, tag.name] } }.uniq
   end
 
@@ -58,6 +60,12 @@ class PublicationsController < ApplicationController
   end
 
   private
+
+  def tags_filter_params
+    params.fetch(:filter, { tags: [] }).permit(tags: []).tap do |tags_params|
+      tags_params[:tags] = tags_params[:tags].reject { |val| val == '' }
+    end
+  end
 
   def publication_params
     params.require(:publication).permit(:title, :description, :url, :author, files: [])

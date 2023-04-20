@@ -1,4 +1,5 @@
 = turbo_frame_tag 'tags-filter', data: { controller: 'tags-filter' } do
-  = floki_form_for :filter, class: 'tags-filter' do |f|
+  - url = public_send("#{owner_class.name.downcase.pluralize}_path", format: :turbo_stream)
+  = floki_form_for :filter, class: 'tags-filter', url: url, method: :get do |f|
     = f.collection_check_boxes :tags, tags, :first, :last do |b|
       = b.label(class: 'tag') { '#'.html_safe + b.text + b.check_box(class: 'hidden', data: { action: 'click->tags-filter#filter' }) }

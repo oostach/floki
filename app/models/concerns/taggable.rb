@@ -27,6 +27,8 @@ module Taggable
       end
     end
 
+    scope :filter_by_tags, ->(tags) { tags.present? ? includes(:tags).where(tags: { id: tags }) : includes(:tags) }
+
     accepts_nested_attributes_for :tags
   end
 end
