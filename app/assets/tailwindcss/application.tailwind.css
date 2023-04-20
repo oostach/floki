@@ -41,3 +41,17 @@
     @apply text-right ml-auto relative;
   }
 }
+
+@layer components {
+  .tags-filter {
+    @apply my-2;
+
+    .tag {
+      @apply font-semibold text-sky-700 px-2 py-1 mr-1 rounded-full;
+
+      &.marked {
+        @apply bg-sky-300;
+      }
+    }
+  }
+}
