@@ -11,7 +11,7 @@ class PublicationsController < ApplicationController
     @publications = Publication.with_attached_files
                                .filter_by_tags(tags_filter_params[:tags])
                                .page(params[:page] || 1).per(PREPAGE)
-    @tags = @publications.flat_map { |publication| publication.tags.map { |tag| [tag.id, tag.name] } }.uniq
+    @filter_tags = Tag.for_owner_class(Publication).map { |tag| [tag.id, tag.name] }
   end
 
   def show

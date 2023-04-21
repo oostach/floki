@@ -5,5 +5,5 @@ class Tag < ApplicationRecord
 
   validates :name, uniqueness: { scope: :owner_class }
 
-  scope :for_owner_class, ->(owner) { joins(:tag_mappings).where(owner_class: owner.class.name) }
+  scope :for_owner_class, ->(owner_class) { joins(:tag_mappings).where(owner_class: owner_class.name).distinct }
 end

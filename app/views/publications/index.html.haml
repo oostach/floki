@@ -4,8 +4,8 @@
 
 = turbo_frame_tag 'new-publication'
 
-- if @tags.present?
-  = render 'tags/filter', tags: @tags, owner_class: @publications.first.class
+- if @filter_tags.present?
+  = render 'tags/filter', tags: @filter_tags, owner_class: Publication
 
 = turbo_frame_tag :publications, class: 'publications' do
   = render 'publications', publications: @publications

@@ -9,7 +9,7 @@ class TagsController < ApplicationController
 
   def create
     @tags = @owner.tags.update_list(tags_params[:name])
-    @filter_tags = Tag.for_owner_class(@owner).uniq.map { |tag| [tag.id, tag.name] }
+    @filter_tags = Tag.for_owner_class(@owner.class).uniq.map { |tag| [tag.id, tag.name] }
   end
 
   private

@@ -11,7 +11,7 @@ module Taggable
       end
 
       def find_or_create_tags(list_of_tags)
-        tags_list = list_of_tags.split
+        tags_list = list_of_tags.split.uniq
 
         existing_tags = Tag.where(owner_class: owner_class, name: tags_list)
         new_tags      = (tags_list - existing_tags.map(&:name)).map { |name| Tag.create!(owner_class: owner_class, name: name) }
