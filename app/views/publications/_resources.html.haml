@@ -8,4 +8,6 @@
       = render partial: 'file', collection: files, locals: { publication: publication }
 - else
   .images.flex.flex-wrap.sm:grid.sm:grid-cols-2{ data: { droppable_target: 'imagesPreviewArea' } }
+    = turbo_frame_tag dom_id(publication, 'images'), class: 'flex flex-wrap sm:grid sm:grid-cols-2'
   .files.grid.grid-cols-2.gap-2.sm:grid-cols-1{ data: { droppable_target: 'filesPreviewArea' } }
+    = turbo_frame_tag dom_id(publication, 'files'), class: 'grid grid-cols-2 sm:grid-cols-1 gap-2'
