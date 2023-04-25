@@ -2,6 +2,22 @@
 
 class Note < ApplicationRecord
   include Notifiable
+  include Elasticsearch::Model
+
+  mapping dynamic: false do
+    indexes :title, type: :text
+    indexes :body, type: :nested do
+      indexes :to_plain_text, type: :text
+    end
+  end
+
+  def as_indexed_json(options = {})
+    as_json(
+      include: {
+        body: { methods: [:to_plain_text], only: [:to_plain_text] }
+      }
+    )
+  end
 
   has_rich_text :body
   has_one_attached :image
@@ -10,3 +26,31 @@ class Note < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 5 }
 end
+
+# {
+# 	"query": {
+# 		"bool": {
+# 			"should": [
+# 				{
+# 					"match": {
+# 						"title": "css"
+# 					}
+# 				},
+# 				{
+# 				    "nested":{
+# 				        "path": "body",
+# 				        "query": {
+# 				            "bool": {
+# 				                "should": {
+# 				                    "match": {
+# 				                        "body.to_plain_text": "css"
+# 				                    }
+# 				                }
+# 				            }
+# 				        }
+# 				    }
+# 				}
+# 			]
+# 		}
+# 	}
+# }

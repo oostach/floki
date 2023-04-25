@@ -30,3 +30,10 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.trix-content {
+  li {
+    list-style-type: disc;
+    margin-left: 2em;
+  }
+}

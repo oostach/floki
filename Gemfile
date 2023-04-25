@@ -25,8 +25,10 @@ gem 'image_processing', '~> 1.2'
 # gem 'telegram-bot'
 gem 'octokit'
 gem 'faraday-retry'
-gem 'floki-form', '~> 0.2', git: 'https://github.com/oostach/floki-form'
-# gem 'floki-form', '~> 0.2', path: '~/projects/floki-form'
+gem 'elasticsearch-model', git: 'https://github.com/elastic/elasticsearch-rails', branch: 'main'
+gem 'elasticsearch-rails', git: 'https://github.com/elastic/elasticsearch-rails', branch: 'main'
+# gem 'floki-form', '~> 0.2', git: 'https://github.com/oostach/floki-form'
+gem 'floki-form', '~> 0.2', path: '~/projects/floki-form'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
