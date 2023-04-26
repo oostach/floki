@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
-  include Notifiable
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  include Notifiable
 
   mapping dynamic: false do
     indexes :title, type: :text
@@ -26,31 +27,3 @@ class Note < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 5 }
 end
-
-# {
-# 	"query": {
-# 		"bool": {
-# 			"should": [
-# 				{
-# 					"match": {
-# 						"title": "css"
-# 					}
-# 				},
-# 				{
-# 				    "nested":{
-# 				        "path": "body",
-# 				        "query": {
-# 				            "bool": {
-# 				                "should": {
-# 				                    "match": {
-# 				                        "body.to_plain_text": "css"
-# 				                    }
-# 				                }
-# 				            }
-# 				        }
-# 				    }
-# 				}
-# 			]
-# 		}
-# 	}
-# }
