@@ -6,8 +6,12 @@
 
 = turbo_frame_tag 'new-note'
 
-= turbo_frame_tag :notes do
-  - @notes.each do |note|
-    = render note
+= turbo_frame_tag :search do
+  = floki_form_for :search, url: notes_path(format: :turbo_stream), method: :get, data: { controller: 'search-form' } do |f|
+    .flex.w-full.mb-2
+      = f.text_field :q, label: false, wrapper: { class: 'w-full clear-mb mr-2' }
+      = f.submit 'Search', class: 'button-primary', data: { action: 'click->search-form#search' }
 
-= paginate @notes
+= turbo_frame_tag :notes do
+  = render @notes
+  = paginate @notes

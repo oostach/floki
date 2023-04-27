@@ -20,7 +20,7 @@ export default class extends Controller {
     } else {
       tagLabel.classList.remove('marked')
     }
-    debugger
+
     Turbo.navigator.submitForm(filterForm)
   }
 }

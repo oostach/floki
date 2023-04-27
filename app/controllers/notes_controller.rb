@@ -2,12 +2,14 @@
 
 # TODO: Add rendering of the flash messages
 class NotesController < ApplicationController
+  include Searchable
+
   PREPAGE = 5
 
   before_action :load_note, only: %i[show edit destroy update]
 
   def index
-    @notes = Note.all.page(params[:page] || 1).per(PREPAGE)
+    @notes = search_results.page(params[:page] || 1).per(PREPAGE)
   end
 
   def show
@@ -46,6 +48,10 @@ class NotesController < ApplicationController
   end
 
   private
+
+  def search_scope
+    Note.all
+  end
 
   def note_params
     params.require(:note).permit(:title, :body)
