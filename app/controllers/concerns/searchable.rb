@@ -8,7 +8,11 @@ module Searchable
   end
 
   def search_results
-    @search_results ||= search_params[:q]&.strip.present? ? search_scope.search(search_params[:q].strip).records : search_scope
+    @search_results ||= if search_params[:q]&.strip.present?
+                          search_scope.search(query(search_params[:q].strip)).records
+                        else
+                          search_scope
+                        end
   end
 
   private
@@ -17,33 +21,34 @@ module Searchable
     params.fetch(:search, {}).permit(:q)
   end
 
-  def query(search_phrase)
+  def multi_match(query, object, fields = [])
     {
-      "query": {
-        "bool": {
-          "should": [
-            {
-              "match": {
-                "title": search_phrase
-              }
-            },
-            {
-                "nested":{
-                    "path": "body",
-                    "query": {
-                        "bool": {
-                            "should": {
-                                "match": {
-                                    "body.to_plain_text": search_phrase
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+      multi_match: {
+        query: query,
+        fields: fields.map { |field| [object, field].join('.') }
+      }
+    }
+  end
+
+  def nested_match(query, object, fields)
+    {
+      nested: {
+        path: object,
+        query: multi_match(query, object, fields)
+      }
+    }
+  end
+
+  def query(query, strength: :should)
+    {
+      query: {
+        bool: {
+          strength => [
+            multi_match(query, [:title]),
+            nested_match(query, :body, [:to_plain_text])
           ]
         }
       }
-    }
+    }.to_json
   end
 end
