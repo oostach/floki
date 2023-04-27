@@ -25,7 +25,8 @@ module Searchable
     {
       multi_match: {
         query: query,
-        fields: fields.map { |field| [object, field].join('.') }
+        fields: fields.map { |field| [object, field].compact.join('.') },
+        minimum_should_match: '75%'
       }
     }
   end
@@ -44,7 +45,7 @@ module Searchable
       query: {
         bool: {
           strength => [
-            multi_match(query, [:title]),
+            multi_match(query, nil, [:title]),
             nested_match(query, :body, [:to_plain_text])
           ]
         }
