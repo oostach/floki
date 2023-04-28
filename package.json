@@ -7,9 +7,14 @@
   "scripts": {
     "build-tailwindcss": "tailwindcss -i app/assets/tailwindcss/application.tailwind.css -o app/assets/builds/tailwind.css --minify",
     "watchcss": "postcss app/assets/tailwindcss/application.tailwind.css -o app/assets/builds/tailwind.css -w --verbose",
-    "testjs": "jest"
+    "testjs": "jest",
+    "build-react": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds/components",
+    "watch-react": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds/components --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
@@ -20,6 +25,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
     "babel-jest": "^29.4.3",
+    "esbuild": "^0.17.18",
     "eslint": "^8.34.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",

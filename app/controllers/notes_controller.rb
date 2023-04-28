@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Add rendering of the flash messages
 class NotesController < ApplicationController
   include Searchable
 

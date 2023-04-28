@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
+  resources :todos
 
   scope ':owner' do
     resources :tags, only: %i[create update] do
