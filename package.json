@@ -9,7 +9,7 @@
     "watchcss": "postcss app/assets/tailwindcss/application.tailwind.css -o app/assets/builds/tailwind.css -w --verbose",
     "testjs": "jest",
     "build-react": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds/components",
-    "watch-react": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds/components --watch"
+    "watch-react": "esbuild app/javascript/components/todos/*.* --bundle --sourcemap --outdir=app/assets/builds/components/todos --watch"
   },
   "dependencies": {
     "react": "^18.2.0",
