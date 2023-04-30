@@ -1,17 +1,15 @@
 'use strict'
 
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 const TodoForm = ({ addItem }) => {
   const [item, setItem] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    addItem({
-      id: Date.now(),
-      item,
-      completed: false
-    })
+
+    addItem({ id: Date.now(), title: item, completed: false })
     setItem('')
   }
 
@@ -23,6 +21,10 @@ const TodoForm = ({ addItem }) => {
       </div>
     </form>
   )
+}
+
+TodoForm.propTypes = {
+  addItem: PropTypes.func.isRequired
 }
 
 export default TodoForm

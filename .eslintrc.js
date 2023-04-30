@@ -4,14 +4,23 @@ module.exports = {
     es2021: true,
     'jest/globals': true
   },
-  extends: 'standard',
+  extends: [
+    'standard',
+    'plugin:react/recommended'
+  ],
   overrides: [
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
-  plugins: ['jest'],
+  plugins: [
+    'jest',
+    'react'
+  ],
   globals: {
     ZoomMtg: 'readable'
   },
@@ -25,6 +34,8 @@ module.exports = {
     'accessor-pairs': 'off',
     'no-prototype-builtins': 'off',
     'no-return-assign': 'off',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
     'no-multi-spaces': [
       'error',
       {
