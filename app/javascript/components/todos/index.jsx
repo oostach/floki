@@ -15,7 +15,7 @@ const Todo = () => {
   return (
     <div className='todos'>
         <TodoForm addItem={addItem} />
-        { items && <TodoList items={items} /> }
+        { items?.length > 0 && <TodoList items={items} /> }
     </div>
   )
 }
