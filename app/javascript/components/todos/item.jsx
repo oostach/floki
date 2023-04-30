@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+
 const TodoItem = ({ item }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
 
@@ -11,12 +13,18 @@ const TodoItem = ({ item }) => {
   }
 
   return (
-    <div className='todo-item flex'>
-      <div className='form-group inline-checkbox mb-2'>
-        <input type='checkbox' checked={isChecked} onChange={toggleCompletion} name={item.id} className='form-input' />
+    <div className='todo-item flex content-center flex-wrap'>
+      <div className='form-group inline-checkbox !mb-0'>
+        <input type='checkbox' checked={isChecked} onChange={toggleCompletion} id={item.id} name={`todo-${item.id}`} className='form-input' />
         <label htmlFor={item.id}>{item.title}</label>
       </div>
-      <div className='actions'>
+      <div className='actions flex ml-auto'>
+        <button className='badge-button-primary mr-2 badge-normal' >
+          <PencilSquareIcon width={'20px'} />
+        </button>
+        <button className='badge-button-alert badge-normal' >
+          <TrashIcon width={'20px'} />
+        </button>
       </div>
     </div>
   )
