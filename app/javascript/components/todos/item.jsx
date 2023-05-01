@@ -5,11 +5,12 @@ import PropTypes from 'prop-types'
 
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
-const TodoItem = ({ item, deleteItem }) => {
+const TodoItem = ({ item, deleteItem, toggleItem }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
 
   const toggleCompletion = (e) => {
     setIsChecked(!isChecked)
+    toggleItem(item.id)
   }
 
   return (
@@ -32,7 +33,8 @@ const TodoItem = ({ item, deleteItem }) => {
 
 TodoItem.propTypes = {
   item: PropTypes.object.isRequired,
-  deleteItem: PropTypes.func
+  deleteItem: PropTypes.func,
+  toggleItem: PropTypes.func.isRequired
 }
 
 export default TodoItem

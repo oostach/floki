@@ -16,10 +16,14 @@ const Todo = () => {
     setItems(prevState => prevState.filter(item => item.id !== id))
   }
 
+  const toggleItem = (id) => {
+    setItems(prevState => prevState.map(item => item.id === id ? { ...item, completed: !item.completed } : item))
+  }
+
   return (
     <div className='todos'>
         <TodoForm addItem={addItem} />
-        { items?.length > 0 && <TodoList items={items} deleteItem={deleteItem} /> }
+        { items?.length > 0 && <TodoList items={items} deleteItem={deleteItem} toggleItem={toggleItem} /> }
     </div>
   )
 }
