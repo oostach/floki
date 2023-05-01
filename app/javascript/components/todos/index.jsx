@@ -12,10 +12,14 @@ const Todo = () => {
     setItems(prevState => [...prevState, item])
   }
 
+  const deleteItem = (id) => {
+    setItems(prevState => prevState.filter(item => item.id !== id))
+  }
+
   return (
     <div className='todos'>
         <TodoForm addItem={addItem} />
-        { items?.length > 0 && <TodoList items={items} /> }
+        { items?.length > 0 && <TodoList items={items} deleteItem={deleteItem} /> }
     </div>
   )
 }
