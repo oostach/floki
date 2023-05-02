@@ -5,9 +5,10 @@ import { createRoot } from 'react-dom/client'
 import TodoForm from './form'
 import TodoEditForm from './edit-form'
 import TodoList from './list'
+import useLocalStorage from './hooks/use-local-storage'
 
 const Todo = () => {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useLocalStorage('floki-app-todos', [])
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
 
