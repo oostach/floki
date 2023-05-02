@@ -17,7 +17,7 @@ const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
     <div className='todo-item flex content-center flex-wrap mb-2'>
       <div className='form-group inline-checkbox !mb-0'>
         <input type='checkbox' checked={isChecked} onChange={toggleCompletion} id={item.id} name={`todo-${item.id}`} className='form-input' />
-        <label htmlFor={item.id}>{item.title}</label>
+        <label className={isChecked && 'line-through'} htmlFor={item.id}>{item.title}</label>
       </div>
       <div className='actions flex ml-auto'>
         <button className='badge-button-primary mr-2 badge-normal' onClick={() => enableEditMode(item)}>
