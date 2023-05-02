@@ -14,7 +14,7 @@ const TodoForm = ({ addItem }) => {
   }
 
   return (
-    <form className='todoForm' onSubmit={handleFormSubmit}>
+    <form className='todo-form' onSubmit={handleFormSubmit}>
       <div className='form-group flex'>
         <input type='text' className='form-input mr-2' value={item} onInput={(e) => setItem(e.target.value)} required autoFocus />
         <button className='button-primary' aria-label='Add Task' type='submit'>Save</button>

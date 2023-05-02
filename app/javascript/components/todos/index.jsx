@@ -25,6 +25,10 @@ const Todo = () => {
 
   const updateItem = (updatedItem) => {
     setItems(prevState => prevState.map(item => item.id === updatedItem.id ? { ...item, title: updatedItem.title } : item))
+    disableEditMode()
+  }
+
+  const disableEditMode = () => {
     setIsEditMode(false)
   }
 
@@ -35,8 +39,8 @@ const Todo = () => {
 
   return (
     <div className='todos'>
-        { !isEditMode && <TodoForm addItem={addItem} /> }
-        { isEditMode && <TodoEditForm currentItem={currentItem} updateItem={updateItem} /> }
+        <TodoForm addItem={addItem} />
+        { isEditMode && <TodoEditForm currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
         { items?.length > 0 && <TodoList items={items} deleteItem={deleteItem} toggleItem={toggleItem} enableEditMode={enableEditMode} /> }
     </div>
   )
