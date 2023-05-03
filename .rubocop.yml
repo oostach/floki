@@ -11,6 +11,7 @@ AllCops:
     - 'bin/**/*'
     - 'db/schema.rb'
     - 'vendor/bundle/**/*'
+    - 'tmp/**/*'
 
 Layout/LineLength:
   Max: 160

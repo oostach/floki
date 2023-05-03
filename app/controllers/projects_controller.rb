@@ -23,6 +23,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: [:url, :name] })
+    params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: %i[url name] })
   end
 end

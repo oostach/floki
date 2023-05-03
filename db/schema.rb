@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_15_194239) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_144532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -117,8 +117,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_194239) do
     t.index ["owner_class"], name: "index_tags_on_owner_class"
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "due_date"
+    t.boolean "status", default: false, null: false
+    t.bigint "todos_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["todos_list_id"], name: "index_todos_on_todos_list_id"
+  end
+
+  create_table "todos_lists", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "repositories", "projects"
   add_foreign_key "tag_mappings", "tags"
+  add_foreign_key "todos", "todos_lists"
 end
