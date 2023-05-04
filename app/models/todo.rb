@@ -4,4 +4,8 @@ class Todo < ApplicationRecord
   belongs_to :todos_list, inverse_of: :todos
 
   validates :title, presence: true
+
+  def completed
+    status
+  end
 end

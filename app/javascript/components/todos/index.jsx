@@ -1,56 +1,25 @@
 'use strict'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
-import TodoForm from './form'
-import TodoEditForm from './edit-form'
-import TodoList from './list'
-import useLocalStorage from './hooks/use-local-storage'
+import Todos from './todos'
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 
-const Todo = () => {
-  const [items, setItems] = useLocalStorage('floki-app-todos', [])
-  const [isEditMode, setIsEditMode] = useState(false)
-  const [currentItem, setCurrentItem] = useState(null)
+const csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content')
+const link = new HttpLink({ credentials: 'same-origin', headers: { 'X-CSRF-Token': csrfToken } })
 
-  const addItem = (item) => {
-    setItems(prevState => [...prevState, item])
-  }
-
-  const deleteItem = (id) => {
-    setItems(prevState => prevState.filter(item => item.id !== id))
-  }
-
-  const toggleItem = (id) => {
-    setItems(prevState => prevState.map(item => item.id === id ? { ...item, completed: !item.completed } : item))
-  }
-
-  const updateItem = (updatedItem) => {
-    setItems(prevState => prevState.map(item => item.id === updatedItem.id ? { ...item, title: updatedItem.title } : item))
-    disableEditMode()
-  }
-
-  const disableEditMode = () => {
-    setIsEditMode(false)
-  }
-
-  const enableEditMode = (item) => {
-    setCurrentItem(item)
-    setIsEditMode(true)
-  }
-
-  return (
-    <div className='todos'>
-        <TodoForm addItem={addItem} />
-        { isEditMode && <TodoEditForm currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
-        { items?.length > 0 && <TodoList items={items} deleteItem={deleteItem} toggleItem={toggleItem} enableEditMode={enableEditMode} /> }
-    </div>
-  )
-}
+const client = new ApolloClient({
+  link,
+  uri: 'https://floki.dev/graphql/',
+  cache: new InMemoryCache()
+})
 
 const root = createRoot(document.getElementById('todos-root'))
 
 root.render(
-  <React.StrictMode>
-    <Todo />
-  </React.StrictMode>
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <Todos />
+    </React.StrictMode>
+  </ApolloProvider>
 )
