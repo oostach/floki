@@ -14,6 +14,7 @@ gem 'jbuilder'
 gem 'redis', '~> 4.0'
 gem 'haml-rails'
 gem 'kaminari'
+gem "view_component", "~> 2.82"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 
@@ -22,6 +23,7 @@ gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'bootsnap', require: false
 gem 'sassc-rails'
 gem 'image_processing', '~> 1.2'
+gem "graphql"
 # gem 'telegram-bot'
 gem 'octokit'
 gem 'faraday-retry'
@@ -46,6 +48,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'haml_lint', require: false
+  gem "graphiql-rails"
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
 end
@@ -56,5 +59,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'rails-controller-testing'
 end
-
-gem "view_component", "~> 2.82"

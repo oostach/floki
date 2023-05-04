@@ -12,7 +12,7 @@ class Note < ApplicationRecord
     end
   end
 
-  def as_indexed_json(options = {})
+  def as_indexed_json(_options = {})
     as_json(
       include: {
         body: { methods: [:to_plain_text], only: [:to_plain_text] }

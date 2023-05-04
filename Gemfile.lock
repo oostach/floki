@@ -137,6 +137,10 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphiql-rails (1.9.0)
+      railties
+      sprockets-rails
+    graphql (2.0.21)
     haml (6.1.1)
       temple (>= 0.8.2)
       thor
@@ -405,6 +409,8 @@ DEPENDENCIES
   faker
   faraday-retry
   floki-form (~> 0.2)!
+  graphiql-rails
+  graphql
   haml-rails
   haml_lint
   image_processing (~> 1.2)

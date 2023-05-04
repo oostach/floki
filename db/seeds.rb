@@ -7,3 +7,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+3.times do
+  TodosList.create name: Faker::Educator.unique.campus do |list|
+    list.todos << Array.new(3) { Todo.new title: Faker::Educator.subject }
+  end
+end
