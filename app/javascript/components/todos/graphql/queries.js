@@ -13,3 +13,13 @@ export const todoList = gql`
     }
   }
 `
+
+export const todo = gql`
+  query todo($id: ID!) {
+    todo(id: $id) {
+      id
+      title
+      completed
+    }
+  }
+`

@@ -16,5 +16,12 @@ module Types
     def todos_list(id:)
       TodosList.find(id)
     end
+
+    field :todo, Types::TodoType, null: false do
+      argument :id, ID, required: true
+    end
+    def todo(id:)
+      Todo.find(id)
+    end
   end
 end
