@@ -1,17 +1,26 @@
 'use strict'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
+import { TOGGLE_TODO } from './graphql/mutations'
 
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
+  const [toggleTodo, { data, loading, error }] = useMutation(TOGGLE_TODO)
 
   const toggleCompletion = (e) => {
-    setIsChecked(!isChecked)
-    toggleItem(item.id)
+    toggleTodo({ variables: { id: item.id, completed: !isChecked } })
   }
+
+  useEffect(() => {
+    if (data) {
+      setIsChecked(data.item.completed)
+      toggleItem(data.item.id)
+    }
+  }, [data])
 
   return (
     <div className='todo-item flex content-center flex-wrap mb-2'>
