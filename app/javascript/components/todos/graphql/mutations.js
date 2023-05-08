@@ -1,11 +1,13 @@
 import { gql } from '@apollo/client'
 
 export const TOGGLE_TODO = gql`
-  mutation toggleTodo($id: ID!, $completed: Boolean!) {
-    toggleTodo(id: $id, status: $completed) {
-      id
-      title
-      completed
+  mutation ToggleTodo($id: ID!, $status: Boolean!) {
+    toggleTodo(input: { id: $id, status: $status }) {
+      todo {
+        id
+        title
+        completed
+      }
     }
   }
 `

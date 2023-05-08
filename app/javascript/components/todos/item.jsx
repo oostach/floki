@@ -12,13 +12,13 @@ const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
   const [toggleTodo, { data, loading, error }] = useMutation(TOGGLE_TODO)
 
   const toggleCompletion = (e) => {
-    toggleTodo({ variables: { id: item.id, completed: !isChecked } })
+    toggleTodo({ variables: { id: item.id, status: !isChecked } })
   }
 
   useEffect(() => {
     if (data) {
-      setIsChecked(data.item.completed)
-      toggleItem(data.item.id)
+      setIsChecked(data.toggleTodo.todo.completed)
+      toggleItem(data.toggleTodo.todo.id)
     }
   }, [data])
 
