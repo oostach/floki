@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const todoList = gql`
+export const TODO_LIST = gql`
   query {
     todosList(id: 1) {
       id

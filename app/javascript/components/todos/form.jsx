@@ -1,15 +1,19 @@
 'use strict'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/client'
 
 import { CREATE_TODO } from './graphql/mutations'
 
-const TodoForm = ({ listId }) => {
-  const [createTodo, { data, loading, error }] = useMutation(CREATE_TODO)
+const TodoForm = ({ listId, addItem }) => {
+  const [createTodo, { data }] = useMutation(CREATE_TODO)
   const [todoTitle, setTodoTitle] = useState('')
   const [todoListId] = useState(listId)
+
+  useEffect(() => {
+    data && addItem(data.createTodo.todo)
+  }, [data])
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -29,6 +33,7 @@ const TodoForm = ({ listId }) => {
 }
 
 TodoForm.propTypes = {
+  addItem: PropTypes.func.isRequired,
   listId: PropTypes.string.isRequired
 }
 

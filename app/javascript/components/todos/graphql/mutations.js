@@ -23,3 +23,11 @@ export const CREATE_TODO = gql`
     }
   }
 `
+
+export const DELETE_TODO = gql`
+  mutation DeleteTodo($id: ID!, $listId: ID!) {
+    deleteTodo(input: { id: $id, listId: $listId }) {
+      id
+    }
+  }
+`

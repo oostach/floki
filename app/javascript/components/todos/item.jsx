@@ -3,24 +3,26 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
-import { TOGGLE_TODO } from './graphql/mutations'
+import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
 
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
-const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
+const TodoItem = ({ item, listId, deleteItem, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
-  const [toggleTodo, { data, loading, error }] = useMutation(TOGGLE_TODO)
+  const [toggleTodo, toggleTodoRes] = useMutation(TOGGLE_TODO)
+  const [deleteTodo, { data }] = useMutation(DELETE_TODO)
 
   const toggleCompletion = (e) => {
     toggleTodo({ variables: { id: item.id, status: !isChecked } })
   }
 
   useEffect(() => {
-    if (data) {
-      setIsChecked(data.toggleTodo.todo.completed)
-      toggleItem(data.toggleTodo.todo.id)
-    }
+    data && deleteItem(data.deleteTodo.id)
   }, [data])
+
+  useEffect(() => {
+    toggleTodoRes.data && setIsChecked(toggleTodoRes.data.toggleTodo.todo.completed)
+  }, [toggleTodoRes])
 
   return (
     <div className='todo-item flex content-center flex-wrap mb-2'>
@@ -32,7 +34,7 @@ const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
         <button className='badge-button-primary mr-2 badge-normal' onClick={() => enableEditMode(item)}>
           <PencilSquareIcon width={'20px'} />
         </button>
-        <button className='badge-button-alert badge-normal' onClick={() => deleteItem(item.id)} >
+        <button className='badge-button-alert badge-normal' onClick={() => deleteTodo({ variables: { id: item.id, listId } })} >
           <TrashIcon width={'20px'} />
         </button>
       </div>
@@ -42,8 +44,8 @@ const TodoItem = ({ item, deleteItem, toggleItem, enableEditMode }) => {
 
 TodoItem.propTypes = {
   item: PropTypes.object.isRequired,
+  listId: PropTypes.string.isRequired,
   deleteItem: PropTypes.func,
-  toggleItem: PropTypes.func.isRequired,
   enableEditMode: PropTypes.func.isRequired
 }
 
