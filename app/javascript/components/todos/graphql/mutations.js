@@ -11,3 +11,15 @@ export const TOGGLE_TODO = gql`
     }
   }
 `
+
+export const CREATE_TODO = gql`
+  mutation CreateTodo($title: String!, $listId: ID!) {
+    createTodo(input: { title: $title, listId: $listId }) {
+      todo {
+        id
+        title
+        completed
+      }
+    }
+  }
+`
