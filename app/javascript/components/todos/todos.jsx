@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TodoForm from './form'
 import TodoEditForm from './edit-form'
 import TodoList from './list'
@@ -13,11 +13,12 @@ const Todos = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
 
-  const { loading, data } = useQuery(TODO_LIST)
-
-  useEffect(() => {
-    data && setItems([...data.todosList.todos])
-  }, [data])
+  const { loading, data } = useQuery(TODO_LIST, {
+    variables: { id: 1 },
+    onCompleted(data) {
+      setItems([...data.todosList.todos])
+    }
+  })
 
   const updateItem = (updatedItem) => {
     setItems(prevState => prevState.map(item => item.id === updatedItem.id ? { ...item, title: updatedItem.title } : item))
@@ -33,10 +34,6 @@ const Todos = () => {
     setIsEditMode(true)
   }
 
-  const addItem = (item) => {
-    setItems(prevState => [...prevState, item])
-  }
-
   const deleteItem = (id) => {
     console.log(id)
     setItems(prevState => prevState.filter(item => item.id !== id))
@@ -46,7 +43,7 @@ const Todos = () => {
     <div className='todos'>
         { loading && <Loader /> }
         { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
-        { data && <TodoForm listId={data.todosList.id} addItem={addItem} /> }
+        { data && <TodoForm listId={data.todosList.id} /> }
         { data && items?.length > 0 && <TodoList items={items} listId={data.todosList.id} deleteItem={deleteItem} enableEditMode={enableEditMode} /> }
     </div>
   )

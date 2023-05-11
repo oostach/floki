@@ -1,25 +1,44 @@
 'use strict'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/client'
 
 import { CREATE_TODO } from './graphql/mutations'
+import { TODO_LIST } from './graphql/queries'
 
-const TodoForm = ({ listId, addItem }) => {
-  const [createTodo, { data }] = useMutation(CREATE_TODO)
+const TodoForm = ({ listId }) => {
   const [todoTitle, setTodoTitle] = useState('')
-  const [todoListId] = useState(listId)
-
-  useEffect(() => {
-    data && addItem(data.createTodo.todo)
-  }, [data])
+  const [createTodo] = useMutation(CREATE_TODO, {
+    update(cache, { data }) {
+      const { todosList } = cache.readQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) }
+      })
+      cache.writeQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) },
+        data: {
+          todosList: {
+            id: todosList.id,
+            name: todosList.name,
+            todos: [
+              data.createTodo.todo,
+              ...todosList.todos
+            ]
+          }
+        }
+      })
+    },
+    onCompleted() {
+      setTodoTitle('')
+    }
+  })
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    createTodo({ variables: { title: todoTitle, listId: todoListId } })
-    setTodoTitle('')
+    createTodo({ variables: { title: todoTitle, listId } })
   }
 
   return (
@@ -33,7 +52,6 @@ const TodoForm = ({ listId, addItem }) => {
 }
 
 TodoForm.propTypes = {
-  addItem: PropTypes.func.isRequired,
   listId: PropTypes.string.isRequired
 }
 

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const TODO_LIST = gql`
-  query {
-    todosList(id: 1) {
+  query todosList($id: ID!) {
+    todosList(id: $id) {
       id
       name
       todos {
