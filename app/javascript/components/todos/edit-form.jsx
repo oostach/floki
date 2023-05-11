@@ -1,16 +1,24 @@
 'use strict'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 
-const TodoEditForm = ({ currentItem, updateItem, disableEditMode }) => {
+import { UPDATE_TODO } from './graphql/mutations'
+
+const TodoEditForm = ({ listId, currentItem, updateItem, disableEditMode }) => {
   const [editedItemTitle, setEditedItemTitle] = useState(currentItem.title)
+  const [updateTodo, { data }] = useMutation(UPDATE_TODO)
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    updateItem({ ...currentItem, title: editedItemTitle })
+    updateTodo({ variables: { id: currentItem.id, listId, title: editedItemTitle } })
   }
+
+  useEffect(() => {
+    data && updateItem({ ...currentItem, title: data.updateTodo.todo.title })
+  }, [data])
 
   return (
     <div
@@ -29,6 +37,7 @@ const TodoEditForm = ({ currentItem, updateItem, disableEditMode }) => {
 }
 
 TodoEditForm.propTypes = {
+  listId: PropTypes.string.isRequired,
   currentItem: PropTypes.object.isRequired,
   updateItem: PropTypes.func.isRequired,
   disableEditMode: PropTypes.func

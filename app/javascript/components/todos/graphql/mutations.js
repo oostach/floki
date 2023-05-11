@@ -24,6 +24,18 @@ export const CREATE_TODO = gql`
   }
 `
 
+export const UPDATE_TODO = gql`
+  mutation UpdateTodo($id: ID!, $listId: ID!, $title: String!) {
+    updateTodo(input: { id: $id, listId: $listId, title: $title }) {
+      todo {
+        id
+        title
+        completed
+      }
+    }
+  }
+`
+
 export const DELETE_TODO = gql`
   mutation DeleteTodo($id: ID!, $listId: ID!) {
     deleteTodo(input: { id: $id, listId: $listId }) {
