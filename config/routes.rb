@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
-  resources :todos
+  resources :todos, only: [:index]
+  get '/todos/:id', to: redirect('/todos')
 
   scope ':owner' do
     resources :tags, only: %i[create update] do

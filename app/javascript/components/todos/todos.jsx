@@ -7,14 +7,16 @@ import TodoList from './list'
 import Loader from './loader'
 import { useQuery } from '@apollo/client'
 import { TODO_LIST } from './graphql/queries'
+import { useParams } from 'react-router-dom'
 
 const Todos = () => {
   const [items, setItems] = useState([])
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
+  const { id } = useParams()
 
   const { loading, data } = useQuery(TODO_LIST, {
-    variables: { id: 1 },
+    variables: { id },
     onCompleted(data) {
       setItems([...data.list.todos])
     }
