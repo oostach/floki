@@ -1,36 +1,34 @@
 import { gql } from '@apollo/client'
+import { TODO_FIELDS } from './fragments'
 
 export const TOGGLE_TODO = gql`
+  ${TODO_FIELDS}
   mutation ToggleTodo($id: ID!, $status: Boolean!) {
     toggleTodo(input: { id: $id, status: $status }) {
       todo {
-        id
-        title
-        completed
+        ...TodoFields
       }
     }
   }
 `
 
 export const CREATE_TODO = gql`
+  ${TODO_FIELDS}
   mutation CreateTodo($title: String!, $listId: ID!) {
     createTodo(input: { title: $title, listId: $listId }) {
       todo {
-        id
-        title
-        completed
+        ...TodoFields
       }
     }
   }
 `
 
 export const UPDATE_TODO = gql`
+  ${TODO_FIELDS}
   mutation UpdateTodo($id: ID!, $listId: ID!, $title: String!) {
     updateTodo(input: { id: $id, listId: $listId, title: $title }) {
       todo {
-        id
-        title
-        completed
+        ...TodoFields
       }
     }
   }
