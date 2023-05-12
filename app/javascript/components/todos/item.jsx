@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
@@ -10,7 +10,32 @@ import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 const TodoItem = ({ item, listId, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
-  const [toggleTodo, toggleTodoRes] = useMutation(TOGGLE_TODO)
+
+  const [toggleTodo] = useMutation(TOGGLE_TODO, {
+    variables: { id: item.id, status: !isChecked },
+    update(cache, { data }) {
+      const { id, completed } = data.toggleTodo.todo
+      const { todosList } = cache.readQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) }
+      })
+      cache.writeQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) },
+        data: {
+          todosList: {
+            id: todosList.id,
+            name: todosList.name,
+            todos: todosList.todos.map(item => item.id === id ? { ...item, completed } : item)
+          }
+        }
+      })
+    },
+    onCompleted(data) {
+      const { completed } = data.toggleTodo.todo
+      setIsChecked(completed)
+    }
+  })
   const [deleteTodo] = useMutation(DELETE_TODO, {
     variables: { id: item.id, listId },
     update(cache, { data }) {
@@ -32,18 +57,10 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     }
   })
 
-  const toggleCompletion = (e) => {
-    toggleTodo({ variables: { id: item.id, status: !isChecked } })
-  }
-
-  useEffect(() => {
-    toggleTodoRes.data && setIsChecked(toggleTodoRes.data.toggleTodo.todo.completed)
-  }, [toggleTodoRes])
-
   return (
     <div className='todo-item flex content-center flex-wrap mb-2'>
       <div className='form-group inline-checkbox !mb-0'>
-        <input type='checkbox' checked={isChecked} onChange={toggleCompletion} id={item.id} name={`todo-${item.id}`} className='form-input' />
+        <input type='checkbox' checked={isChecked} onChange={toggleTodo} id={item.id} name={`todo-${item.id}`} className='form-input' />
         <label className={isChecked ? 'line-through' : ''} htmlFor={item.id}>{item.title}</label>
       </div>
       <div className='actions flex ml-auto'>
