@@ -15,7 +15,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     variables: { id: item.id, status: !isChecked },
     update(cache, { data }) {
       const { id, completed } = data.toggleTodo.todo
-      const { todosList } = cache.readQuery({
+      const { list } = cache.readQuery({
         query: TODO_LIST,
         variables: { id: parseInt(listId) }
       })
@@ -23,10 +23,10 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
         query: TODO_LIST,
         variables: { id: parseInt(listId) },
         data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: todosList.todos.map(item => item.id === id ? { ...item, completed } : item)
+          list: {
+            id: list.id,
+            name: list.name,
+            todos: list.todos.map(item => item.id === id ? { ...item, completed } : item)
           }
         }
       })
@@ -39,7 +39,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
   const [deleteTodo] = useMutation(DELETE_TODO, {
     variables: { id: item.id, listId },
     update(cache, { data }) {
-      const { todosList } = cache.readQuery({
+      const { list } = cache.readQuery({
         query: TODO_LIST,
         variables: { id: parseInt(listId) }
       })
@@ -47,10 +47,10 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
         query: TODO_LIST,
         variables: { id: parseInt(listId) },
         data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: todosList.todos.filter(todo => todo.id !== data.deleteTodo.id)
+          list: {
+            id: list.id,
+            name: list.name,
+            todos: list.todos.filter(todo => todo.id !== data.deleteTodo.id)
           }
         }
       })
