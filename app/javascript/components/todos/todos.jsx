@@ -34,17 +34,12 @@ const Todos = () => {
     setIsEditMode(true)
   }
 
-  const deleteItem = (id) => {
-    console.log(id)
-    setItems(prevState => prevState.filter(item => item.id !== id))
-  }
-
   return (
     <div className='todos'>
         { loading && <Loader /> }
         { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
         { data && <TodoForm listId={data.todosList.id} /> }
-        { data && items?.length > 0 && <TodoList items={items} listId={data.todosList.id} deleteItem={deleteItem} enableEditMode={enableEditMode} /> }
+        { data && items?.length > 0 && <TodoList items={items} listId={data.todosList.id} enableEditMode={enableEditMode} /> }
     </div>
   )
 }

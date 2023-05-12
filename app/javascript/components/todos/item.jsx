@@ -4,21 +4,37 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
+import { TODO_LIST } from './graphql/queries'
 
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
-const TodoItem = ({ item, listId, deleteItem, enableEditMode }) => {
+const TodoItem = ({ item, listId, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
   const [toggleTodo, toggleTodoRes] = useMutation(TOGGLE_TODO)
-  const [deleteTodo, { data }] = useMutation(DELETE_TODO)
+  const [deleteTodo] = useMutation(DELETE_TODO, {
+    variables: { id: item.id, listId },
+    update(cache, { data }) {
+      const { todosList } = cache.readQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) }
+      })
+      cache.writeQuery({
+        query: TODO_LIST,
+        variables: { id: parseInt(listId) },
+        data: {
+          todosList: {
+            id: todosList.id,
+            name: todosList.name,
+            todos: todosList.todos.filter(todo => todo.id !== data.deleteTodo.id)
+          }
+        }
+      })
+    }
+  })
 
   const toggleCompletion = (e) => {
     toggleTodo({ variables: { id: item.id, status: !isChecked } })
   }
-
-  useEffect(() => {
-    data && deleteItem(data.deleteTodo.id)
-  }, [data])
 
   useEffect(() => {
     toggleTodoRes.data && setIsChecked(toggleTodoRes.data.toggleTodo.todo.completed)
@@ -34,7 +50,7 @@ const TodoItem = ({ item, listId, deleteItem, enableEditMode }) => {
         <button className='badge-button-primary mr-2 badge-normal' onClick={() => enableEditMode(item)}>
           <PencilSquareIcon width={'20px'} />
         </button>
-        <button className='badge-button-alert badge-normal' onClick={() => deleteTodo({ variables: { id: item.id, listId } })} >
+        <button className='badge-button-alert badge-normal' onClick={deleteTodo} >
           <TrashIcon width={'20px'} />
         </button>
       </div>
@@ -45,7 +61,6 @@ const TodoItem = ({ item, listId, deleteItem, enableEditMode }) => {
 TodoItem.propTypes = {
   item: PropTypes.object.isRequired,
   listId: PropTypes.string.isRequired,
-  deleteItem: PropTypes.func,
   enableEditMode: PropTypes.func.isRequired
 }
 
