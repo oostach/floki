@@ -39,7 +39,7 @@ const Todos = () => {
         { loading && <Loader /> }
         { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
         { data && <TodoForm listId={data.todosList.id} /> }
-        { data && items?.length > 0 && <TodoList items={items} listId={data.todosList.id} enableEditMode={enableEditMode} /> }
+        { data && items?.length > 0 && <TodoList items={items} list={data.todosList} enableEditMode={enableEditMode} /> }
     </div>
   )
 }

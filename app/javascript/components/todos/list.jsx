@@ -4,13 +4,13 @@ import React from 'react'
 import TodoItem from './item'
 import PropTypes from 'prop-types'
 
-const TodoList = ({ items, listId, toggleItem, enableEditMode }) => {
+const TodoList = ({ items, list, toggleItem, enableEditMode }) => {
   return (
     <div className='todos-list mt-4'>
-      <div className='todos-list-name mb-2 font-semibold text-lg text-sky-900'>My List</div>
+      <div className='todos-list-name mb-2 font-semibold text-lg text-sky-900'>{list.name}</div>
       {
         items.sort((a, b) => b.id - a.id).map(item => {
-          return <TodoItem key={item.id} item={item} listId={listId} toggleItem={toggleItem} enableEditMode={enableEditMode} />
+          return <TodoItem key={item.id} item={item} listId={list.id} toggleItem={toggleItem} enableEditMode={enableEditMode} />
         })
       }
     </div>
@@ -19,7 +19,7 @@ const TodoList = ({ items, listId, toggleItem, enableEditMode }) => {
 
 TodoList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
-  listId: PropTypes.string.isRequired,
+  list: PropTypes.object.isRequired,
   toggleItem: PropTypes.func,
   enableEditMode: PropTypes.func
 }
