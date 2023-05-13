@@ -17,11 +17,11 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
       const { id, completed } = data.toggleTodo.todo
       const { list } = cache.readQuery({
         query: TODO_LIST,
-        variables: { id: parseInt(listId) }
+        variables: { id: listId }
       })
       cache.writeQuery({
         query: TODO_LIST,
-        variables: { id: parseInt(listId) },
+        variables: { id: listId },
         data: {
           list: {
             id: list.id,
@@ -36,6 +36,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
       setIsChecked(completed)
     }
   })
+
   const [deleteTodo] = useMutation(DELETE_TODO, {
     variables: { id: item.id, listId },
     update(cache, { data }) {
