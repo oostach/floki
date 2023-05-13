@@ -22,14 +22,14 @@ const root = createRoot(document.getElementById('todos-root'))
 
 const routes = createBrowserRouter([
   {
-    path: '/todos',
+    path: '/',
     element: <Layout />,
     children: [
-      { path: '/todos/:id', element: <Todos /> },
+      { path: '/:id', element: <Todos /> },
       { path: '*', element: <NoMatch /> }
     ]
   }
-])
+], { basename: '/todos' })
 
 root.render(
   <ApolloProvider client={client}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, Navigate } from 'react-router-dom'
 
 import Loader from '../loader'
 
@@ -16,11 +16,12 @@ const Layout = () => {
       <nav className='mb-4'>
         {
           data.lists.map(({ id, name }) => {
-            return <Link key={id} to={`/todos/${id}`} className='button-primary mr-2'>{name}</Link>
+            return <Link key={id} to={`/${id}`} className='button-primary mr-2'>{name}</Link>
           })
         }
       </nav>
       <Outlet />
+      <Navigate to={`/${data.lists[0].id}'`} />
     </div>
   )
 }
