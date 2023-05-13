@@ -21,7 +21,7 @@ const Layout = () => {
         }
       </nav>
       <Outlet />
-      <Navigate to={`/${data.lists[0].id}'`} />
+      <Navigate to={`/${data.lists[0].id}`} />
     </div>
   )
 }
