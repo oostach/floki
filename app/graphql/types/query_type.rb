@@ -9,16 +9,16 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :lists, [TodosListType], null: false
-    def lists
+    field :todos_lists, [TodosListType], null: false
+    def todos_lists
       TodosList.all
     end
 
     # Get a TodosList
-    field :list, Types::TodosListType, null: false do
+    field :todos_list, Types::TodosListType, null: false do
       argument :id, ID, required: true
     end
-    def list(id:)
+    def todos_list(id:)
       TodosList.find(id)
     end
 

@@ -15,13 +15,13 @@ const Layout = () => {
     <div className='todos-lists'>
       <nav className='mb-4'>
         {
-          data.lists.map(({ id, name }) => {
+          data.todosLists.map(({ id, name }) => {
             return <Link key={id} to={`/${id}`} className='button-primary mr-2'>{name}</Link>
           })
         }
       </nav>
       <Outlet />
-      <Navigate to={`/${data.lists[0].id}`} />
+      <Navigate to={`/${data.todosLists[0].id}`} />
     </div>
   )
 }

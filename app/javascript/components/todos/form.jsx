@@ -11,20 +11,20 @@ const TodoForm = ({ listId }) => {
   const [todoTitle, setTodoTitle] = useState('')
   const [createTodo] = useMutation(CREATE_TODO, {
     update(cache, { data }) {
-      const { list } = cache.readQuery({
+      const { todosList } = cache.readQuery({
         query: TODO_LIST,
-        variables: { id: parseInt(listId) }
+        variables: { id: listId }
       })
       cache.writeQuery({
         query: TODO_LIST,
-        variables: { id: parseInt(listId) },
+        variables: { id: listId },
         data: {
-          list: {
-            id: list.id,
-            name: list.name,
+          todosList: {
+            id: todosList.id,
+            name: todosList.name,
             todos: [
               data.createTodo.todo,
-              ...list.todos
+              ...todosList.todos
             ]
           }
         }

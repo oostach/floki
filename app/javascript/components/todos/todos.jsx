@@ -18,7 +18,7 @@ const Todos = () => {
   const { loading, data } = useQuery(TODO_LIST, {
     variables: { id },
     onCompleted(data) {
-      setItems([...data.list.todos])
+      setItems([...data.todosList.todos])
     }
   })
 
@@ -39,9 +39,9 @@ const Todos = () => {
   return (
     <div className='todos'>
         { loading && <Loader /> }
-        { data && isEditMode && <TodoEditForm listId={data.list.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
-        { data && <TodoForm listId={data.list.id} /> }
-        { data && items?.length > 0 && <TodoList items={items} list={data.list} enableEditMode={enableEditMode} /> }
+        { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
+        { data && <TodoForm listId={data.todosList.id} /> }
+        { data && items?.length > 0 && <TodoList items={items} list={data.todosList} enableEditMode={enableEditMode} /> }
     </div>
   )
 }
