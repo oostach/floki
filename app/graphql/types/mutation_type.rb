@@ -6,5 +6,6 @@ module Types
     field :create_todo, mutation: Mutations::Todos::Create
     field :delete_todo, mutation: Mutations::Todos::Delete
     field :update_todo, mutation: Mutations::Todos::Update
+    field :update_position, mutation: Mutations::Todos::UpdatePosition
   end
 end

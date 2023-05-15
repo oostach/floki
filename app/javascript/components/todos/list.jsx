@@ -9,7 +9,7 @@ const TodoList = ({ items, list, enableEditMode }) => {
     <div className='todos-list mt-4'>
       <div className='todos-list-name mb-2 font-semibold text-lg text-sky-900'>{list.name}</div>
       {
-        items.sort((a, b) => b.id - a.id).map(item => {
+        items.map(item => {
           return <TodoItem key={item.id} item={item} listId={list.id} enableEditMode={enableEditMode} />
         })
       }

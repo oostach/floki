@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { TODO_FIELDS } from './fragments'
 
 export const TODOS_LISTS = gql`
-  query lists {
+  query todosLists {
     todosLists {
       id
       name
@@ -12,7 +12,7 @@ export const TODOS_LISTS = gql`
 
 export const TODO_LIST = gql`
   ${TODO_FIELDS}
-  query list($id: ID!) {
+  query todosList($id: ID!) {
     todosList(id: $id) {
       id
       name

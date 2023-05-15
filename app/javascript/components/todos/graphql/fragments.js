@@ -5,5 +5,6 @@ export const TODO_FIELDS = gql`
     id
     title
     completed
+    position
   }
 `

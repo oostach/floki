@@ -41,3 +41,14 @@ export const DELETE_TODO = gql`
     }
   }
 `
+
+export const UPDATE_POSITION = gql`
+  ${TODO_FIELDS}
+  mutation UpdatePosition($ids: [ID!]!, $listId: ID!) {
+    updatePosition(input: { ids: $ids, listId: $listId } ) {
+      todos {
+        ...TodoFields
+      }
+    }
+  }
+`
