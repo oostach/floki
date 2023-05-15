@@ -22,11 +22,6 @@ const Todos = () => {
     }
   })
 
-  const updateItem = (updatedItem) => {
-    setItems(prevState => prevState.map(item => item.id === updatedItem.id ? { ...item, title: updatedItem.title } : item))
-    disableEditMode()
-  }
-
   const disableEditMode = () => {
     setIsEditMode(false)
   }
@@ -39,7 +34,7 @@ const Todos = () => {
   return (
     <div className='todos'>
         { loading && <Loader /> }
-        { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} updateItem={updateItem} disableEditMode={disableEditMode} /> }
+        { data && isEditMode && <TodoEditForm listId={data.todosList.id} currentItem={currentItem} disableEditMode={disableEditMode} /> }
         { data && <TodoForm listId={data.todosList.id} /> }
         { data && items?.length > 0 && <TodoList items={items} list={data.todosList} enableEditMode={enableEditMode} /> }
     </div>
