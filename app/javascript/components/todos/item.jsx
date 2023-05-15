@@ -48,13 +48,26 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     e.dataTransfer.setData('text', e.currentTarget.id)
   }
 
+  const getItemPosition = (element) => {
+    return parseInt(element.querySelector('.todo-position').value)
+  }
+
   const handleDrop = (e) => {
     e.preventDefault()
 
     const id = e.dataTransfer.getData('text')
+    const movingItem = document.getElementById(id)
+    const currentItem = e.currentTarget
+    const movingItemPosition = getItemPosition(movingItem)
+    const currentItemPosition = getItemPosition(currentItem)
+
     e.dataTransfer.effectAllowed = 'move'
     e.currentTarget.classList.remove('bg-sky-100')
-    e.currentTarget.before(document.getElementById(id))
+    if (movingItemPosition < currentItemPosition) {
+      currentItem.after(document.getElementById(id))
+    } else {
+      currentItem.before(document.getElementById(id))
+    }
     updatePosition({ variables: { ids: collectIds(e.currentTarget), listId } })
   }
 
