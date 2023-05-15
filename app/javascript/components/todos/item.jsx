@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
 
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 
 const TodoItem = ({ item, listId, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
@@ -41,8 +41,46 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     }
   })
 
+  const handleDrag = (e) => {
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text', e.currentTarget.id)
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+
+    const id = e.dataTransfer.getData('text')
+    e.dataTransfer.effectAllowed = 'move'
+    e.currentTarget.before(document.getElementById(id))
+  }
+
+  const handleDragenter = (e) => {
+    e.preventDefault()
+
+    e.currentTarget.classList.add('bg-sky-100')
+  }
+
+  const handleDragLeave = (e) => {
+    e.preventDefault()
+
+    e.currentTarget.classList.remove('bg-sky-100')
+  }
+
+  const handleDragover = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <div className='todo-item flex content-center flex-wrap mb-2'>
+    <div className='todo-item flex content-center items-center flex-wrap p-2' id={`todo-${item.id}`}
+         draggable='true'
+         onDragStart={handleDrag}
+         onDrop={handleDrop}
+         onDragOver={handleDragover}
+         onDragLeave={handleDragLeave}
+         onDragEnter={handleDragenter}>
+      <div className='text-zinc-500 mr-2 cursor-move' >
+        <ArrowsUpDownIcon width={'20px'} />
+      </div>
       <div className='form-group inline-checkbox !mb-0'>
         <input type='checkbox' checked={isChecked} onChange={toggleTodo} id={item.id} name={`todo-${item.id}`} className='form-input' />
         <label className={isChecked ? 'line-through' : ''} htmlFor={item.id}>{item.title}</label>
