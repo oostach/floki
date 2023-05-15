@@ -5,27 +5,22 @@ import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/client'
 
 import { CREATE_TODO } from './graphql/mutations'
-import { TODO_LIST } from './graphql/queries'
+import { TODO_FIELDS } from './graphql/fragments'
 
 const TodoForm = ({ listId }) => {
   const [todoTitle, setTodoTitle] = useState('')
   const [createTodo] = useMutation(CREATE_TODO, {
     update(cache, { data }) {
-      const { todosList } = cache.readQuery({
-        query: TODO_LIST,
-        variables: { id: listId }
-      })
-      cache.writeQuery({
-        query: TODO_LIST,
-        variables: { id: listId },
-        data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: [
-              data.createTodo.todo,
-              ...todosList.todos
-            ]
+      cache.modify({
+        id: cache.identify({ __typename: 'TodosList', id: listId }),
+        fields: {
+          todos(existingTodosRefs, { readField }) {
+            const newTodoRef = cache.writeFragment({
+              data: data.createTodo.todo,
+              fragment: TODO_FIELDS
+            })
+
+            return [newTodoRef, ...existingTodosRefs]
           }
         }
       })

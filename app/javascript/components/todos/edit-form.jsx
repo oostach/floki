@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 
 import { UPDATE_TODO } from './graphql/mutations'
-import { TODO_LIST } from './graphql/queries'
 
 const TodoEditForm = ({ listId, currentItem, disableEditMode }) => {
   const [editedItemTitle, setEditedItemTitle] = useState(currentItem.title)
@@ -13,19 +12,10 @@ const TodoEditForm = ({ listId, currentItem, disableEditMode }) => {
     variables: { id: currentItem.id, listId, title: editedItemTitle },
     update(cache, { data }) {
       const { id, title } = data.updateTodo.todo
-      const { todosList } = cache.readQuery({
-        query: TODO_LIST,
-        variables: { id: listId }
-      })
-      cache.writeQuery({
-        query: TODO_LIST,
-        variables: { id: listId },
-        data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: todosList.todos.map(item => item.id === id ? { ...item, title } : item)
-          }
+      cache.modify({
+        id: cache.identify({ __typename: 'Todo', id }),
+        fields: {
+          title() { return title }
         }
       })
     },

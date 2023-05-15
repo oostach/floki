@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
-import { TODO_LIST } from './graphql/queries'
 
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
@@ -15,19 +14,10 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     variables: { id: item.id, status: !isChecked },
     update(cache, { data }) {
       const { id, completed } = data.toggleTodo.todo
-      const { todosList } = cache.readQuery({
-        query: TODO_LIST,
-        variables: { id: listId }
-      })
-      cache.writeQuery({
-        query: TODO_LIST,
-        variables: { id: listId },
-        data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: todosList.todos.map(item => item.id === id ? { ...item, completed } : item)
-          }
+      cache.modify({
+        id: cache.identify({ __typename: 'Todo', id }),
+        fields: {
+          completed() { return completed }
         }
       })
     },
@@ -40,18 +30,11 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
   const [deleteTodo] = useMutation(DELETE_TODO, {
     variables: { id: item.id, listId },
     update(cache, { data }) {
-      const { todosList } = cache.readQuery({
-        query: TODO_LIST,
-        variables: { id: parseInt(listId) }
-      })
-      cache.writeQuery({
-        query: TODO_LIST,
-        variables: { id: parseInt(listId) },
-        data: {
-          todosList: {
-            id: todosList.id,
-            name: todosList.name,
-            todos: todosList.todos.filter(todo => todo.id !== data.deleteTodo.id)
+      cache.modify({
+        id: cache.identify({ __typename: 'TodosList', id: listId }),
+        fields: {
+          todos(cachedTodos, { readField }) {
+            return cachedTodos.filter(ref => readField('id', ref) !== data.deleteTodo.id)
           }
         }
       })
