@@ -12,7 +12,7 @@ module Mutations
         todo_list = TodosList.find(list_id)
         todo_list.todos.find(ids)
         todo_list.todos.each { |todo| todo.position = ids.index(todo.id.to_s) + 5 }
-        { todos: todo_list.todos } if todo_list.save
+        { todos: todo_list.todos.sort_by(&:position) } if todo_list.save
       end
     end
   end
