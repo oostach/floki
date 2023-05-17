@@ -41,33 +41,57 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     }
   })
 
-  const [updatePosition] = useMutation(UPDATE_POSITION)
-
-  const handleDrag = (e) => {
-    e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData('text', e.currentTarget.id)
-  }
+  const [updatePosition] = useMutation(UPDATE_POSITION, {
+    update(cache, { data }) {
+      const { todos } = data.updatePosition
+      cache.modify({
+        id: cache.identify({ __typename: 'TodosList', id: listId }),
+        fields: {
+          todos() { return [...todos] }
+        }
+      })
+    }
+  })
 
   const getItemPosition = (element) => {
     return parseInt(element.querySelector('.todo-position').value)
   }
 
+  const updateUIPosition = (element) => {
+    const parentElement = element.parentElement
+    parentElement.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
+  }
+
+  const moveItem = (event) => {
+    if (event.dataTransfer.getData('text') === '') {
+      return
+    }
+
+    const id = event.dataTransfer.getData('text')
+    const movingItem = document.getElementById(id)
+    const movingItemPosition = getItemPosition(movingItem)
+    const currentItemPosition = getItemPosition(event.currentTarget)
+
+    if (movingItemPosition < currentItemPosition) {
+      event.currentTarget.after(movingItem)
+    } else {
+      event.currentTarget.before(movingItem)
+    }
+  }
+
+  const handleDrag = (e) => {
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text', e.currentTarget.getAttribute('id'))
+  }
+
   const handleDrop = (e) => {
     e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
 
-    const id = e.dataTransfer.getData('text')
-    const movingItem = document.getElementById(id)
-    const currentItem = e.currentTarget
-    const movingItemPosition = getItemPosition(movingItem)
-    const currentItemPosition = getItemPosition(currentItem)
+    moveItem(e)
 
-    e.dataTransfer.effectAllowed = 'move'
     e.currentTarget.classList.remove('bg-sky-100')
-    if (movingItemPosition < currentItemPosition) {
-      currentItem.after(document.getElementById(id))
-    } else {
-      currentItem.before(document.getElementById(id))
-    }
+    updateUIPosition(e.currentTarget)
     updatePosition({ variables: { ids: collectIds(e.currentTarget), listId } })
   }
 
@@ -85,6 +109,8 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
 
   const handleDragover = (e) => {
     e.preventDefault()
+
+    e.currentTarget.classList.add('bg-sky-100')
   }
 
   const collectIds = (element) => {
