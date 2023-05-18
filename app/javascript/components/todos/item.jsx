@@ -80,6 +80,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
   }
 
   const handleDrag = (e) => {
+    e.currentTarget.classList.add('moving-todo')
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('text', e.currentTarget.getAttribute('id'))
   }
@@ -88,29 +89,52 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
 
+    const nextElement = e.currentTarget.nextSibling
+
     moveItem(e)
 
-    e.currentTarget.classList.remove('bg-sky-100')
     updateUIPosition(e.currentTarget)
     updatePosition({ variables: { ids: collectIds(e.currentTarget), listId } })
+
+    if (nextElement.classList.contains('copy-todo')) {
+      nextElement.remove()
+    }
   }
 
   const handleDragenter = (e) => {
     e.preventDefault()
 
-    e.currentTarget.classList.add('bg-sky-100')
+    const movingElement = e.currentTarget.parentElement.querySelector('.moving-todo')
+    const nextElement = e.currentTarget.nextSibling
+
+    if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
+      const movingElementCopy = movingElement.cloneNode(true)
+      movingElementCopy.classList.add('copy-todo')
+      e.currentTarget.after(movingElementCopy)
+    }
   }
 
   const handleDragLeave = (e) => {
     e.preventDefault()
 
-    e.currentTarget.classList.remove('bg-sky-100')
+    const nextElement = e.currentTarget.nextSibling
+
+    if (nextElement.classList.contains('copy-todo')) {
+      nextElement.remove()
+    }
   }
 
   const handleDragover = (e) => {
     e.preventDefault()
 
-    e.currentTarget.classList.add('bg-sky-100')
+    const movingElement = e.currentTarget.parentElement.querySelector('.moving-todo')
+    const nextElement = e.currentTarget.nextSibling
+
+    if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
+      const movingElementCopy = movingElement.cloneNode(true)
+      movingElementCopy.classList.add('copy-todo')
+      e.currentTarget.after(movingElementCopy)
+    }
   }
 
   const collectIds = (element) => {
@@ -119,7 +143,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
   }
 
   return (
-    <div className='todo-item flex content-center items-center flex-wrap p-2' id={`todo-${item.id}`}
+    <div className='todo-item flex content-center items-center flex-wrap p-2 box-border' id={`todo-${item.id}`}
          draggable='true'
          onDragStart={handleDrag}
          onDrop={handleDrop}
