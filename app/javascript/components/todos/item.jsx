@@ -109,7 +109,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
 
     if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
       const movingElementCopy = movingElement.cloneNode(true)
-      movingElementCopy.classList.add('copy-todo')
+      movingElementCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100')
       e.currentTarget.after(movingElementCopy)
     }
   }
@@ -132,7 +132,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
 
     if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
       const movingElementCopy = movingElement.cloneNode(true)
-      movingElementCopy.classList.add('copy-todo')
+      movingElementCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
       e.currentTarget.after(movingElementCopy)
     }
   }
