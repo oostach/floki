@@ -107,6 +107,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     const movingElement = e.currentTarget.parentElement.querySelector('.moving-todo')
     const nextElement = e.currentTarget.nextSibling
 
+    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'none')
     if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
       const movingElementCopy = movingElement.cloneNode(true)
       movingElementCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100')
@@ -119,6 +120,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
 
     const nextElement = e.currentTarget.nextSibling
 
+    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'auto')
     if (nextElement.classList.contains('copy-todo')) {
       nextElement.remove()
     }
