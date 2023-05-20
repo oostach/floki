@@ -7,27 +7,31 @@ import PropTypes from 'prop-types'
 const TodoList = ({ items, list, enableEditMode }) => {
   const handleDragover = (e) => {
     e.preventDefault()
-    removePlaceholder(e.currentTarget)
 
     const activeTodo = e.target.closest('.todo-item')
     const movingTodo = e.currentTarget.querySelector('.moving-todo')
-    console.log(activeTodo)
+    const activeMiddle = activeTodo.offsetTop + activeTodo.clientHeight / 2
+
     if (activeTodo && movingTodo.getAttribute('id') !== activeTodo.getAttribute('id')) {
-      const activeMiddle = activeTodo.offsetTop + activeTodo.clientHeight / 2
       const movingCopy = movingTodo.cloneNode(true)
       movingCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
 
       if (e.clientY < activeMiddle) {
+        const prevEl = activeTodo.previousSibling
+        if (prevEl.classList.contains('copy-todo')) {
+          return
+        }
+        removePlaceholder(e)
         activeTodo.before(movingCopy)
-        e.clientY = e.clientY + movingCopy.clientHeight
       } else {
+        removePlaceholder(e)
         activeTodo.after(movingCopy)
       }
     }
   }
 
-  const removePlaceholder = (container) => {
-    const clones = container.querySelectorAll('.copy-todo')
+  const removePlaceholder = (event, activeMiddle) => {
+    const clones = event.currentTarget.querySelectorAll('.copy-todo')
     clones.forEach(clone => clone.remove())
   }
 
