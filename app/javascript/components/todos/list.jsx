@@ -20,20 +20,20 @@ const TodoList = ({ items, list, enableEditMode }) => {
     }
   })
 
-  const updateUIPosition = (event) => {
-    event.currentTarget.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
+  const updateUIPosition = ({ currentTarget }) => {
+    currentTarget.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
   }
 
-  const pasteItem = (event) => {
-    const id = event.dataTransfer.getData('text')
+  const pasteItem = ({ dataTransfer, currentTarget }) => {
+    const id = dataTransfer.getData('text')
     const movingItem = document.querySelector(`#${id}.moving-todo`)
-    const placeholders = event.currentTarget.querySelectorAll('.copy-todo')
+    const placeholders = currentTarget.querySelectorAll('.copy-todo')
 
     if (placeholders.length !== 1) {
       return
     }
 
-    event.currentTarget.replaceChild(movingItem, placeholders[0])
+    currentTarget.replaceChild(movingItem, placeholders[0])
     movingItem.classList.remove('moving-todo')
   }
 
@@ -41,8 +41,39 @@ const TodoList = ({ items, list, enableEditMode }) => {
     return Array.from(element.querySelectorAll('.todo-checkbox')).map(node => node.getAttribute('id'))
   }
 
-  const removePlaceholder = (event) => {
-    event.currentTarget.querySelectorAll('.copy-todo').forEach(clone => clone.remove())
+  const removePlaceholder = ({ currentTarget }) => {
+    currentTarget.querySelectorAll('.copy-todo').forEach(clone => clone.remove())
+  }
+
+  const createPlaceholder = (movingTodo) => {
+    const clone = movingTodo.cloneNode(true)
+    clone.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
+    clone.classList.remove('moving-todo')
+    return clone
+  }
+
+  const calculateElementMiddle = (element) => {
+    return element.offsetTop + element.clientHeight / 2
+  }
+
+  const shouldHighlightIt = (activeTodo, movingTodo) => activeTodo && movingTodo.getAttribute('id') !== activeTodo.getAttribute('id')
+
+  const renderPlaceholder = (event, activeTodo, movingTodo) => {
+    const movingCopy = createPlaceholder(movingTodo)
+    const activeMiddle = calculateElementMiddle(activeTodo)
+
+    if (event.clientY < activeMiddle) {
+      const prevEl = activeTodo.previousSibling
+      if (prevEl.classList.contains('copy-todo')) {
+        return
+      }
+
+      removePlaceholder(event)
+      activeTodo.before(movingCopy)
+    } else {
+      removePlaceholder(event)
+      activeTodo.after(movingCopy)
+    }
   }
 
   const handleDragover = (e) => {
@@ -51,25 +82,8 @@ const TodoList = ({ items, list, enableEditMode }) => {
     const activeTodo = e.target.closest('.todo-item')
     const movingTodo = e.currentTarget.querySelector('.moving-todo')
 
-    if (activeTodo && movingTodo.getAttribute('id') !== activeTodo.getAttribute('id')) {
-      const movingCopy = movingTodo.cloneNode(true)
-      const activeMiddle = activeTodo.offsetTop + activeTodo.clientHeight / 2
-
-      movingCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
-      movingCopy.classList.remove('moving-todo')
-
-      if (e.clientY < activeMiddle) {
-        const prevEl = activeTodo.previousSibling
-        if (prevEl.classList.contains('copy-todo')) {
-          return
-        }
-
-        removePlaceholder(e)
-        activeTodo.before(movingCopy)
-      } else {
-        removePlaceholder(e)
-        activeTodo.after(movingCopy)
-      }
+    if (shouldHighlightIt(activeTodo, movingTodo)) {
+      renderPlaceholder(e, activeTodo, movingTodo)
     }
   }
 
