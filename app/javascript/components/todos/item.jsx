@@ -3,7 +3,9 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
+
 import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
+import { handleDrag } from './draggable'
 
 import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 
@@ -40,12 +42,6 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
       })
     }
   })
-
-  const handleDrag = (e) => {
-    e.currentTarget.classList.add('moving-todo')
-    e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData('text', e.currentTarget.getAttribute('id'))
-  }
 
   return (
     <div className='todo-item flex content-center items-center flex-wrap p-2 box-border' id={`todo-${item.id}`}
