@@ -62,7 +62,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     parentElement.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
   }
 
-  const moveItem = (event) => {
+  const pasteItem = (event) => {
     if (event.dataTransfer.getData('text') === '') {
       return
     }
@@ -89,54 +89,19 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
 
-    const nextElement = e.currentTarget.nextSibling
-
-    moveItem(e)
-
+    pasteItem(e)
     updateUIPosition(e.currentTarget)
     updatePosition({ variables: { ids: collectIds(e.currentTarget), listId } })
-
-    if (nextElement.classList.contains('copy-todo')) {
-      nextElement.remove()
-    }
+    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'auto')
   }
 
   const handleDragenter = (e) => {
     e.preventDefault()
-
-    const movingElement = e.currentTarget.parentElement.querySelector('.moving-todo')
-    const nextElement = e.currentTarget.nextSibling
-
-    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'none')
-    if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
-      const movingElementCopy = movingElement.cloneNode(true)
-      movingElementCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100')
-      e.currentTarget.after(movingElementCopy)
-    }
+    // e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'none')
   }
 
   const handleDragLeave = (e) => {
     e.preventDefault()
-
-    const nextElement = e.currentTarget.nextSibling
-
-    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'auto')
-    if (nextElement.classList.contains('copy-todo')) {
-      nextElement.remove()
-    }
-  }
-
-  const handleDragover = (e) => {
-    e.preventDefault()
-
-    const movingElement = e.currentTarget.parentElement.querySelector('.moving-todo')
-    const nextElement = e.currentTarget.nextSibling
-
-    if (!(nextElement?.classList?.contains('copy-todo')) && !(e.currentTarget === movingElement)) {
-      const movingElementCopy = movingElement.cloneNode(true)
-      movingElementCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
-      e.currentTarget.after(movingElementCopy)
-    }
   }
 
   const collectIds = (element) => {
@@ -149,7 +114,6 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
          draggable='true'
          onDragStart={handleDrag}
          onDrop={handleDrop}
-         onDragOver={handleDragover}
          onDragLeave={handleDragLeave}
          onDragEnter={handleDragenter}>
       <div className='text-zinc-500 mr-2 cursor-move' >
