@@ -41,9 +41,8 @@ const TodoList = ({ items, list, enableEditMode }) => {
     return Array.from(element.querySelectorAll('.todo-checkbox')).map(node => node.getAttribute('id'))
   }
 
-  const removePlaceholder = (event, activeMiddle) => {
-    const clones = event.currentTarget.querySelectorAll('.copy-todo')
-    clones.forEach(clone => clone.remove())
+  const removePlaceholder = (event) => {
+    event.currentTarget.querySelectorAll('.copy-todo').forEach(clone => clone.remove())
   }
 
   const handleDragover = (e) => {
@@ -51,10 +50,11 @@ const TodoList = ({ items, list, enableEditMode }) => {
 
     const activeTodo = e.target.closest('.todo-item')
     const movingTodo = e.currentTarget.querySelector('.moving-todo')
-    const activeMiddle = activeTodo.offsetTop + activeTodo.clientHeight / 2
 
     if (activeTodo && movingTodo.getAttribute('id') !== activeTodo.getAttribute('id')) {
       const movingCopy = movingTodo.cloneNode(true)
+      const activeMiddle = activeTodo.offsetTop + activeTodo.clientHeight / 2
+
       movingCopy.classList.add('copy-todo', 'border', 'opacity-50', 'bg-sky-100', 'rounded-lg')
       movingCopy.classList.remove('moving-todo')
 
@@ -63,6 +63,7 @@ const TodoList = ({ items, list, enableEditMode }) => {
         if (prevEl.classList.contains('copy-todo')) {
           return
         }
+
         removePlaceholder(e)
         activeTodo.before(movingCopy)
       } else {
@@ -81,8 +82,10 @@ const TodoList = ({ items, list, enableEditMode }) => {
     updatePosition({ variables: { ids: collectIds(e.currentTarget), listId: list.id } })
   }
 
+  const handleDragEnd = (e) => removePlaceholder(e)
+
   return (
-    <div className='todos-list mt-4' onDragOver={handleDragover} onDrop={handleDrop}>
+    <div className='todos-list mt-4' onDragOver={handleDragover} onDrop={handleDrop} onDragEnd={handleDragEnd}>
       <div className='todos-list-name mb-2 font-semibold text-lg text-sky-900'>{list.name}</div>
       {
         items.map(item => {
