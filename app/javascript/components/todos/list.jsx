@@ -34,6 +34,7 @@ const TodoList = ({ items, list, enableEditMode }) => {
     }
 
     event.currentTarget.replaceChild(movingItem, placeholders[0])
+    movingItem.classList.remove('moving-todo')
   }
 
   const collectIds = (element) => {
