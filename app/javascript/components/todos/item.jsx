@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
-import { DELETE_TODO, TOGGLE_TODO, UPDATE_POSITION } from './graphql/mutations'
+import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
 
 import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 
@@ -41,81 +41,16 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
     }
   })
 
-  const [updatePosition] = useMutation(UPDATE_POSITION, {
-    update(cache, { data }) {
-      const { todos } = data.updatePosition
-      cache.modify({
-        id: cache.identify({ __typename: 'TodosList', id: listId }),
-        fields: {
-          todos() { return [...todos] }
-        }
-      })
-    }
-  })
-
-  const getItemPosition = (element) => {
-    return parseInt(element.querySelector('.todo-position').value)
-  }
-
-  const updateUIPosition = (element) => {
-    const parentElement = element.parentElement
-    parentElement.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
-  }
-
-  const pasteItem = (event) => {
-    if (event.dataTransfer.getData('text') === '') {
-      return
-    }
-
-    const id = event.dataTransfer.getData('text')
-    const movingItem = document.getElementById(id)
-    const movingItemPosition = getItemPosition(movingItem)
-    const currentItemPosition = getItemPosition(event.currentTarget)
-
-    if (movingItemPosition < currentItemPosition) {
-      event.currentTarget.after(movingItem)
-    } else {
-      event.currentTarget.before(movingItem)
-    }
-  }
-
   const handleDrag = (e) => {
     e.currentTarget.classList.add('moving-todo')
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('text', e.currentTarget.getAttribute('id'))
   }
 
-  const handleDrop = (e) => {
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
-
-    pasteItem(e)
-    updateUIPosition(e.currentTarget)
-    updatePosition({ variables: { ids: collectIds(e.currentTarget), listId } })
-    e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'auto')
-  }
-
-  const handleDragenter = (e) => {
-    e.preventDefault()
-    // e.currentTarget.childNodes.forEach(node => node.style.pointerEvents = 'none')
-  }
-
-  const handleDragLeave = (e) => {
-    e.preventDefault()
-  }
-
-  const collectIds = (element) => {
-    const parentEl = element.parentElement
-    return Array.from(parentEl.querySelectorAll('.todo-checkbox')).map(node => node.getAttribute('id'))
-  }
-
   return (
     <div className='todo-item flex content-center items-center flex-wrap p-2 box-border' id={`todo-${item.id}`}
          draggable='true'
-         onDragStart={handleDrag}
-         onDrop={handleDrop}
-         onDragLeave={handleDragLeave}
-         onDragEnter={handleDragenter}>
+         onDragStart={handleDrag}>
       <div className='text-zinc-500 mr-2 cursor-move' >
         <ArrowsUpDownIcon width={'20px'} />
         <input type='hidden' id={`todo-position-${item.id}`} name={`todo[position][${item.id}]`} className='hidden todo-position' value={item.position} />
