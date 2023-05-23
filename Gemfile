@@ -24,7 +24,6 @@ gem 'bootsnap', require: false
 gem 'sassc-rails'
 gem 'image_processing', '~> 1.2'
 gem "graphql"
-# gem 'telegram-bot'
 gem 'octokit'
 gem 'faraday-retry'
 gem 'elasticsearch-model', git: 'https://github.com/elastic/elasticsearch-rails', branch: 'main'
