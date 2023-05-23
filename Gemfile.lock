@@ -9,8 +9,9 @@ GIT
       hashie
     elasticsearch-rails (7.2.1)
 
-PATH
-  remote: ../floki-form
+GIT
+  remote: https://github.com/oostach/floki-form
+  revision: cf3044543f8e8f99c34e373f5dfc1af4a693e260
   specs:
     floki-form (0.2.4)
       actionpack (>= 7.0.4.3)
