@@ -33,6 +33,8 @@ jobs:
         run: yarn install
       - name: Precompile tailwindcss
         run: yarn build-tailwindcss
+      - name: Precompile react components
+        run: yarn build-react
       - name: Precompile assets
         run: RAILS_ENV=development bin/rails assets:precompile
       # - name: Add tailwindcss to assets
