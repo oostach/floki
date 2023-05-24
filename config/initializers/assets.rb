@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w[components.js]
-Rails.application.config.assets.precompile += %w[graphiql/rails/application.js graphiql/rails/application.css] if Rails.env.development?
+Rails.application.config.assets.precompile += %w[graphiql/rails/application.js graphiql/rails/application.css]
