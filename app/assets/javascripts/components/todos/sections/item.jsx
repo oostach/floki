@@ -3,11 +3,12 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { DELETE_TODO, TOGGLE_TODO } from '../graphql/mutations'
 import { handleDrag } from '../utils/draggable'
 
-import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
+import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon, ClockIcon } from '@heroicons/react/24/outline'
 
 const TodoItem = ({ item, listId, enableEditMode }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
@@ -51,10 +52,17 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
         <ArrowsUpDownIcon width={'20px'} />
         <input type='hidden' id={`todo-position-${item.id}`} name={`todo[position][${item.id}]`} className='hidden todo-position' value={item.position} />
       </div>
-      <div className='form-group inline-checkbox !mb-0'>
+      <div className='form-group inline-checkbox !mb-0 mr-2'>
         <input type='checkbox' checked={isChecked} onChange={toggleTodo} id={item.id} name={`todo[${item.id}]`} className='form-input todo-checkbox' />
         <label className={isChecked ? 'line-through' : ''} htmlFor={item.id}>{item.title}</label>
       </div>
+      {
+        item.dueDate &&
+        <div className={(isChecked ? 'line-through' : '') + ' text-sky-500 text-xs italic flex'}>
+          <ClockIcon width={'16px'} className='mr-1' />
+          { moment.utc(new Date(item.dueDate)).format('DD.MM.YYYY hh:mm') }
+        </div>
+      }
       <div className='actions flex ml-auto'>
         <button className='badge-button-primary mr-2 badge-normal' onClick={() => enableEditMode(item)}>
           <PencilSquareIcon width={'20px'} />

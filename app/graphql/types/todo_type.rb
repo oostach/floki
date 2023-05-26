@@ -6,8 +6,7 @@ module Types
 
     field :id, ID, null: false
     field :title, String, null: false
-    field :date, String
-    field :time, String
+    field :due_date, String
     field :completed, Boolean, null: false
     field :position, Int, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

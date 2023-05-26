@@ -19,7 +19,7 @@ module Types
       argument :id, ID, required: true
     end
     def todos_list(id:)
-      TodosList.find(id)
+      TodosList.includes(:todos).find(id)
     end
 
     field :todo, Types::TodoType, null: false do
