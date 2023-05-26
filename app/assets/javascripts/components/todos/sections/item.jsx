@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 
-import { DELETE_TODO, TOGGLE_TODO } from './graphql/mutations'
-import { handleDrag } from './support/draggable'
+import { DELETE_TODO, TOGGLE_TODO } from '../graphql/mutations'
+import { handleDrag } from '../utils/draggable'
 
 import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 

@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/client'
 
-import { CREATE_TODO } from './graphql/mutations'
-import { TODO_FIELDS } from './graphql/fragments'
+import { CREATE_TODO } from '../graphql/mutations'
+import { TODO_FIELDS } from '../graphql/fragments'
 
 const TodoForm = ({ listId }) => {
   const [todoTitle, setTodoTitle] = useState('')

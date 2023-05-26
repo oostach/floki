@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import PropTypes from 'prop-types'
 
-import { UPDATE_TODO } from './graphql/mutations'
+import { UPDATE_TODO } from '../graphql/mutations'
 
 const TodoEditForm = ({ listId, currentItem, disableEditMode }) => {
   const [editedItemTitle, setEditedItemTitle] = useState(currentItem.title)

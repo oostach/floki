@@ -5,8 +5,8 @@ import TodoItem from './item'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/client'
 
-import { UPDATE_POSITION } from './graphql/mutations'
-import { handleDragover, handleDrop, handleDragEnd } from './support/draggable'
+import { UPDATE_POSITION } from '../graphql/mutations'
+import { handleDragover, handleDrop, handleDragEnd } from '../utils/draggable'
 
 const TodoList = ({ items, list, enableEditMode }) => {
   const [updatePosition] = useMutation(UPDATE_POSITION, {

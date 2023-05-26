@@ -5,9 +5,9 @@ import { createRoot } from 'react-dom/client'
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Todos from './todos'
-import Layout from './routes/layout'
-import NoMatch from './routes/no-match'
+import Todos from './views/todos'
+import Layout from './views/layout'
+import NoMatch from './views/no-match'
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content')
 const link = new HttpLink({ credentials: 'same-origin', headers: { 'X-CSRF-Token': csrfToken } })
