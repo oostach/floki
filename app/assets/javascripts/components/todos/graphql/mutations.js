@@ -25,8 +25,8 @@ export const CREATE_TODO = gql`
 
 export const UPDATE_TODO = gql`
   ${TODO_FIELDS}
-  mutation UpdateTodo($id: ID!, $listId: ID!, $title: String!) {
-    updateTodo(input: { id: $id, listId: $listId, title: $title }) {
+  mutation UpdateTodo($id: ID!, $listId: ID!, $title: String!, $date: String!, $time: String!) {
+    updateTodo(input: { id: $id, listId: $listId, title: $title, date: $date, time: $time }) {
       todo {
         ...TodoFields
       }
