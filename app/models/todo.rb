@@ -7,6 +7,14 @@ class Todo < ApplicationRecord
 
   validates :title, presence: true
 
+  def date
+    due_date&.to_date
+  end
+
+  def time
+    due_date&.to_time
+  end
+
   def completed
     status
   end

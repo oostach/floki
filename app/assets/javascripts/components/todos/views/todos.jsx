@@ -1,10 +1,10 @@
 'use strict'
 
 import React, { useState } from 'react'
-import TodoForm from '../form'
+import TodoForm from '../sections/form'
 import TodoEditForm from '../sections/edit-form'
-import TodoList from '../list'
-import Loader from '../loader'
+import TodoList from '../sections/list'
+import Loader from '../sections/loader'
 import { useQuery } from '@apollo/client'
 import { TODO_LIST } from '../graphql/queries'
 import { useParams } from 'react-router-dom'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Outlet, Navigate } from 'react-router-dom'
 
-import Loader from '../loader'
+import Loader from '../sections/loader'
 
 import { useQuery } from '@apollo/client'
 import { TODOS_LISTS } from '../graphql/queries'

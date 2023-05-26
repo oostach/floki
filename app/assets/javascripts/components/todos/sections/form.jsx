@@ -9,6 +9,9 @@ import { TODO_FIELDS } from '../graphql/fragments'
 
 const TodoForm = ({ listId }) => {
   const [todoTitle, setTodoTitle] = useState('')
+  const [todoDate, setTodoDate] = useState('')
+  const [todoTime, setTodoTime] = useState('')
+
   const [createTodo] = useMutation(CREATE_TODO, {
     update(cache, { data }) {
       cache.modify({
@@ -26,20 +29,24 @@ const TodoForm = ({ listId }) => {
       })
     },
     onCompleted() {
-      setTodoTitle('')
+      setTodoTitle(prevTodoTitle => '')
+      setTodoDate(prevTodoDate => '')
+      setTodoTime(prevTodoTime => '')
     }
   })
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    createTodo({ variables: { title: todoTitle, listId } })
+    createTodo({ variables: { title: todoTitle, date: todoDate, time: todoTime, listId } })
   }
 
   return (
     <form className='todo-form' onSubmit={handleFormSubmit}>
       <div className='form-group flex'>
         <input type='text' className='form-input mr-2' value={todoTitle} onInput={(e) => setTodoTitle(e.target.value)} required autoFocus />
+        <input type='date' className='form-input mr-2 !w-min' value={todoDate} onChange={(e) => setTodoDate(e.target.value)} />
+        <input type='time' className='form-input  mr-2 !w-min' value={todoTime} onChange={(e) => setTodoTime(e.target.value)} />
         <button className='button-primary' aria-label='Add Task' type='submit'>Save</button>
       </div>
     </form>

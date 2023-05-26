@@ -9,7 +9,7 @@
     "watchcss": "postcss app/assets/tailwindcss/application.tailwind.css -o app/assets/builds/tailwind.css -w --verbose",
     "testjs": "jest",
     "build-todos": "esbuild --bundle ./app/assets/javascripts/components/todos/index.jsx --outfile=./app/assets/builds/components/todos.js --minify --sourcemap --loader:.js=jsx",
-    "watch-react": "esbuild app/javascript/components/todos/*.* --bundle --sourcemap --outdir=app/assets/builds/components/todos --watch"
+    "watch-react": "esbuild --bundle ./app/assets/javascripts/components/todos/index.jsx --outfile=./app/assets/builds/components/todos.js --watch --sourcemap"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

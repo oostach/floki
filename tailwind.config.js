@@ -8,7 +8,7 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
     './app/components/**/*.{erb,haml,html,slim}',
-    './app/javascript/components/**/*.{js,jsx}'
+    './app/assets/javascripts/components/**/*.{js,jsx}'
   ],
   safelist: [
     { pattern: /flash-message-(notice|alert|info)/ },
