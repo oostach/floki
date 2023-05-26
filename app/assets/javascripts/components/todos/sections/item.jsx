@@ -67,7 +67,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
         <button className='badge-button-primary mr-2 badge-normal' onClick={() => enableEditMode(item)}>
           <PencilSquareIcon width={'20px'} />
         </button>
-        <button className='badge-button-alert badge-normal' onClick={deleteTodo} >
+        <button className='badge-button-alert badge-normal' onClick={() => { confirm('Are you sure?') && deleteTodo() } }>
           <TrashIcon width={'20px'} />
         </button>
       </div>
