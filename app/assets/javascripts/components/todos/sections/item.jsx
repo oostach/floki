@@ -45,7 +45,7 @@ const TodoItem = ({ item, listId, enableEditMode, hidden }) => {
   })
 
   return (
-    <div className={`${hidden ? 'hidden' : ''} todo-item flex content-center items-center flex-wrap p-2 box-border`} id={`todo-${item.id}`}
+    <div className={`${hidden ? 'hidden' : ''} todo-item flex content-center items-center flex-wrap p-2 -mx-2 box-border`} id={`todo-${item.id}`}
          draggable='true'
          onDragStart={handleDrag}>
       <div className='text-zinc-500 mr-2 cursor-move' >

@@ -27,7 +27,7 @@ const TodoList = ({ items, list, enableEditMode }) => {
   const filterCompleted = hiddenState => setHidden(hiddenState)
 
   return (
-    <div className='todos-list mt-4' onDragOver={handleDragover} onDrop={(e) => handleDrop(e, updatePosition, { listId: list.id })} onDragEnd={handleDragEnd}>
+    <div className='todos-list mt-4 pb-2' onDragOver={handleDragover} onDrop={(e) => handleDrop(e, updatePosition, { listId: list.id })} onDragEnd={handleDragEnd}>
       <div className='flex content-center mb-2 flex-wrap'>
         <div className='todos-list-name font-semibold text-lg text-sky-900'>{list.name}</div>
         <TodosFilter filterCompleted={filterCompleted} />
