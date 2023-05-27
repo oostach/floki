@@ -60,7 +60,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
         item.dueDate &&
         <div className={(isChecked ? 'line-through' : '') + ' text-sky-500 text-xs italic flex'}>
           <ClockIcon width={'16px'} className='mr-1' />
-          { moment.utc(new Date(item.dueDate)).format('DD.MM.YYYY hh:mm') }
+          { `Due: ${moment.utc(new Date(item.dueDate)).format('DD.MM.YYYY hh:mm')}` }
         </div>
       }
       <div className='actions flex ml-auto'>

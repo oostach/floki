@@ -2,8 +2,7 @@ const updateUIPosition = ({ currentTarget }) => {
   currentTarget.querySelectorAll('.todo-position').forEach((item, index) => item.value = index)
 }
 
-const pasteItem = ({ dataTransfer, currentTarget }) => {
-  const id = dataTransfer.getData('text')
+const pasteItem = (id, currentTarget) => {
   const movingItem = document.querySelector(`#${id}.moving-todo`)
   const placeholders = currentTarget.querySelectorAll('.copy-todo')
 
@@ -69,15 +68,24 @@ const handleDrop = (e, positionUpdater, listParams) => {
   e.preventDefault()
   e.dataTransfer.dropEffect = 'move'
 
-  pasteItem(e)
+  const [movingId, ...pastOrderIds] = e.dataTransfer.getData('text').split(',')
+  pasteItem(movingId, e.currentTarget)
   updateUIPosition(e)
-  positionUpdater({ variables: { ids: collectIds(e.currentTarget), ...listParams } })
+
+  const currentOrderIds = collectIds(e.currentTarget)
+  if (JSON.stringify(currentOrderIds) !== JSON.stringify(pastOrderIds)) {
+    positionUpdater({ variables: { ids: currentOrderIds, ...listParams } })
+  }
 }
 
 const handleDrag = (e) => {
+  const parentElement = e.currentTarget.parentElement
+  const listIds = collectIds(parentElement)
+  const data = [e.currentTarget.getAttribute('id'), ...listIds].join(',')
+
   e.currentTarget.classList.add('moving-todo')
   e.dataTransfer.effectAllowed = 'move'
-  e.dataTransfer.setData('text', e.currentTarget.getAttribute('id'))
+  e.dataTransfer.setData('text', data)
 }
 
 const handleDragEnd = (e) => removePlaceholder(e)
