@@ -10,7 +10,7 @@ import { handleDrag } from '../utils/draggable'
 
 import { PencilSquareIcon, TrashIcon, ArrowsUpDownIcon, ClockIcon } from '@heroicons/react/24/outline'
 
-const TodoItem = ({ item, listId, enableEditMode }) => {
+const TodoItem = ({ item, listId, enableEditMode, hidden }) => {
   const [isChecked, setIsChecked] = useState(item.completed)
 
   const [toggleTodo] = useMutation(TOGGLE_TODO, {
@@ -45,7 +45,7 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
   })
 
   return (
-    <div className='todo-item flex content-center items-center flex-wrap p-2 box-border' id={`todo-${item.id}`}
+    <div className={`${hidden ? 'hidden' : ''} todo-item flex content-center items-center flex-wrap p-2 box-border`} id={`todo-${item.id}`}
          draggable='true'
          onDragStart={handleDrag}>
       <div className='text-zinc-500 mr-2 cursor-move' >
@@ -78,7 +78,8 @@ const TodoItem = ({ item, listId, enableEditMode }) => {
 TodoItem.propTypes = {
   item: PropTypes.object.isRequired,
   listId: PropTypes.string.isRequired,
-  enableEditMode: PropTypes.func.isRequired
+  enableEditMode: PropTypes.func.isRequired,
+  hidden: PropTypes.bool.isRequired
 }
 
 export default TodoItem
