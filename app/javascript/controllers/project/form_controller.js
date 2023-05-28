@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { Octokit } from 'octokit'
+import { Octokit } from '@octokit/core'
 import { wrapWithError, clearErrors } from '../../lib/error-wrapper'
 
 // Connects to data-controller="project--form"
