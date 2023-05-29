@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/outline'
@@ -7,11 +7,9 @@ const TodosFilter = ({ filterCompleted, sortTodos }) => {
   const [active, setActive] = useState(false)
   const [quickest, setQuickest] = useState('unsorted')
 
-  const toggleHidden = (e) => {
-    e.preventDefault()
-    setActive(prevActive => !prevActive)
-    filterCompleted(!active)
-  }
+  useEffect(() => {
+    filterCompleted(active)
+  }, [active])
 
   const sortByDue = (e) => {
     e.preventDefault()
@@ -43,7 +41,7 @@ const TodosFilter = ({ filterCompleted, sortTodos }) => {
         { quickest === 'recent' && <ArrowUpIcon width={'16px'} className='inline-block mr-1' /> }
         Sort by Date
       </a>
-      <a href='#' onClick={toggleHidden} className={classList(active)}>Non Completed Only</a>
+      <a href='#' onClick={(e) => { e.preventDefault(); setActive(prevActive => !prevActive) }} className={classList(active)}>Non Completed Only</a>
     </div>
   )
 }
