@@ -2,11 +2,15 @@ import { Controller } from '@hotwired/stimulus'
 
 // Connects to data-controller="album"
 export default class extends Controller {
-  static targets = ['container', 'image', 'previews', 'preview', 'imageItem']
+  static targets = ['container', 'image', 'previews', 'preview', 'imageItem', 'autoToggle']
 
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
       <div class='album-header'>
+        <div>
+          <input type='checkbox' data-album-target='autoToggle' data-action='album#toggleAutoChange' />
+          Auto
+        </div>
         <dvi class='album-close-btn' data-action='click->album#closeAlbum'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
@@ -23,6 +27,7 @@ export default class extends Controller {
   #imagesList = []
   #currentImageIndex = null
   #albumSize = null
+  #autoInterval = null
 
   connect() {
     this.#imagesList.push(...this.#collectImagesParams())
@@ -44,6 +49,16 @@ export default class extends Controller {
     this.containerTarget.style.display = 'none'
   }
 
+  toggleAutoChange(e) {
+    e.preventDefault()
+
+    if (e.currentTarget.checked) {
+      this.#autoInterval = setInterval(() => { this.nextImage() }, 2000)
+    } else {
+      clearInterval(this.#autoInterval)
+    }
+  }
+
   changeImage(event) {
     event.preventDefault()
 
@@ -51,8 +66,10 @@ export default class extends Controller {
     this.#setImage(index)
   }
 
-  nextImage(event) {
-    event.preventDefault()
+  nextImage(event = null) {
+    if (event) {
+      event.preventDefault()
+    }
 
     const firstIndex = '0'
     const nextIndex = this.#currentImageIndex + 1
