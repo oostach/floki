@@ -56,4 +56,10 @@
   .field-with-errors .field-errors {
     @apply block text-red-500 text-sm italic;
   }
+
+  .toggle-checkbox {
+    @apply appearance-none w-[2.35rem] focus:outline-none h-[1.3rem] bg-slate-100 rounded-full border-slate-500 transition-all duration-300 text-slate-300 focus:ring-transparent;
+    @apply before:inline-block before:rounded-full before:bg-slate-500 before:h-4 before:w-4 before:ml-0.5;
+    @apply checked:bg-slate-300 checked:border-slate-500 checked:focus:border-slate-500 checked:before:translate-x-full checked:bg-none;
+  }
 }

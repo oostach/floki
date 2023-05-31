@@ -7,9 +7,8 @@ export default class extends Controller {
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
       <div class='album-header'>
-        <div>
-          <input type='checkbox' data-album-target='autoToggle' data-action='album#toggleAutoChange' />
-          Auto
+        <div class='flex items-center justify-center mr-2'>
+          <input type='checkbox' class='toggle-checkbox' data-album-target='autoToggle' data-action='album#toggleAutoChange' />
         </div>
         <dvi class='album-close-btn' data-action='click->album#closeAlbum'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
