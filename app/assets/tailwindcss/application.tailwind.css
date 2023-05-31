@@ -10,6 +10,7 @@
 @import './components/resources';
 @import './components/blankslate';
 @import './components/publications';
+@import './components/tooltip';
 
 @import "tailwindcss/utilities";
 
