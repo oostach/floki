@@ -7,7 +7,8 @@ export default class extends Controller {
   static template = `
     <div class='album' data-album-target='container' style='display: none;'>
       <div class='album-header'>
-        <div class='flex items-center justify-center mr-2'>
+        <div class='flex items-center justify-center mr-2' data-controller='tooltip' data-action='mouseenter->tooltip#show mouseleave->tooltip#hide'
+          data-tooltip-title-value='Change slides automatically.' data-tooltip-placement-value='left'>
           <input type='checkbox' class='toggle-checkbox' data-album-target='autoToggle' data-action='album#toggleAutoChange' />
         </div>
         <dvi class='album-close-btn' data-action='click->album#closeAlbum'>

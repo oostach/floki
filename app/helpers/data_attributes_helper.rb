@@ -11,7 +11,7 @@ module DataAttributesHelper
       droppable: { target: 'droppableArea' } }
   end
 
-  def tooltip_data_attr(title)
-    { controller: 'tooltip', action: 'mouseenter->tooltip#show mouseleave->tooltip#hide', tooltip_title_value: title }
+  def tooltip_data_attr(title:, placement: 'top')
+    { controller: 'tooltip', action: 'mouseenter->tooltip#show mouseleave->tooltip#hide', tooltip_title_value: title, tooltip_placement_value: placement }
   end
 end
