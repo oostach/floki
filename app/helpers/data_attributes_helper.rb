@@ -10,4 +10,8 @@ module DataAttributesHelper
                dragleave->droppable#clearDroppableArea drop->droppable#uploadOrPreviewFiles',
       droppable: { target: 'droppableArea' } }
   end
+
+  def tooltip_data_attr(title)
+    { controller: 'tooltip', action: 'mouseenter->tooltip#show mouseleave->tooltip#hide', tooltip_title_value: title }
+  end
 end
