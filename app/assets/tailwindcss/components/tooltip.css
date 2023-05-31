@@ -1,14 +1,10 @@
 @layer components {
   .tooltip {
-    @apply w-max bg-gray-600 border border-gray-900 text-white text-xs rounded text-center absolute py-1 px-3;
+    @apply w-max bg-gray-700 border border-gray-700 text-white text-xs rounded text-center absolute py-1 px-3;
   }
 
   .tooltip:after {
     @apply content-[''] left-0 right-0 -bottom-[5px] absolute my-0 mx-auto w-0 h-0;
-    @apply border-l-transparent border-l-[5px] border-r-transparent border-r-[5px] border-solid border-t-[5px] border-t-gray-900;
-
-    /* border-top: 5px solid #6A0136;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent; */
+    @apply border-l-transparent border-l-[5px] border-r-transparent border-r-[5px] border-solid border-t-[5px] border-t-gray-700;
   }
 }

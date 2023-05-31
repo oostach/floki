@@ -20,7 +20,7 @@ export default class extends Controller {
     this.#tooltip = this.#buildTooltip()
     this.element.before(this.#tooltip)
     const tooltipSize = this.#tooltip.getBoundingClientRect()
-    this.#tooltip.style.top = (elementSize.top - tooltipSize.height - 5) + 'px'
+    this.#tooltip.style.top = (elementSize.top - tooltipSize.height + window.scrollY - 5) + 'px'
     this.#tooltip.style.left = elementSize.left + (elementSize.width - tooltipSize.width) / 2 + 'px'
   }
 
