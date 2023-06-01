@@ -10,7 +10,7 @@
   = floki_form_for :search, url: notes_path, method: :get do |f|
     .flex.w-full.mb-2
       = f.text_field :q, label: false, wrapper: { class: 'w-full clear-mb mr-2' }
-      = f.submit 'Search', class: 'button-primary', data: tooltip_data_attr(title: 'Click to search!', placement: 'top')
+      = f.submit 'Search', class: 'button-primary', data: tooltip_data_attr(title: 'Click to search!')
 
 = turbo_frame_tag :notes do
   = render @notes
