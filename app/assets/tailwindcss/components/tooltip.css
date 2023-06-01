@@ -12,4 +12,14 @@
     @apply content-[''] top-0 -right-[5px] bottom-0 absolute mx-0 my-auto w-0 h-0 z-50;
     @apply border-t-transparent border-t-[5px] border-b-transparent border-b-[5px] border-solid border-l-[5px] border-l-gray-700;
   }
+
+  .tooltip.tooltip-bottom:after {
+    @apply content-[''] left-0 right-0 -top-[5px] absolute my-0 mx-auto w-0 h-0 z-50;
+    @apply border-l-transparent border-l-[5px] border-r-transparent border-r-[5px] border-solid border-b-[5px] border-b-gray-700;
+  }
+
+  .tooltip.tooltip-right:after {
+    @apply content-[''] top-0 -left-[5px] bottom-0 absolute mx-0 my-auto w-0 h-0 z-50;
+    @apply border-t-transparent border-t-[5px] border-b-transparent border-b-[5px] border-solid border-r-[5px] border-r-gray-700;
+  }
 }

@@ -27,44 +27,47 @@ export default class extends Controller {
     return tooltipWrapper
   }
 
-  #leftPlacementOffset(elementSize, tooltipSize) {
+  #leftPlacementStatic(elementSize, tooltipSize) {
     return {
       x: Math.round(elementSize.left - tooltipSize.width - 5) + 'px',
       y: Math.round(elementSize.top + window.scrollY + (elementSize.height - tooltipSize.height) / 2) + 'px'
     }
   }
 
-  #rightPlacementOffset(elementSize, tooltipSize) {
-
-  }
-
-  #bottomPlacementOffset(elementSize, tooltipSize) {
+  #rightPlacementStatic(elementSize, tooltipSize) {
     return {
-      x: Math.round(elementSize.top - tooltipSize.height + window.scrollY - 5) + 'px',
-      y: Math.round(elementSize.left + (elementSize.width - tooltipSize.width) / 2) + 'px'
+      x: Math.round(elementSize.left + elementSize.width + 5) + 'px',
+      y: Math.round(elementSize.top + window.scrollY + (elementSize.height - tooltipSize.height) / 2) + 'px'
     }
   }
 
-  #topPlacementOffset(elementSize, tooltipSize) {
+  #bottomPlacementStatic(elementSize, tooltipSize) {
     return {
-      x: elementSize.left + (elementSize.width - tooltipSize.width) / 2 + 'px',
-      y: elementSize.top - tooltipSize.height + window.scrollY - 5 + 'px'
+      x: Math.round(elementSize.left + (elementSize.width - tooltipSize.width) / 2) + 'px',
+      y: Math.round(elementSize.top + elementSize.height + window.scrollY + 5) + 'px'
     }
   }
 
-  #tooltipOffsets() {
+  #topPlacementStatic(elementSize, tooltipSize) {
+    return {
+      x: Math.round(elementSize.left + (elementSize.width - tooltipSize.width) / 2) + 'px',
+      y: Math.round(elementSize.top - tooltipSize.height + window.scrollY - 5) + 'px'
+    }
+  }
+
+  #tooltipStaticOffsets() {
     const elementSize = this.element.getBoundingClientRect()
     const tooltipSize = this.#tooltip.getBoundingClientRect()
 
     switch (this.placementValue) {
       case 'left':
-        return this.#leftPlacementOffset(elementSize, tooltipSize)
+        return this.#leftPlacementStatic(elementSize, tooltipSize)
       case 'right':
-        return this.#rightPlacementOffset(elementSize, tooltipSize)
+        return this.#rightPlacementStatic(elementSize, tooltipSize)
       case 'bottom':
-        return this.#bottomPlacementOffset(elementSize, tooltipSize)
+        return this.#bottomPlacementStatic(elementSize, tooltipSize)
       default:
-        return this.#topPlacementOffset(elementSize, tooltipSize)
+        return this.#topPlacementStatic(elementSize, tooltipSize)
     }
   }
 
@@ -72,7 +75,7 @@ export default class extends Controller {
     this.#tooltip = this.#buildTooltip()
     this.element.before(this.#tooltip)
 
-    const tooltipOffsets = this.#tooltipOffsets()
+    const tooltipOffsets = this.#tooltipStaticOffsets()
     this.#tooltip.style.top = tooltipOffsets.y
     this.#tooltip.style.left = tooltipOffsets.x
   }
