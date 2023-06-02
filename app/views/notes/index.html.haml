@@ -1,5 +1,5 @@
 = page_title do
-  = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }, class: 'button-primary'
+  = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note', **tooltip_data_attr(title: 'Click to add!', placement: 'right') }, class: 'button-primary'
   = link_to 'Subscribe', new_subscription_path(notifiable_model: 'Note'), data: { turbo_frame: 'new-subscription' }, class: 'button-secondary'
   .absolute.mt-2.w-2000
     = turbo_frame_tag 'new-subscription'
@@ -8,7 +8,7 @@
 
 = turbo_frame_tag :search, target: :notes do
   = floki_form_for :search, url: notes_path, method: :get do |f|
-    .flex.w-full.mb-2{ data: tooltip_data_attr(title: 'Click to add!') }
+    .flex.w-full.mb-2
       = f.text_field :q, label: false, wrapper: { class: 'w-full clear-mb mr-2' }
       = f.submit 'Search', class: 'button-primary'
 

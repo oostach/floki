@@ -2,8 +2,8 @@
   = render publications
 - else
   = turbo_frame_tag(:blankslate) do
-    = render BlankSlateComponent.new(:publications, 'Neither books no articles where found', 'You can add one by clicking add button') do |wrapper|
+    = render BlankSlateComponent.new(:publications, t('.blank_slate_message')) do |wrapper|
       - wrapper.with_actions do
-        = link_to 'Add Book or Article', new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
+        = link_to t('.add_book_or_article'), new_publication_path, data: { turbo_frame: 'new-publication' }, class: 'button-primary'
 
 = paginate publications

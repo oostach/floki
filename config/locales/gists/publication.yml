@@ -7,9 +7,17 @@ en:
   publications:
     index:
       page_title: Books and Articles
+      add_book_or_article: Add Book or Article
     show:
       page_title: Books and Articles > %{text}
     form:
       drag_and_drop_message: Drug and drop your resources here
       to_select_file: to select files
       resources: Resources
+    publication:
+      source_url: 'Source URL:'
+      title_info: Added on %{time}, written by %{author}
+    publications:
+      add_book_or_article: Add Book or Article
+      blank_slate_message: Neither books no articles where found', 'You can add one by clicking add button
+

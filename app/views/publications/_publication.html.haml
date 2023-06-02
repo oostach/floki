@@ -5,9 +5,9 @@
     .publication-title
       %div
         .publication-title-text= publication.title
-        .publication-title-info Added on #{l(publication.created_at.to_date, format: :long)}, writen by #{publication.author}
+        .publication-title-info= t('.title_info', time: l(publication.created_at.to_date, format: :long), author: publication.author)
         .publication-source-link
-          %span Source URL:
+          %span= t('.source_url')
           = link_to publication.url, publication.url, class: ''
       .publication-actions
         = link_to edit_publication_path(publication), class: 'badge-button-primary mr-2 badge-normal' do
@@ -19,7 +19,7 @@
     = render 'tags/tags', tags: publication.tags, owner: publication
 
     .publication-description= publication.description
-    .publication-show-more= link_to 'Show more', publication_path(publication), data: { turbo: false }
+    .publication-show-more= link_to t('show_more'), publication_path(publication), data: { turbo: false }
 
     - if publication.files.any?
       .publication-resources
