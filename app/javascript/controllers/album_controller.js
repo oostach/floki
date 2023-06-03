@@ -32,12 +32,14 @@ export default class extends Controller {
   connect() {
     this.#imagesList.push(...this.#collectImagesParams())
     this.#albumSize = this.#imagesList.length
-    this.#buildAlbum()
   }
 
   openAlbum(event) {
     event.preventDefault()
 
+    if (!this.element.querySelector('.album')) {
+      this.#buildAlbum()
+    }
     this.#setImage(this.#initialIndex(event.currentTarget))
     this.#showAlbum()
   }
