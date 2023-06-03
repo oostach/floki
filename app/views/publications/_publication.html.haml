@@ -23,7 +23,7 @@
 
     - if publication.files.any?
       .publication-resources
-        .publication-resources-title Resources
+        .publication-resources-title= t('.resources')
         - images, files = publication.partition_files
         .images{ data: album_attr, tabindex: '0' }
           = render partial: 'image', collection: images, as: :image

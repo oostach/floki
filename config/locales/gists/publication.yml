@@ -17,6 +17,7 @@ en:
     publication:
       source_url: 'Source URL:'
       title_info: Added on %{time}, written by %{author}
+      resources: Resources
     publications:
       add_book_or_article: Add Book or Article
       blank_slate_message: Neither books no articles where found', 'You can add one by clicking add button
