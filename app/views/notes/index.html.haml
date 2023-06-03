@@ -1,5 +1,5 @@
 = page_title do
-  = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note', **tooltip_data_attr(title: 'Click to add!', placement: 'right') }, class: 'button-primary'
+  = link_to 'Add Note', new_note_path, data: { turbo_frame: 'new-note' }, class: 'button-primary'
   = link_to 'Subscribe', new_subscription_path(notifiable_model: 'Note'), data: { turbo_frame: 'new-subscription' }, class: 'button-secondary'
   .absolute.mt-2.w-2000
     = turbo_frame_tag 'new-subscription'
