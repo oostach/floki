@@ -3,6 +3,10 @@
     @apply mt-1 block w-full rounded-md border border-gray-300 shadow-sm;
   }
 
+  .field-with-errors .form-richtext {
+    @apply border-red-500
+  }
+
   .form-richtext .trix-button-row {
     @apply p-2.5 bg-white rounded-t-md border-b border-gray-300;
   }

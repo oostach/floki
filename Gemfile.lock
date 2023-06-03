@@ -11,9 +11,9 @@ GIT
 
 GIT
   remote: https://github.com/oostach/floki-form
-  revision: cf3044543f8e8f99c34e373f5dfc1af4a693e260
+  revision: 75eed04bce284ef1f663d0e55cce47c4186e8f02
   specs:
-    floki-form (0.2.4)
+    floki-form (0.2.5)
       actionpack (>= 7.0.4.3)
       activemodel (>= 7.0.4.3)
       railties (>= 7.0.4.3)
