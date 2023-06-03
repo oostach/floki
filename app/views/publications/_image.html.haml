@@ -10,4 +10,4 @@
         .image-actions
           = link_to delete_url, data: delete_data_attrs, class: 'badge-button-alert badge-small bottom-1 right-1 ml-auto' do
             = svg_icon :xmark, options: { width: '12px' }
-    = image_tag image.variant(:thumb), class: 'image-previwe', data: { action: 'click->album#openAlbum' }
+    = image_tag image.variant(:thumb), class: 'image-previwe', data: { action: 'click->album#openAlbum' }, loading: 'lazy'

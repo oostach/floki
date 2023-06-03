@@ -116,6 +116,7 @@ export default class extends Controller {
       imgOriginal.src = url
       imgOriginal.classList.add('original-image')
       imgOriginal.dataset.index = index
+      imgOriginal.loading = 'lazy'
       imageWrapper.appendChild(imgOriginal)
     } else {
       imgPreview.src = url
