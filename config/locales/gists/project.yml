@@ -3,3 +3,9 @@ en:
     attributes:
       project:
         enable_repo: Add project's repository
+
+  projects:
+    index:
+      add_project: Add Project
+      blank_slate_message: No projects where found
+      blank_slate_description: You can create new project
