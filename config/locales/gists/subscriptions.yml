@@ -1,0 +1,4 @@
+en:
+  subscriptions:
+    unsubscribe:
+      unsubscribe_message: You were successfully unsubscribe from the %{subscription} notifications

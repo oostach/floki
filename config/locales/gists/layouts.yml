@@ -1,0 +1,7 @@
+en:
+  layouts:
+    header:
+      todos: Todos
+      projects: Projects
+      books_and_article: Books & Article
+      diary: Diary
