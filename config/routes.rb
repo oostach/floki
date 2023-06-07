@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :notes
-  resources :todos, only: [:index]
-  get '/todos/:id', to: redirect('/todos')
 
   scope ':owner' do
     resources :tags, only: %i[create update] do
@@ -23,6 +21,10 @@ Rails.application.routes.draw do
   end
 
   resources :projects
+  namespace :projects do
+    resources :todos, only: [:index]
+    get '/todos/:id', to: redirect('/todos')
+  end
 
   # GraphQL routes configuration
   if Rails.env.development? # rubocop:disable Style/IfUnlessModifier

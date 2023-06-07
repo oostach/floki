@@ -1,7 +1,7 @@
 en:
   layouts:
     header:
-      todos: Todos
+      about: About
       projects: Projects
       books_and_article: Books & Article
       diary: Diary

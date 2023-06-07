@@ -7,7 +7,7 @@
     %button{ class: 'sm:block hidden button-primary', data: { action: 'click->main-menu#show' } } Menu
     %ul.main-nav{ data: { main_menu_target: 'menuList', action: 'click@window->main-menu#hide' } }
       %li.main-nav-item
-        = link_to t('.todos'), todos_path, data: { turbo: false }
+        = link_to t('.about'), '#', data: { turbo: false }
       %li.main-nav-item
         = link_to t('.projects'), projects_path
       %li.main-nav-item
