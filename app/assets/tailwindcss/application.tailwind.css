@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
+@import './components/shared';
 @import './components/menus';
 @import './components/buttons';
 @import './components/flashes';
@@ -11,6 +12,7 @@
 @import './components/blankslate';
 @import './components/publications';
 @import './components/tooltip';
+@import './components/projects';
 
 @import "tailwindcss/utilities";
 

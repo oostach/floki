@@ -1,4 +1,11 @@
-.project
-  .project-title= project.title
-  .project-description= project.description
-  -# .project-repo= project.repository
+= turbo_frame_tag dom_id(project) do
+  .project
+    .project-header.flex.mb-2
+      .project-title= project.title
+      .project-actions.ml-auto.flex
+        = link_to edit_project_path(project), class: 'badge-button-primary mr-2 badge-normal' do
+          = svg_icon :edit, options: { width: '20px' }
+        - link_attr = action_name == 'show' ? delete_data_attrs.merge(turbo_frame: :_top) : delete_data_attrs
+        = link_to project_path(project), data: link_attr, class: 'badge-button-alert badge-normal' do
+          = svg_icon :trash, options: { width: '20px' }
+    .project-description= project.description

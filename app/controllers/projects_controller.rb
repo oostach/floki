@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  before_action :load_project, only: %i[destroy]
+
   def index
     @projects = Project.all
   end
@@ -20,9 +22,19 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    @project.destroy
+    flash.now.notice = 'Your note has been successfully removed.'
+    redirect_to(action: :index, status: :see_other) unless turbo_frame_request?
+  end
+
   private
 
   def project_params
     params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: %i[url name] })
+  end
+
+  def load_project
+    @project = Project.find(params[:id])
   end
 end
