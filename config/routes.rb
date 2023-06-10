@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   end
 
   resources :projects
-  namespace :projects do
-    resources :todos, only: [:index]
+  scope module: :projects do
+    resources :todos, only: %i[index]
     get '/todos/:id', to: redirect('/todos')
   end
 

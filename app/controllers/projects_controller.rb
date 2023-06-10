@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    flash.now.notice = 'Your note has been successfully removed.'
+    flash.now.notice = 'Your project has been successfully removed.'
     redirect_to(action: :index, status: :see_other) unless turbo_frame_request?
   end
 

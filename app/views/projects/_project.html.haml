@@ -1,7 +1,8 @@
 = turbo_frame_tag dom_id(project) do
-  .project
+  %article.project
     .project-header.flex.mb-2
-      .project-title= project.title
+      -# TODO: Convert link to a specific field of the Project model
+      .project-title= link_to project.title, todos_path, data: { turbo: false }
       .project-actions.ml-auto.flex
         = link_to edit_project_path(project), class: 'badge-button-primary mr-2 badge-normal' do
           = svg_icon :edit, options: { width: '20px' }

@@ -9,3 +9,6 @@ en:
       add_project: Add Project
       blank_slate_message: No projects where found
       blank_slate_description: You can create new project
+    todos:
+      index:
+        page_title: Projects > Todos React App
