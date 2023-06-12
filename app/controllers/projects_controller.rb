@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :load_project, only: %i[destroy]
+  before_action :load_project, only: %i[edit show update destroy]
 
   def index
     @projects = Project.all
   end
 
+  def show
+    render @project
+  end
+
   def new
     @project = Project.new
     @project.build_repository
+  end
+
+  def edit
+    @project.repository || @project.build_repository
   end
 
   def create
@@ -22,6 +30,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update
+    if @project.update(project_params)
+      render @project
+    else
+      render action: :edit
+    end
+  end
+
   def destroy
     @project.destroy
     flash.now.notice = 'Your project has been successfully removed.'
@@ -31,7 +47,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: %i[url name] })
+    params.require(:project).permit(:title, :description, :enable_repo, { repository_attributes: %i[id url name] })
   end
 
   def load_project
