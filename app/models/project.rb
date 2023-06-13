@@ -12,11 +12,27 @@ class Project < ApplicationRecord
   validates_associated :repository, if: :repo_enabled?
   accepts_nested_attributes_for :repository
 
+  after_initialize :enable_repo!
+  def enable_repo!
+    self.enable_repo ||= repository.present?
+  end
+
+  after_update :remove_repository, if: -> { repo_disabled? && repository }
+  def remove_repository
+    return unless repository
+
+    repository.destroy
+  end
+
   def repo
     @repo ||= Octokit::Repository.from_url repository
   end
 
   def repo_enabled?
-    enable_repo.present? && enable_repo == '1'
+    enable_repo == '1'
+  end
+
+  def repo_disabled?
+    !repo_enabled?
   end
 end
