@@ -4,6 +4,11 @@ en:
       project:
         enable_repo: Add project's repository
 
+  flashes:
+    notice:
+      project_removed: Your project has been successfully removed.
+      project_created: Your project has been successfully created.
+
   projects:
     index:
       add_project: Add Project

@@ -3,6 +3,13 @@ en:
     attributes:
       publication:
         url: Link to source
+        title: Title
+        author: Author
+
+  flashes:
+    notice:
+      publication_created: Your publication has been successfully created.
+      publication_removed: Your publication has been successfully removed.
 
   publications:
     index:

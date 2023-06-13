@@ -28,7 +28,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
 
     if @publication.save
-      flash.now.notice = 'Your publication has been successfully saved.'
+      flash.now.notice = t('publication_created', scope: 'flashes.notice')
       render action: :create
     else
       render action: :new
@@ -45,7 +45,7 @@ class PublicationsController < ApplicationController
 
   def destroy
     @publication.destroy
-    flash.now.notice = 'Your note has been successfully removed.'
+    flash.now.notice = t('publication_removed', scope: 'flashes.notice')
     redirect_to(action: :index, status: :see_other) unless turbo_frame_request?
   end
 

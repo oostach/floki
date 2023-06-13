@@ -1,4 +1,8 @@
 en:
+  flashes:
+    notice:
+      subscription_added: You email was added to notes subscription. You will be notified about any new notes.
+
   subscriptions:
     unsubscribe:
       unsubscribe_message: You were successfully unsubscribe from the %{subscription} notifications

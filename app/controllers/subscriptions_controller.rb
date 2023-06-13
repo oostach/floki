@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new(subscription_params.merge(actions: %i[create update destroy]))
     if @subscription.save
       flash[:autohide] = true
-      flash.now.notice = 'You email was added to notes subscription. You will be notified about any new notes.'
+      flash.now.notice = t('subscription_added', scope: 'flashes.notice')
     else
       render action: :new
     end

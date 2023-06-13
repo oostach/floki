@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      flash.now.notice = 'Your project has been successfully saved.'
+      flash.now.notice = t('project_created', scope: 'flashes.notice')
     else
       render action: :new
     end
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    flash.now.notice = 'Your project has been successfully removed.'
+    flash.now.notice = t('project_removed', scope: 'flashes.notice')
     redirect_to(action: :index, status: :see_other) unless turbo_frame_request?
   end
 

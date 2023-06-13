@@ -1,7 +1,11 @@
 en:
   activerecord:
     attributes:
-      index:
-        page_title: Diary
       note:
-        body: Content
+        title: Title
+
+  notes:
+    index:
+      page_title: Diary
+    note:
+      body: Content
