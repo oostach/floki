@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      render @project
+      render @project.reload
     else
       render action: :edit
     end

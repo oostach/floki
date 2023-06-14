@@ -7,8 +7,10 @@ class Repository < ApplicationRecord
 
   around_save :sync_data
   def sync_data
-    will_sync = new_record? || changed.intersect?(%w[name url])
+    will_sync = new_record? || changed.intersect?(%w[url])
     yield
     SyncRepositoryJob.perform_later id if will_sync
   end
+
+  after_update_commit -> { broadcast_update_to 'projects_repositories', partial: 'projects/repository', locals: { repository: self }, target: ApplicationController.helpers.dom_id(project, :repository) }
 end
