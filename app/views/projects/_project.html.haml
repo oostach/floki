@@ -10,5 +10,5 @@
         = link_to project_path(project), data: link_attr, class: 'badge-button-alert badge-normal' do
           = svg_icon :trash, options: { width: '20px' }
     .project-description= project.description
-    %div{ id: dom_id(project, :repository) }
+    .project-reposytory{ id: dom_id(project, :repository) }
       = render('projects/repository', repository: project.repository) if project.repository

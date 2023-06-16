@@ -1,3 +1,4 @@
 = turbo_frame_tag dom_id(repository) do
-  = repository.name
-  = repository.url
+  %h3.my-2.text-sky-900.font-bold.text-lg Repository
+  .repository-name.font-semibold= repository.name
+  .repository-url.italic.text-sm.text-sky-700= repository.url
